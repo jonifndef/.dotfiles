@@ -79,6 +79,16 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "Close vim if nerdtree is the only window left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" <=== Powerline ===>
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set laststatus=2            " Always display powerline in all windows
+set showtabline=2           " Always show tabline, even if there's just one tab
+set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+set t_Co=256               " Use 256 colors (Use this setting only if your terminal supports 256 colors) 
+" <== /Powerline ===>
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
