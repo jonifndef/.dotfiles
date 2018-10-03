@@ -17,8 +17,16 @@ set hlsearch
 set statusline+=%F
 set backspace=2 " make backspace work like most other programs
 
+" And the obligatory disabling of space
+"nnoremap <SPACE> <Nop>
+" Space is leader
+let mapleader=" "
+
+" Colors
+" Yellow background with black text makes for 
+" great visibility with search results
 colo slate
-hi Search ctermbg=Yellow
+hi Search ctermbg=Yellow 
 hi Search ctermfg=Black
 
 " Switch back to normal mode after a few seconds, here 10 sec
@@ -36,6 +44,18 @@ set tags=tags;/
 " Scrolling faster
 " nnoremap <C-e> 3<C-e>
 " nnoremap <C-y> 3<C-y>
+
+" Buffer navigation
+set hidden
+nmap <Left> :bprevious<cr>
+nmap <Right> :bnext<cr>
+nmap <leader>bq :bdelete<cr>
+" List open buffers
+nmap <leader>ls :ls<cr> 
+
+" Scroll
+nmap <Up> <C-y>
+nmap <Down> <C-e>
 
 " Esc to remove search findings
 nnoremap <esc> :noh<return><esc>
@@ -99,6 +119,7 @@ Plugin 'VundleVim/Vundle.vim' "Required
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'jeetsukumaran/vim-buffergator'
 
 " <======== /PLUGINS =======>
 
@@ -194,9 +215,9 @@ endfunction
 " ctags
 " youcompleteme
 "
-"
-"
-"
+" Fix shortcuts for buffnext, buffprev, buffclose
+" Fix shortcut for CtrlP, YcmCompleter FixIt
+" Fix shortcut for C-e, C-y-scrolling
 "
 "
 "
