@@ -1,3 +1,13 @@
+"                                            
+"             __                            
+"     __  __ /\_\    ___ ___   _ __   ___   
+"    /\ \/\ \\/\ \ /' __` __`\/\`'__\/'___\ 
+"  __\ \ \_/ |\ \ \/\ \/\ \/\ \ \ \//\ \__/ 
+" /\_\\ \___/  \ \_\ \_\ \_\ \_\ \_\\ \____\
+" \/_/ \/__/    \/_/\/_/\/_/\/_/\/_/ \/____/
+"                                           
+"                                          
+
 syntax on
 filetype off "Required for vundle
 
@@ -22,6 +32,7 @@ set backspace=2 " make backspace work like most other programs
 " Space is leader
 let mapleader=" "
 
+
 " Colors
 " Yellow background with black text makes for 
 " great visibility with search results
@@ -29,33 +40,51 @@ colo slate
 hi Search ctermbg=Yellow 
 hi Search ctermfg=Black
 
-" Switch back to normal mode after a few seconds, here 10 sec
+
+
+" Switch back to normal mode after a few seconds, here 15 sec
 au CursorHoldI * stopinsert
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
 au InsertLeave * let &updatetime=updaterestore
+
+
 
 " Make right/lower window be the active one at a split
 set splitright
 set splitbelow
 
+
+
 " CTags looks recursivly on directory up all the way to root
 set tags=tags;/
 
+" ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ 
+"||K |||E |||Y |||B |||I |||N |||D |||I |||N |||G |||S ||
+"||__|||__|||__|||__|||__|||__|||__|||__|||__|||__|||__||
+"|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+"
 " Scrolling faster
-" nnoremap <C-e> 3<C-e>
-" nnoremap <C-y> 3<C-y>
+nnoremap <C-Down> 3<C-e>
+nnoremap <C-Up> 3<C-y>
+
 
 " Buffer navigation
 set hidden
 nmap <Left> :bprevious<cr>
 nmap <Right> :bnext<cr>
-nmap <leader>bq :bdelete<cr>
+nmap <leader>q :bdelete<cr>
 " List open buffers
-nmap <leader>ls :ls<cr> 
+nmap <leader>l :ls<cr> 
+
+" CtrlP
+nmap <leader>c :CtrlP<cr>
 
 " Scroll
 nmap <Up> <C-y>
 nmap <Down> <C-e>
+
+" YCMCompleter 
+nmap <leader>f :YcmCompleter FixIt<cr>
 
 " Esc to remove search findings
 nnoremap <esc> :noh<return><esc>
@@ -65,21 +94,25 @@ nnoremap <esc>^[ <esc>^[
 inoremap jj <esc>
 
 " Toggle between header and source
-map <silent> <F4> :call ToggleBetweenHeaderAndSourceFile()<CR>
+"map <silent> <F4> :call ToggleBetweenHeaderAndSourceFile()<CR>
 
 " Change directory to the current buffer when opening files.
 "set autochdir
 
+
+
 " netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 25
 "augroup ProjectDrawer
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
 "augroup END	
+
+
 
 "map <silent> <C-W> :call ToggleVExplorer()<CR>
 "Toggle relative numbers
@@ -90,8 +123,16 @@ map <f12> :NERDTreeToggle<CR>
 nnoremap <F5> :call LessMode()<CR>
 let g:lessmode = 0
 
+
+
 "Ugly little snippet done the Luke Smith-way, prints std::cout
 autocmd FileType cpp inoremap ;co std::cout<Space><<<Space>f<Space><<<Space>std::endl;<Esc>Ffcw
+
+" ____ ____ ____ ____ ____ ____ ____ ____ 
+"||N |||E |||R |||D |||T |||R |||E |||E ||
+"||__|||__|||__|||__|||__|||__|||__|||__||
+"|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+"
 " Start up nerdtree automatically if no files were specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -99,7 +140,12 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "Close vim if nerdtree is the only window left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" <=== Powerline ===>
+
+" ____ ____ ____ ____ ____ ____ ____ ____ ____ 
+"||P |||O |||W |||E |||R |||L |||I |||N |||E ||
+"||__|||__|||__|||__|||__|||__|||__|||__|||__||
+"|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+"
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
@@ -107,7 +153,12 @@ set laststatus=2            " Always display powerline in all windows
 set showtabline=2           " Always show tabline, even if there's just one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set t_Co=256               " Use 256 colors (Use this setting only if your terminal supports 256 colors) 
-" <== /Powerline ===>
+
+" ____ ____ ____ ____ ____ ____ ____ 
+"||P |||L |||U |||G |||I |||N |||S ||
+"||__|||__|||__|||__|||__|||__|||__||
+"|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+"                                    
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -119,7 +170,8 @@ Plugin 'VundleVim/Vundle.vim' "Required
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'jeetsukumaran/vim-buffergator'
+"Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'terryma/vim-multiple-cursors'
 
 " <======== /PLUGINS =======>
 
@@ -132,45 +184,47 @@ call vundle#end()
 filetype plugin indent on "Required by vundle
 filetype on "Okey again after last Vundle command
 
-" Toggle Vexplore with Ctrl-E
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
-  else
-      exec '1wincmd w'
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
-  endif
-endfunction
 
-" Toggle between header and source file
-function! ToggleBetweenHeaderAndSourceFile()
-  let bufname = bufname("%")
-  let ext = fnamemodify(bufname, ":e")
-  if ext == "h"
-    let ext = "cpp"
-  elseif ext == "cpp"
-    let ext = "h"
-  else
-    return
-  endif
-  let bufname_new = fnamemodify(bufname, ":r") . "." . ext
-  let bufname_alt = bufname("#")
-  if bufname_new == bufname_alt
-    execute ":e#"
-  else
-    execute ":e " . bufname_new
-  endif
-endfunction
+
+" Toggle Vexplore with Ctrl-E
+"function! ToggleVExplorer()
+"  if exists("t:expl_buf_num")
+"      let expl_win_num = bufwinnr(t:expl_buf_num)
+"      if expl_win_num != -1
+"          let cur_win_nr = winnr()
+"          exec expl_win_num . 'wincmd w'
+"          close
+"          exec cur_win_nr . 'wincmd w'
+"          unlet t:expl_buf_num
+"      else
+"          unlet t:expl_buf_num
+"      endif
+"  else
+"      exec '1wincmd w'
+"      Vexplore
+"      let t:expl_buf_num = bufnr("%")
+"  endif
+"endfunction
+"
+"" Toggle between header and source file
+"function! ToggleBetweenHeaderAndSourceFile()
+"  let bufname = bufname("%")
+"  let ext = fnamemodify(bufname, ":e")
+"  if ext == "h"
+"    let ext = "cpp"
+"  elseif ext == "cpp"
+"    let ext = "h"
+"  else
+"    return
+"  endif
+"  let bufname_new = fnamemodify(bufname, ":r") . "." . ext
+"  let bufname_alt = bufname("#")
+"  if bufname_new == bufname_alt
+"    execute ":e#"
+"  else
+"    execute ":e " . bufname_new
+"  endif
+"endfunction
 
 function! LessMode()
   if g:lessmode == 0
@@ -195,6 +249,54 @@ function! LessMode()
   echohl Label | echo "Less mode" onoff | echohl None
 endfunction
 
+" Jump to the next or previous line that has the same level or a lower
+" level of indentation than the current line.
+"
+" exclusive (bool): true: Motion is exclusive
+" false: Motion is inclusive
+" fwd (bool): true: Go to next line
+" false: Go to previous line
+" lowerlevel (bool): true: Go to line with lower indentation level
+" false: Go to line with the same indentation level
+" skipblanks (bool): true: Skip blank lines
+" false: Don't skip blank lines
+function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
+  let line = line('.')
+  let column = col('.')
+  let lastline = line('$')
+  let indent = indent(line)
+  let stepvalue = a:fwd ? 1 : -1
+  while (line > 0 && line <= lastline)
+    let line = line + stepvalue
+    if ( ! a:lowerlevel && indent(line) == indent ||
+          \ a:lowerlevel && indent(line) < indent)
+      if (! a:skipblanks || strlen(getline(line)) > 0)
+        if (a:exclusive)
+          let line = line - stepvalue
+        endif
+        exe line
+        exe "normal " column . "|"
+        return
+      endif
+    endif
+  endwhile
+endfunction
+
+" Moving back and forth between lines of same or lower indentation.
+nnoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
+nnoremap <silent> [L :call NextIndent(0, 0, 1, 1)<CR>
+nnoremap <silent> ]L :call NextIndent(0, 1, 1, 1)<CR>
+vnoremap <silent> [l <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> ]l <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+vnoremap <silent> [L <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
+vnoremap <silent> ]L <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
+onoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
+onoremap <silent> [L :call NextIndent(1, 0, 1, 1)<CR>
+onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
+
+
 " Commands that are good to know (and remember)
 " % to jump to next matching thingy (curly-braces, paranthesis etc)
 " '' to jump to last jumped-to-cursor postition
@@ -207,19 +309,21 @@ endfunction
 " C-a to increment value under cursor, yo
 " C-x to decrement value under cursor
 " Good tool for merging (like meld): vimdiff
-"
+" [{ to go to top of scope or code block
+" ]} to go to bottom of scope or code block
 "
 " TODO:
-" vim-airline with tabs (nah), or maybe rather CtrlP
-" nerdtree, or perhaps netrw
-" ctags
-" youcompleteme
+" vim-airline with tabs (nah), or maybe rather CtrlP DONE
+" nerdtree, or perhaps netrw DONE
+" ctags DONE
+" youcompleteme DONE
 "
 " Fix shortcuts for buffnext, buffprev, buffclose
 " Fix shortcut for CtrlP, YcmCompleter FixIt
 " Fix shortcut for C-e, C-y-scrolling
 "
+" vim-multiple-cursors
 "
 "
-"
-"
+" Fix arander, calendar, pulse audio ncurses wrapper, a good network manager,
+" screenshot, etc etc
