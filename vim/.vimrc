@@ -86,6 +86,9 @@ nmap <Down> <C-e>
 " YCMCompleter 
 nmap <leader>f :YcmCompleter FixIt<cr>
 
+" Cscope extended regex search
+noremap <leader>e :cs find e 
+
 " Esc to remove search findings
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
@@ -318,12 +321,27 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " ctags DONE
 " youcompleteme DONE
 "
-" Fix shortcuts for buffnext, buffprev, buffclose
-" Fix shortcut for CtrlP, YcmCompleter FixIt
-" Fix shortcut for C-e, C-y-scrolling
+" Fix shortcuts for buffnext, buffprev, buffclose DONE
+" Fix shortcut for CtrlP, YcmCompleter FixIt DONE
+" Fix shortcut for C-e, C-y-scrolling DONE
 "
 " vim-multiple-cursors
 "
 "
 " Fix arander, calendar, pulse audio ncurses wrapper, a good network manager,
 " screenshot, etc etc
+"
+"
+" Cscope:
+" Install cscope and run it with cscope -Rb in the project root dir. -b tells
+" cscope to just build the database, not enter that ugly ncurses-interface
+" Download and place the cscope_maps.vim in ~/.vim/plugins/
+" Ctrl-\ s for finding symbol under cursor, Ctrl-space s for finding it and
+" opening it in a horizontal split, Ctrl-space Ctrl-space s for finding it and opening it
+" in a vertical split
+" To serach for arbitrary text, do :cs find e text\ here\ with\ spaces\
+"
+"
+" To look for commit message when using git log, do got log --all -i
+" --grep='improved slices'
+" escaped
