@@ -26,6 +26,7 @@ set ignorecase
 set hlsearch
 set statusline+=%F
 set backspace=2 " make backspace work like most other programs
+set formatoptions-=cro " Disable continuation of comment at linebreaks
 
 " And the obligatory disabling of space
 "nnoremap <SPACE> <Nop>
@@ -40,7 +41,23 @@ colo slate
 hi Search ctermbg=Yellow 
 hi Search ctermfg=Black
 
+" Popup menu (for autocomplete etc)
+hi Pmenu ctermbg=100
+hi PmenuSel ctermbg=237
 
+" Vimdiff colors
+"hi DiffAdd ctermbg=
+hi DiffChange ctermbg=95
+"hi DiffDelete ctermbg=
+"hi DiffText ctermbg=
+
+" If we start in diff mode, turn off syntax highlighting
+if &diff
+    syntax off
+endif
+
+" Always keep cursor at least 5 rows from top/bottom, when searching/zt etc
+set scrolloff=5
 
 " Switch back to normal mode after a few seconds, here 15 sec
 au CursorHoldI * stopinsert
@@ -48,15 +65,16 @@ au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
 au InsertLeave * let &updatetime=updaterestore
 
 
-
 " Make right/lower window be the active one at a split
 set splitright
 set splitbelow
 
 
-
 " CTags looks recursivly on directory up all the way to root
 set tags=tags;/
+
+" Diable Ex mode
+nmap Q <Nop>
 
 " ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ 
 "||K |||E |||Y |||B |||I |||N |||D |||I |||N |||G |||S ||
@@ -67,12 +85,12 @@ set tags=tags;/
 nnoremap <C-Down> 3<C-e>
 nnoremap <C-Up> 3<C-y>
 
-
 " Buffer navigation
 set hidden
 nmap <Left> :bprevious<cr>
 nmap <Right> :bnext<cr>
 nmap <leader>q :bdelete<cr>
+
 " List open buffers
 nmap <leader>l :ls<cr> 
 
@@ -92,6 +110,13 @@ noremap <leader>e :cs find e
 " Esc to remove search findings
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
+
+" Search for text selected in visual mode
+vnoremap // y/<C-R>"<CR>
+
+" Search and replace 
+xnoremap <leader>sr y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>"/\=replacement/g<CR>
+xnoremap <leader>sc y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>"/\=replacement/gc<CR>
 
 " Exit insert mode with jj
 inoremap jj <esc>
@@ -119,7 +144,7 @@ inoremap jj <esc>
 
 "map <silent> <C-W> :call ToggleVExplorer()<CR>
 "Toggle relative numbers
-map <C-l> :set rnu!<CR> 
+map <leader>l :set rnu!<CR> 
 "Toggle nerdtree
 map <f12> :NERDTreeToggle<CR>
 " Toggle lessMode
@@ -175,6 +200,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
 "Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'mattn/vim-starwars'
 
 " <======== /PLUGINS =======>
 
@@ -187,7 +213,16 @@ call vundle#end()
 filetype plugin indent on "Required by vundle
 filetype on "Okey again after last Vundle command
 
-
+" Cursorline
+set cursorline
+noremap <leader>cl :set cursorline!<CR>
+hi CursorLine term=none cterm=none ctermbg=237
+" Only show CursorLine in current window
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
 
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
@@ -328,9 +363,9 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " vim-multiple-cursors
 "
 "
-" Fix arander, calendar, pulse audio ncurses wrapper, a good network manager,
-" screenshot, etc etc
-"
+" 
+" 
+" HOWTOS:
 "
 " Cscope:
 " Install cscope and run it with cscope -Rb in the project root dir. -b tells
