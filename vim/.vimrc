@@ -33,11 +33,12 @@ set formatoptions-=cro " Disable continuation of comment at linebreaks
 " Space is leader
 let mapleader=" "
 
-
 " Colors
+colo slate
+set background=dark " A must for gruvbox + compton transparancy
+
 " Yellow background with black text makes for 
 " great visibility with search results
-colo slate
 hi Search ctermbg=Yellow 
 hi Search ctermfg=Black
 
@@ -198,9 +199,10 @@ Plugin 'VundleVim/Vundle.vim' "Required
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator'
 "Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'mattn/vim-starwars'
+"Plugin 'terryma/vim-multiple-cursors'
+"Plugin 'mattn/vim-starwars'
 
 " <======== /PLUGINS =======>
 

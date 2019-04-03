@@ -1,0 +1,249 @@
+# Should you change your keyboard layout some time, delete
+# this file and re-run i3-config-wizard(1).
+
+# Variables:
+
+set $mod Mod4
+
+set $innerGaps 18
+set $outerGaps 0
+
+# Colors from .Xresources
+set_from_resource $black 	    color0 	#000000
+set_from_resource $white 	    color15 #000000
+set_from_resource $darkGrey 	color8 	#000000
+set_from_resource $lightGrey 	color7 	#000000
+set_from_resource $darkRed 	    color1 	#000000
+set_from_resource $red 		    color9 	#000000
+set_from_resource $darkGreen 	color2 	#000000
+set_from_resource $green 	    color10 #000000
+set_from_resource $darkYellow 	color3 	#000000
+set_from_resource $yellow 	    color11	#000000
+set_from_resource $darkBlue 	color4 	#000000
+set_from_resource $blue 	    color12	#000000
+set_from_resource $darkMagenta 	color5	#000000
+set_from_resource $magenta 	    color13	#000000
+set_from_resource $darkCyan 	color6 	#000000
+set_from_resource $cyan 	    color14	#000000
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# dropdown-style terminal "networks" 
+for_window [instance="networks"] floating enable 
+for_window [instance="networks"] resize set 950 450
+for_window [instance="networks"] move position 820 px 55 px
+
+# dropdown-style scratchpad for pulsemixer
+for_window [instance="pulsemixer"] floating enable
+for_window [instance="pulsemixer"] resize set 800 350
+for_window [instance="pulsemixer"] move position 750 px 55 px
+for_window [instance="pulsemixer"] move scratchpad
+
+# dropdown-style scratchpad for calcurse
+for_window [instance="calcurse"] floating enable
+for_window [instance="calcurse"] resize set 750 450
+for_window [instance="calcurse"] move position 1150 px 55 px
+for_window [instance="calcurse"] move scratchpad
+
+# Terminal running pulsemixer, to be put on the scratchpad:
+exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name pulsemixer -e pulsemixer
+
+# Terminal running calcurse, to be put on the scratchpad:
+exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name calcurse -e calcurse
+
+#exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/5555 --deph 32 -name pulsemixer 
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+#bindsym $mod+ISO_Next_Group kill
+
+bindsym $mod+d exec rofi -show run
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+g split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# "Fake" fullscreen, removing gaps
+bindsym $mod+f gaps inner all set 0
+bindsym $mod+Shift+f gaps inner all set $innerGaps
+
+# enter fullscreen mode for the focused container
+bindsym $mod+F11 fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# switch to prev/next workspace
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+h workspace prev
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize
+bindsym $mod+Ctrl+Left resize shrink width 1 px or 1 ppt
+bindsym $mod+Ctrl+Down resize grow height 1 px or 1 ppt
+bindsym $mod+Ctrl+Up resize shrink height 1 px or 1 ppt 
+bindsym $mod+Ctrl+Right resize grow width 1 px or 1 ppt 
+
+# fast resize
+bindsym $mod+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Up resize shrink height 10 px or 10 ppt 
+bindsym $mod+Right resize grow width 10 px or 10 ppt 
+
+# Gaps
+gaps inner $innerGaps
+gaps outer $outerGaps
+
+# Change gaps
+bindsym $mod+plus gaps inner all plus 5
+bindsym $mod+minus gaps inner all minus 5
+bindsym $mod+Ctrl+plus gaps outer all plus 5
+bindsym $mod+Ctrl+minus gaps outer all minus 5
+
+bindsym $mod+Ctrl+0 gaps inner all set $innerGaps
+bindsym $mod+Ctrl+9 gaps outer all set $outerGaps
+
+# Autostart thingys
+exec_always setxkbmap -layout se,us
+#exec_always setxkbmap -option 'grp:alt_shift_toggle'
+
+# Compton-tyrone
+exec_always compton
+
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
+
+# i3lock-fancy
+bindsym $mod+shift+x exec i3lock-fancy --pixelate --font Hack-Bold --text "Enter the realm of the Yammosk" && systemctl suspend
+
+# Pulse audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+# Playerctl
+bindsym X86AudioPlay exec playerctl play
+bindsym X86AudioPause exec playerctl pause
+bindsym X86AudioNext exec playerctl next
+bindsym X86AudioPrev exec playerctl previous
+
+# Light
+bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
+
+# Chromium
+bindsym $mod+i exec --no-startup-id chromium
+
+# Background 
+exec_always feh --bg-scale /home/jonas/Pictures/wallhaven-1.jpg
+
+# Borderless:
+default_border pixel 2
+
+# Colors:
+# class                  border    backgr.   text      indicator child_border
+client.focused           $white    $black    $white    $white    $magneta
+#client.focused_inactive $blue 	   $black    $white    $black    $magneta
+#client.unfocused        $yellow   $black    $white    $black    $magneta
+client.urgent            $red 	   $black    $white    $black    $magneta
+#client.placeholder      $cyan 	   $black    $white    $black    $darkCyan
+
+client.background       #fffff
+
+# Assume you are on workspace "1: www" and switch to "2: IM" using mod+2 
+# because somebody sent you a message. You don’t need to remember 
+# where you came from now, you can just press $mod+2 again to switch back to "1: www".
+workspace_auto_back_and_forth yes
+
+# Hides vertical and horizontal borders when there's only one window.
+hide_edge_borders none
+
+# Scratchpad
+#bindsym $mod+p [instance="pulsemixer"] scratchpad show; [instance="pulsemixer"] move position 750 px 55 px
+bindsym $mod+p [instance="pulsemixer"] scratchpad show
+#; [instance="networks"] exec "nmcli d w l && nmcli c s && bash"
+
+bindsym $mod+n exec --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -hold -name networks -e bash -c "nmcli d w l && nmcli c s && bash"
+
+bindsym $mod+c [instance="calcurse"] scratchpad show
