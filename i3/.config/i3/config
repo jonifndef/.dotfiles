@@ -66,6 +66,7 @@ exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name p
 exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name calcurse -e calcurse
 
 #exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/5555 --deph 32 -name pulsemixer 
+#
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
