@@ -1,6 +1,6 @@
 # This is the legendary .zshrc!
 # # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -13,7 +13,7 @@ export EDITOR="vim"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="dallas"
+ZSH_THEME="garyblessington"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -74,7 +74,7 @@ plugins=(git
 source $ZSH/oh-my-zsh.sh
 
 # Accept autosuggestion
-bindkey '*' autosuggest-accept
+bindkey '^n' autosuggest-accept
 
 # User configuration
 
@@ -132,8 +132,6 @@ function mkcd() {
         echo "Directory already exists, pleb!"
     fi
 }
-
-
 
 # Make a function that creates a dir and moves the file in question to that dir
 #
