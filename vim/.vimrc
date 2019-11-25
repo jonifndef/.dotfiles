@@ -1,12 +1,12 @@
-"                                            
-"             __                            
-"     __  __ /\_\    ___ ___   _ __   ___   
-"    /\ \/\ \\/\ \ /' __` __`\/\`'__\/'___\ 
-"  __\ \ \_/ |\ \ \/\ \/\ \/\ \ \ \//\ \__/ 
+"
+"
+"     __  __ /\_\    ___ ___   _ __   ___
+"    /\ \/\ \\/\ \ /' __` __`\/\`'__\/'___\
+"  __\ \ \_/ |\ \ \/\ \/\ \/\ \ \ \//\ \__/
 " /\_\\ \___/  \ \_\ \_\ \_\ \_\ \_\\ \____\
 " \/_/ \/__/    \/_/\/_/\/_/\/_/\/_/ \/____/
-"                                           
-"                                          
+"
+"
 
 syntax on
 filetype off "Required for vundle
@@ -37,6 +37,10 @@ let mapleader=" "
 colo slate
 set background=dark " A must for gruvbox + compton transparancy
 
+" Highlight trailing whitespaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
 " Yellow background with black text makes for 
 " great visibility with search results
 hi Search ctermbg=Yellow 
@@ -60,9 +64,9 @@ endif
 " Always keep cursor at least 5 rows from top/bottom, when searching/zt etc
 set scrolloff=5
 
-" Switch back to normal mode after a few seconds, here 15 sec
+" Switch back to normal mode after a few seconds, here 25 sec
 au CursorHoldI * stopinsert
-au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
+au InsertEnter * let updaterestore=&updatetime | set updatetime=25000
 au InsertLeave * let &updatetime=updaterestore
 
 
@@ -154,8 +158,19 @@ let g:lessmode = 0
 
 
 
-"Ugly little snippet done the Luke Smith-way, prints std::cout
-autocmd FileType cpp inoremap ;co std::cout<Space><<<Space>f<Space><<<Space>std::endl;<Esc>Ffcw
+" Ugly little snippet done the Luke Smith-way, prints std::cout
+autocmd FileType cpp inoremap ;co std::cout<Space><<<Space>"f"<Space><<<Space>std::endl;<Esc>Ffcw
+" Same thing but for spdlog, they way it is set up in Timber/Cargo-Server
+autocmd FileType cpp inoremap ;spd spdlog::get("log")->info("q");<Esc>Fqcw
+" Same thing for printf
+autocmd FileType c inoremap ;pf printf("q");<CR>fflush(stdout);<Esc>kFqcw
+
+" For escaped quotes
+autocmd FileType cpp inoremap ++2 \"
+
+" std::string
+autocmd FileType cpp inoremap ;ss std::string 
+
 
 " ____ ____ ____ ____ ____ ____ ____ ____ 
 "||N |||E |||R |||D |||T |||R |||E |||E ||
@@ -200,6 +215,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
+Plugin 'tpope/vim-fugitive.git'
 "Plugin 'jeetsukumaran/vim-buffergator'
 "Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'mattn/vim-starwars'
@@ -364,8 +380,6 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 "
 " vim-multiple-cursors
 "
-"
-" 
 " 
 " HOWTOS:
 "
@@ -379,6 +393,33 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " To serach for arbitrary text, do :cs find e text\ here\ with\ spaces\
 "
 "
-" To look for commit message when using git log, do got log --all -i
+" To look for commit message when using git log, do git log --all -i
 " --grep='improved slices'
 " escaped
+"
+" Rsync a file with the same name within subdirectories and create the same
+" subdirectories locally, for example download logfiles and create their
+" corresponding subdirectories locally
+" rsync -arv --include="*/" --include="logfile" --exclude="*" dsv-jkpg-1:/data/passages/2019-06-19/ .
+"
+" Same thing but bloated (only locally):
+" for d in /data/passages/2019-06-14/*; do mkdir -p /root/ollebolle/$(basename ${d}); cp ${d}/logfile /root/ollebolle/$(basename ${d}); done
+"
+" Rsync a passage, with all it's parent folders, but only it's videofiles:
+" rsync -arv --include="2019-10-16/" --include="2019-10-16/07_20_51" --include="2019-10-16/07_20_51/*.avi" --exclude="*" ljungträ:/data/passages/ .
+"
+" Mounting samba drive:
+" sudo mount -t cifs -o username=jonas,password=stduma+T4l0n //192.168.1.90/cind /home/jonas/share/nas/
+"
+" Make vim session: mks ~/.vim/sessions/ollebolle.vim
+"
+" The next time you start vim, just source it like so:
+" :source ~/.vim/sessions/ollebolle.vim
+" Or start vim with the -S flag, vim -S ~/.vim
+" When the time comes to exit again, you can just overwrite your old session
+" with :mks!
+"
+" See what's in your stash: git stash show -p
+"
+" Run pwin and tell linker which libs to link at runtime
+" LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/ ./pwin --cmd ~/Development/pwin_command_files/TIM-995_dynamic_plane_offset/evalute_2019-10-31.pwin
