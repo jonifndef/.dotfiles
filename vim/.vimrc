@@ -41,9 +41,9 @@ set background=dark " A must for gruvbox + compton transparancy
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-" Yellow background with black text makes for 
+" Yellow background with black text makes for
 " great visibility with search results
-hi Search ctermbg=Yellow 
+hi Search ctermbg=Yellow
 hi Search ctermfg=Black
 
 " Popup menu (for autocomplete etc)
@@ -81,7 +81,7 @@ set tags=tags;/
 " Diable Ex mode
 nmap Q <Nop>
 
-" ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ 
+" ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____
 "||K |||E |||Y |||B |||I |||N |||D |||I |||N |||G |||S ||
 "||__|||__|||__|||__|||__|||__|||__|||__|||__|||__|||__||
 "|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
@@ -97,7 +97,7 @@ nmap <Right> :bnext<cr>
 nmap <leader>q :bdelete<cr>
 
 " List open buffers
-nmap <leader>l :ls<cr> 
+nmap <leader>l :ls<cr>
 
 " CtrlP
 nmap <leader>c :CtrlP<cr>
@@ -106,11 +106,11 @@ nmap <leader>c :CtrlP<cr>
 nmap <Up> <C-y>
 nmap <Down> <C-e>
 
-" YCMCompleter 
+" YCMCompleter
 nmap <leader>f :YcmCompleter FixIt<cr>
 
 " Cscope extended regex search
-noremap <leader>e :cs find e 
+noremap <leader>e :cs find e
 
 " Esc to remove search findings
 nnoremap <esc> :noh<return><esc>
@@ -119,12 +119,15 @@ nnoremap <esc>^[ <esc>^[
 " Search for text selected in visual mode
 vnoremap // y/<C-R>"<CR>
 
-" Search and replace 
+" Search and replace
 xnoremap <leader>sr y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>"/\=replacement/g<CR>
 xnoremap <leader>sc y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>"/\=replacement/gc<CR>
 
 " Exit insert mode with jj
 inoremap jj <esc>
+
+" Remove trailing white space in file
+noremap <leader>w :%s/\s\+$//g<CR>
 
 " Toggle between header and source
 "map <silent> <F4> :call ToggleBetweenHeaderAndSourceFile()<CR>
@@ -143,13 +146,13 @@ inoremap jj <esc>
 "augroup ProjectDrawer
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
-"augroup END	
+"augroup END
 
 
 
 "map <silent> <C-W> :call ToggleVExplorer()<CR>
 "Toggle relative numbers
-map <leader>l :set rnu!<CR> 
+map <leader>l :set rnu!<CR>
 "Toggle nerdtree
 map <f12> :NERDTreeToggle<CR>
 " Toggle lessMode
@@ -169,10 +172,10 @@ autocmd FileType c inoremap ;pf printf("q");<CR>fflush(stdout);<Esc>kFqcw
 autocmd FileType cpp inoremap ++2 \"
 
 " std::string
-autocmd FileType cpp inoremap ;ss std::string 
+autocmd FileType cpp inoremap ;ss std::string
 
 
-" ____ ____ ____ ____ ____ ____ ____ ____ 
+" ____ ____ ____ ____ ____ ____ ____ ____
 "||N |||E |||R |||D |||T |||R |||E |||E ||
 "||__|||__|||__|||__|||__|||__|||__|||__||
 "|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
@@ -185,7 +188,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-" ____ ____ ____ ____ ____ ____ ____ ____ ____ 
+" ____ ____ ____ ____ ____ ____ ____ ____ ____
 "||P |||O |||W |||E |||R |||L |||I |||N |||E ||
 "||__|||__|||__|||__|||__|||__|||__|||__|||__||
 "|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
@@ -196,13 +199,13 @@ python del powerline_setup
 set laststatus=2            " Always display powerline in all windows
 set showtabline=2           " Always show tabline, even if there's just one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-set t_Co=256               " Use 256 colors (Use this setting only if your terminal supports 256 colors) 
+set t_Co=256               " Use 256 colors (Use this setting only if your terminal supports 256 colors)
 
-" ____ ____ ____ ____ ____ ____ ____ 
+" ____ ____ ____ ____ ____ ____ ____
 "||P |||L |||U |||G |||I |||N |||S ||
 "||__|||__|||__|||__|||__|||__|||__||
 "|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
-"                                    
+"
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -380,7 +383,7 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 "
 " vim-multiple-cursors
 "
-" 
+"
 " HOWTOS:
 "
 " Cscope:
@@ -421,5 +424,21 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 "
 " See what's in your stash: git stash show -p
 "
+" Remove files within a directory structure with find:
+" sudo find /data/passages/ -iname 'thumbnail_*' -exec rm {} \;
+"
 " Run pwin and tell linker which libs to link at runtime
 " LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/ ./pwin --cmd ~/Development/pwin_command_files/TIM-995_dynamic_plane_offset/evalute_2019-10-31.pwin
+"
+"   's'   symbol: find all references to the token under cursor
+"   'g'   global: find global definition(s) of the token under cursor
+"   'c'   calls:  find all calls to the function name under cursor
+"   't'   text:   find all instances of the text under cursor
+"   'e'   egrep:  egrep search for the word under cursor
+"   'f'   file:   open the filename under cursor
+"   'i'   includes: find files that include the filename under cursor
+"   'd'   called: find functions that function under cursor calls
+"
+"   Build cmake with debug flags:
+"       cmake -DCMAKE_BUILD_TYPE=Debug ..
+"
