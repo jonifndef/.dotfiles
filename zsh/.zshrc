@@ -112,6 +112,7 @@ alias la='LC_COLLATE=C ls -lah --color=auto'
 alias ..='cd ..'
 alias ...='cd ../../'
 alias nano='vim'
+alias vi='vim'
 alias fuck='pkill -9'
 alias ':q'=exit
 alias ':wq'=exit

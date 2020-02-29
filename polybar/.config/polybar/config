@@ -31,7 +31,6 @@
 ;  VIM
 ;  C++
 
-
 ;;;;;;;;;;; FROM REDDIT ;;;;;;;;;;;;;
 
 [vars]
@@ -133,6 +132,7 @@ font-3 = fixed:pixelsize=20;1
 font-4 = unifont:fontformat=truetype:size=20:antialias=false;1
 font-5 = fixed:pixelsize=28;7
 font-6 = fixed:pixelsize=20;4
+font-7 = FuraMonoForPowerline Nerd Font:pixelsize=20;4
 
 modules-left = i3 xwindow
 modules-center = 
@@ -273,7 +273,8 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+;interface = wlp2s0
+interface = wlan0
 interval = 3.0
 
 ;format-connected = <ramp-signal> <label-connected>

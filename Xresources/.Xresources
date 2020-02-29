@@ -1,5 +1,9 @@
 ! font
-URxvt.font :xft:Hack:style=Regular:size=12
+URxvt.font :xft:Hack:style=Regular:size=12, \
+            xft:FontAwesome:size=12, \
+            xft:icomoon:size=12, \
+            xft:FuraMonoForPowerline Nerd Font:style=Medium,Regular:size=12, \
+            xft:FuraMonoForPowerline Nerd Font:style=Regular, \
 URxvt.boldfont :xft:Hack:style=Regular:size=12
 
 !URxvt.font :xft:undefined,undefined-medium:style=medium, Regular:size=12
