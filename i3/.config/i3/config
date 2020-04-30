@@ -3,7 +3,7 @@
 
 # Variables:
 
-set $mod Mod4
+set $mod Mod1
 
 set $innerGaps 18
 set $outerGaps 0
@@ -42,8 +42,8 @@ set $ws10 "10"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# dropdown-style terminal "networks" 
-for_window [instance="networks"] floating enable 
+# dropdown-style terminal "networks"
+for_window [instance="networks"] floating enable
 for_window [instance="networks"] resize set 950 450
 for_window [instance="networks"] move position 820 px 55 px
 
@@ -65,7 +65,7 @@ exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name p
 # Terminal running calcurse, to be put on the scratchpad:
 exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name calcurse -e calcurse
 
-#exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/5555 --deph 32 -name pulsemixer 
+#exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/5555 --deph 32 -name pulsemixer
 #
 
 # start a terminal
@@ -79,7 +79,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
 
 # shutdown/reboot-dmenu-script-thingy
-bindsym $mod+Escape exec /home/jonas/.local/bin/dmenu_shutdown 
+bindsym $mod+Escape exec /home/jonas/.local/bin/dmenu_shutdown
 
 # change focus
 bindsym $mod+h focus left
@@ -168,14 +168,14 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize
 bindsym $mod+Ctrl+Left resize shrink width 1 px or 1 ppt
 bindsym $mod+Ctrl+Down resize grow height 1 px or 1 ppt
-bindsym $mod+Ctrl+Up resize shrink height 1 px or 1 ppt 
-bindsym $mod+Ctrl+Right resize grow width 1 px or 1 ppt 
+bindsym $mod+Ctrl+Up resize shrink height 1 px or 1 ppt
+bindsym $mod+Ctrl+Right resize grow width 1 px or 1 ppt
 
 # fast resize
 bindsym $mod+Left resize shrink width 10 px or 10 ppt
 bindsym $mod+Down resize grow height 10 px or 10 ppt
-bindsym $mod+Up resize shrink height 10 px or 10 ppt 
-bindsym $mod+Right resize grow width 10 px or 10 ppt 
+bindsym $mod+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Right resize grow width 10 px or 10 ppt
 
 # Gaps
 gaps inner $innerGaps
@@ -200,14 +200,17 @@ exec_always compton
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 
-exec_always --no-startup-id xset r rate 225 20
+#exec_always --no-startup-id xset r rate 225 20
+
+# Unclutter
+exec_always --no-startup-id unclutter -idle 1
 
 # i3lock-fancy
 bindsym $mod+shift+x exec i3lock-fancy --pixelate --font Hack-Bold --text "Enter the realm of the Yammosk" && systemctl suspend
 
 # Pulse audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2
+bindsym XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -2
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # Playerctl
@@ -223,8 +226,8 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 # Chromium
 bindsym $mod+i exec --no-startup-id chromium
 
-# Background 
-exec_always feh --bg-scale /home/jonas/Pictures/wallhaven-1.jpg
+# Background
+exec_always feh --bg-scale /home/jonas/Pictures/wallpapers/wallhaven-6kl1q6.jpg
 
 # Borderless:
 default_border pixel 2
@@ -239,8 +242,8 @@ client.urgent            $red 	   $black    $white    $black    $magneta
 
 client.background       #fffff
 
-# Assume you are on workspace "1: www" and switch to "2: IM" using mod+2 
-# because somebody sent you a message. You don’t need to remember 
+# Assume you are on workspace "1: www" and switch to "2: IM" using mod+2
+# because somebody sent you a message. You don’t need to remember
 # where you came from now, you can just press $mod+2 again to switch back to "1: www".
 workspace_auto_back_and_forth yes
 
