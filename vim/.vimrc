@@ -442,3 +442,10 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 "   Build cmake with debug flags:
 "       cmake -DCMAKE_BUILD_TYPE=Debug ..
 "
+" To set mouse speed (not accel), use: xinput set-prop 23 "Coordinate
+" Transformation Matrix" 2.6 0 0 0 2.6 0 0 0 1, where 23 is the id given to
+" the mouse when running xinput list
+" To set swerty as layout, after you've set it up, run
+" setxkbmap -layout se -variant swerty
+" To reset to regular swe-layout, simply run
+" setxkbmap -layout se

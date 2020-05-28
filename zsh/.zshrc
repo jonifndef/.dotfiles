@@ -117,6 +117,7 @@ alias fuck='pkill -9'
 alias ':q'=exit
 alias ':wq'=exit
 alias psx='ps ax | grep -i'
+alias ssh='TERM="xterm-256color" && ssh'
 
 function fdt() {
     if [ "$1" = "1" ]; then
@@ -129,10 +130,15 @@ function fdt() {
 function mkcd() {
     if [ ! -d "$1" ]; then
         mkdir -p "$1" && cd "$1"
-    else 
+    else
         echo "Directory already exists, pleb!"
     fi
 }
 
 # Make a function that creates a dir and moves the file in question to that dir
-#
+
+
+function pwin_start_cmd() {
+    echo "LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/"
+}
+

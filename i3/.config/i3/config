@@ -3,7 +3,7 @@
 
 # Variables:
 
-set $mod Mod4
+set $mod Mod1
 
 set $innerGaps 18
 set $outerGaps 0
@@ -69,7 +69,8 @@ exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name c
 #
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -195,7 +196,7 @@ exec_always setxkbmap -layout se,us
 #exec_always setxkbmap -option 'grp:alt_shift_toggle'
 
 # Compton-tyrone
-exec_always compton
+exec_always /home/jonas/.local/bin/compton --config /home/jonas/.config/compton.conf
 
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
