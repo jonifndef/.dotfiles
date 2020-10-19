@@ -72,6 +72,7 @@ plugins=(git
          zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.jenkins_token.zsh
 
 # Accept autosuggestion
 bindkey '^n' autosuggest-accept
@@ -100,15 +101,15 @@ fi
 #
 # LC_COLLATE=C sorts ls output with dotfiles on top
 
-
 # History stuff
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 HISTSAVE=10000
 
-alias ls='LC_COLLATE=C ls --color=auto'
-alias ll='LC_COLLATE=C ls -lh --color=auto'
-alias la='LC_COLLATE=C ls -lah --color=auto'
+alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
+alias ll='LC_COLLATE=C ls -lh --color=auto --group-directories-first'
+alias la='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
+
 alias ..='cd ..'
 alias ...='cd ../../'
 alias nano='vim'
@@ -118,6 +119,9 @@ alias ':q'=exit
 alias ':wq'=exit
 alias psx='ps ax | grep -i'
 alias ssh='TERM="xterm-256color" && ssh'
+
+# Whitelisting specific commands for zsh autocorrect
+alias git='nocorrect git'
 
 function fdt() {
     if [ "$1" = "1" ]; then
@@ -141,4 +145,14 @@ function mkcd() {
 function pwin_start_cmd() {
     echo "LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/"
 }
+
+function build-deb () {
+        (
+                cd debian
+                ./gen_deb_version.sh
+        )
+        fakeroot dpkg-buildpackage -tc -uc -us --build=binary
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

@@ -102,6 +102,9 @@ nmap <leader>l :ls<cr>
 " CtrlP
 nmap <leader>c :CtrlP<cr>
 
+" RipGrep
+nmap <leader>r :Rg<cr>
+
 " Scroll
 nmap <Up> <C-y>
 nmap <Down> <C-e>
@@ -201,6 +204,20 @@ set showtabline=2           " Always show tabline, even if there's just one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set t_Co=256               " Use 256 colors (Use this setting only if your terminal supports 256 colors)
 
+" ____ ____ ____ ____ ____
+"||C |||T |||R |||L |||P ||
+"||__|||__|||__|||__|||__||
+"|/__\|/__\|/__\|/__\|/__\|
+"
+let g:ctrlp_custom_ignore = 'build\|git' " Ignore certain directories when using ctrlP
+
+"" Use RipGrep with CtrlP:
+"if executable('rg')
+"  set grepprg=rg\ --color=never
+"  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"  let g:ctrlp_use_caching = 0
+"endif
+
 " ____ ____ ____ ____ ____ ____ ____
 "||P |||L |||U |||G |||I |||N |||S ||
 "||__|||__|||__|||__|||__|||__|||__||
@@ -216,9 +233,11 @@ Plugin 'VundleVim/Vundle.vim' "Required
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-fugitive.git'
+Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
+"Plugin 'jremmen/vim-ripgrep'
 "Plugin 'jeetsukumaran/vim-buffergator'
 "Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'mattn/vim-starwars'
@@ -244,6 +263,10 @@ augroup CursorLine
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
+
+
+"set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
 
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
@@ -412,7 +435,7 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " rsync -arv --include="2019-10-16/" --include="2019-10-16/07_20_51" --include="2019-10-16/07_20_51/*.avi" --exclude="*" ljungträ:/data/passages/ .
 "
 " Mounting samba drive:
-" sudo mount -t cifs -o username=jonas,password=stduma+T4l0n //192.168.1.90/cind /home/jonas/share/nas/
+" sudo mount -t cifs //192.168.1.90/cind /home/jonas/share/nas/ -o credentials=/home/jonas/.smb_creds2.txt,vers=2.0
 "
 " Make vim session: mks ~/.vim/sessions/ollebolle.vim
 "
@@ -429,6 +452,9 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 "
 " Run pwin and tell linker which libs to link at runtime
 " LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/ ./pwin -cmd ~/Development/pwin_command_files/TIM-995_dynamic_plane_offset/evalute_2019-10-31.pwin
+"
+" mysqldump:
+" mysqldump -u user -p database-name > dump_name-$(date "+%Y-%m-%d_%H_%M_%S").sql
 "
 "   's'   symbol: find all references to the token under cursor
 "   'g'   global: find global definition(s) of the token under cursor
@@ -449,3 +475,5 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " setxkbmap -layout se -variant swerty
 " To reset to regular swe-layout, simply run
 " setxkbmap -layout se
+" To increase keyboard repeat speed:
+" xset r rate 235 20
