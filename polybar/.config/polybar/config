@@ -133,9 +133,10 @@ font-4 = unifont:fontformat=truetype:size=20:antialias=false;1
 font-5 = fixed:pixelsize=28;7
 font-6 = fixed:pixelsize=20;4
 font-7 = FuraMonoForPowerline Nerd Font:pixelsize=20;4
+font-8 = icomoon:pixelsize=20;1
 
 modules-left = i3 xwindow
-modules-center = 
+modules-center =
 modules-right = xbacklight pulseaudio wlan battery date
 
 ;tray-position = right

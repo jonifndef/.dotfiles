@@ -192,6 +192,7 @@ bindsym $mod+Ctrl+9 gaps outer all set $outerGaps
 
 # Autostart thingys
 exec_always setxkbmap -layout se,us
+# Switch to swerty: setxkbmap -layout se -variant swerty
 #exec_always setxkbmap -option 'grp:alt_shift_toggle'
 
 # Compton-tyrone
@@ -225,6 +226,9 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
 # Chromium
 bindsym $mod+i exec --no-startup-id chromium
+
+# Printscreen with scrot
+Bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 
 # Background
 exec_always feh --bg-scale /home/jonas/Pictures/wallpapers/wallhaven-6kl1q6.jpg

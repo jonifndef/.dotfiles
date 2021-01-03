@@ -100,6 +100,10 @@ fi
 #
 # LC_COLLATE=C sorts ls output with dotfiles on top
 
+# Always start tmux
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    exec tmux && exit
+fi
 
 # History stuff
 HISTFILE=~/.zsh_history
@@ -136,3 +140,5 @@ function mkcd() {
 
 # Make a function that creates a dir and moves the file in question to that dir
 #
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
