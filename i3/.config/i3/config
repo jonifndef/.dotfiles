@@ -258,3 +258,6 @@ bindsym $mod+p [instance="pulsemixer"] scratchpad show
 bindsym $mod+n exec --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -hold -name networks -e bash -c "nmcli d w l && nmcli c s && bash"
 
 bindsym $mod+c [instance="calcurse"] scratchpad show
+
+# Screenshots with scrot
+bindsym --release Print exec "scrot -s '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~/Pictures/screenshots'"

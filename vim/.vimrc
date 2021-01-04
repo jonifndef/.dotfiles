@@ -166,7 +166,8 @@ autocmd FileType cpp inoremap ;co std::cout<Space><<<Space>"f"<Space><<<Space>st
 " Same thing but for spdlog, they way it is set up in Timber/Cargo-Server
 autocmd FileType cpp inoremap ;spd spdlog::get("log")->info("q");<Esc>Fqcw
 " Same thing for printf
-autocmd FileType c inoremap ;pf printf("q");<CR>fflush(stdout);<Esc>kFqcw
+autocmd FileType c inoremap ;pf printf("q");<Esc>Fqcw
+autocmd FileType cpp,c inoremap ;for for (int i = 0; i < q; i++)<CR>{<CR><CR>}<CR><Esc>kkkk0fqcw
 
 " For escaped quotes
 autocmd FileType cpp inoremap ++2 \"
@@ -216,9 +217,10 @@ Plugin 'VundleVim/Vundle.vim' "Required
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-fugitive.git'
+Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
 "Plugin 'jeetsukumaran/vim-buffergator'
 "Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'mattn/vim-starwars'
@@ -244,6 +246,10 @@ augroup CursorLine
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
+
+" Use ripgrep with fzf
+set rtp+=~/.fzf
+nmap <leader>R :Rg<cr>
 
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
