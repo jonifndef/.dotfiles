@@ -49,8 +49,8 @@ URxvt.internalBorder: 13
 
 !*background: #282828
 
-*depth: 32
-*background: rgba:0040/0040/0040/afff
+urxvt*depth: 32
+urxvt*background: rgba:0040/0040/0040/afff
 
 ! Fake transparency
 !*background: #282828

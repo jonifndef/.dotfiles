@@ -79,7 +79,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
 
 # shutdown/reboot-dmenu-script-thingy
-bindsym $mod+Escape exec /home/jonas/.local/bin/dmenu_shutdown
+#bindsym $mod+Escape exec /home/jonas/.local/bin/dmenu_shutdown
 
 # change focus
 bindsym $mod+h focus left
