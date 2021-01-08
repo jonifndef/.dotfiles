@@ -2,29 +2,28 @@
 # this file and re-run i3-config-wizard(1).
 
 # Variables:
-
 set $mod Mod1
 
 set $innerGaps 18
 set $outerGaps 0
 
 # Colors from .Xresources
-set_from_resource $black 	    color0 	#000000
-set_from_resource $white 	    color15 #000000
-set_from_resource $darkGrey 	color8 	#000000
-set_from_resource $lightGrey 	color7 	#000000
-set_from_resource $darkRed 	    color1 	#000000
-set_from_resource $red 		    color9 	#000000
-set_from_resource $darkGreen 	color2 	#000000
-set_from_resource $green 	    color10 #000000
-set_from_resource $darkYellow 	color3 	#000000
-set_from_resource $yellow 	    color11	#000000
-set_from_resource $darkBlue 	color4 	#000000
-set_from_resource $blue 	    color12	#000000
-set_from_resource $darkMagenta 	color5	#000000
-set_from_resource $magenta 	    color13	#000000
-set_from_resource $darkCyan 	color6 	#000000
-set_from_resource $cyan 	    color14	#000000
+#set_from_resource $black 	    color0 	#000000
+#set_from_resource $white 	    color15 #000000
+#set_from_resource $darkGrey 	color8 	#000000
+#set_from_resource $lightGrey 	color7 	#000000
+#set_from_resource $darkRed 	    color1 	#000000
+#set_from_resource $red 		    color9 	#000000
+#set_from_resource $darkGreen 	color2 	#000000
+#set_from_resource $green 	    color10 #000000
+#set_from_resource $darkYellow 	color3 	#000000
+#set_from_resource $yellow 	    color11	#000000
+#set_from_resource $darkBlue 	color4 	#000000
+#set_from_resource $blue 	    color12	#000000
+#set_from_resource $darkMagenta 	color5	#000000
+#set_from_resource $magenta 	    color13	#000000
+#set_from_resource $darkCyan 	color6 	#000000
+#set_from_resource $cyan 	    color14	#000000
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -69,7 +68,7 @@ exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name c
 #
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -191,7 +190,7 @@ bindsym $mod+Ctrl+0 gaps inner all set $innerGaps
 bindsym $mod+Ctrl+9 gaps outer all set $outerGaps
 
 # Autostart thingys
-exec_always setxkbmap -layout se,us
+#exec_always setxkbmap -layout se,us
 #exec_always setxkbmap -option 'grp:alt_shift_toggle'
 
 # Set caps to control

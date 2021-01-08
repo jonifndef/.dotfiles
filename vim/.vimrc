@@ -219,6 +219,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'rdnetto/YCM-Generator'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
 "Plugin 'jeetsukumaran/vim-buffergator'
