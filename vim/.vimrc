@@ -119,6 +119,10 @@ nnoremap <esc>^[ <esc>^[
 " Search for text selected in visual mode
 vnoremap // y/<C-R>"<CR>
 
+" Yank/paste to/from +-register/system clipboard
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+
 " Search and replace
 xnoremap <leader>sr y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>"/\=replacement/g<CR>
 xnoremap <leader>sc y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>"/\=replacement/gc<CR>
@@ -194,9 +198,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "||__|||__|||__|||__|||__|||__|||__|||__|||__||
 "|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 "
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
 set laststatus=2            " Always display powerline in all windows
 set showtabline=2           " Always show tabline, even if there's just one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
@@ -250,7 +254,7 @@ augroup END
 
 " Use ripgrep with fzf
 set rtp+=~/.fzf
-nmap <leader>R :Rg<cr>
+nmap <leader>r :Rg<cr>
 
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
