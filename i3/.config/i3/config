@@ -202,7 +202,10 @@ exec_always compton
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 
-exec_always --no-startup-id xset r rate 225 20
+# exec_always --no-startup-id xset r rate 225 20
+
+# Dunst
+exec_always dunst
 
 # i3lock-fancy
 bindsym $mod+shift+x exec i3lock-fancy --pixelate --font Hack-Bold --text "Enter the realm of the Yammosk" && systemctl suspend
