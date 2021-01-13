@@ -136,7 +136,7 @@ font-7 = FuraMonoForPowerline Nerd Font:pixelsize=20;4
 
 modules-left = i3 xwindow
 modules-center = 
-modules-right = xbacklight pulseaudio wlan battery date
+modules-right = backlight-acpi pulseaudio wlan battery date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -458,5 +458,28 @@ margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
-;
-;
+
+; ===================================
+
+[bar/testing]
+width = 100%
+height = 3%
+offset-x =
+offset-y =
+
+background = #222222
+
+;color of the font, find out why it is different to the white in the terminal
+foreground = #ebdbb2
+
+;the last digit is vertical offset, higher means the text is pushed further down
+font-0 = Hack:mono:pixelsize=12;1
+
+underline-size = 3
+underline-color = #cc241d
+
+modules-left = i3
+modules-right = date
+
+[module/date]
+format-underline = #fb4934
