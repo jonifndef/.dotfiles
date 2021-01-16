@@ -110,9 +110,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 HISTSAVE=10000
 
-alias ls='LC_COLLATE=C ls --color=auto'
-alias ll='LC_COLLATE=C ls -lh --color=auto'
-alias la='LC_COLLATE=C ls -lah --color=auto'
+alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
+alias ll='LC_COLLATE=C ls -lh --color=auto --group-directories-first'
+alias la='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
 alias ..='cd ..'
 alias ...='cd ../../'
 alias nano='vim'
@@ -133,7 +133,7 @@ function fdt() {
 function mkcd() {
     if [ ! -d "$1" ]; then
         mkdir -p "$1" && cd "$1"
-    else 
+    else
         echo "Directory already exists, pleb!"
     fi
 }

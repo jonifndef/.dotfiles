@@ -49,8 +49,8 @@ URxvt.internalBorder: 13
 
 !*background: #282828
 
-*depth: 32
-*background: rgba:0040/0040/0040/afff
+urxvt*depth: 32
+urxvt*background: rgba:0040/0040/0040/afff
 
 ! Fake transparency
 !*background: #282828
@@ -83,3 +83,11 @@ URxvt.internalBorder: 13
 ! LightGrey + White
 *color7:  #a89984
 *color15: #ebdbb2
+
+!Sxiv
+Sxiv.background: #282828
+Sxiv.foreground: #928374
+Sxiv.font: Hack:size:12
+Sxiv.fontcolor: #ebdbb2
+Sxiv.transparent: true
+Sxiv.shading: 90

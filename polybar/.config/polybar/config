@@ -27,9 +27,15 @@
 ;  bat-5
 ;  arch
 ;  boring wifi 
+;   wifi full (big)
+;   wifi half full
+;   wifi half empty
+;   wifi empty
 ;  muted
 ;  VIM
+;   Big
 ;  C++
+;  Debian Big
 
 ;;;;;;;;;;; FROM REDDIT ;;;;;;;;;;;;;
 
@@ -50,16 +56,15 @@ padding-1 = 1
 [settings]
 throttle-limit = 5
 throttle-ms = 50
-throttle-input-for = 50
 
 [bar/laptop]
 height = 35
 offset-x = 50px
 offset-y = 20px
 
-;tray-position = right
+tray-position = right
 tray-transparent = false
-tray-detached = false
+tray-detached = true
 tray-background = ${vars.color-bg-0}
 ;
 ;border-bottom-size = 1
@@ -136,8 +141,8 @@ font-7 = FuraMonoForPowerline Nerd Font:pixelsize=20;4
 font-8 = icomoon:pixelsize=20;1
 
 modules-left = i3 xwindow
-modules-center =
-modules-right = xbacklight pulseaudio wlan battery date
+modules-center = 
+modules-right = backlight-acpi pulseaudio wlan battery date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -166,16 +171,16 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+;format-prefix-foreground = ${colors.foreground-alt}
+;format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+;label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
+;label-indicator-background = ${colors.secondary}
+;;label-indicator-underline = ${colors.secondary}
 
 [module/filesystem]
 type = internal/fs
@@ -459,5 +464,80 @@ margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
-;
-;
+
+; ===================================
+
+[colors]
+black = #1d2021
+red = #cc241d
+green = #98971a
+yellow = #d79921
+blue = #458588
+magenta = #b16286
+cyan = #689d6a
+white = #a89984
+        
+bright-black = #928374
+bright-red = #fb4934
+bright-green = #b8bb26
+bright-yellow = #fabd2f
+bright-blue = #83a598
+bright-magent = #d3869b
+bright-cyan = #8ec07c
+bright-white = #ebdbb2
+
+[bar/testing]
+width = 100%
+height = 3%
+offset-x =
+offset-y =
+
+background = #222222
+;color of the font, find out why it is different to the white in the terminal
+foreground = #ebdbb2
+
+;the last digit is vertical offset, higher means the text is pushed further down
+font-0 = Hack:mono:pixelsize=12;2
+
+
+;border above bar, higher values moves the bar downwards
+border-size = 0
+
+
+;thickness of all underlines (not used right now)
+underline-size = 3
+
+
+;padding on left/right side of bar, can be controlled individually with padding-left/padding-right
+padding-right = 1
+
+
+;space between modules. This does not add space between the outmost modules and the edges of the bar
+module-margin = 1
+
+
+;very unclear, doesn't seem to work for me
+dim-value = 0.9
+
+
+;setting this to true will get rid of the error message "tray: Failed to put tray above 0x0000 in the stack (XCB_MATCH (8))"
+; but it will put the bar above windows, not allowing the wm to reserve space for it
+override-redirect = false
+
+
+tray-position = right
+;if this is true, the tray will cover other bar elements as it grows and more icons are added
+tray-detached = false
+;keep this at 1.0, it's not just the icons that scale, it's the entire "background" tray
+tray-scale = 1.0
+
+
+;modules
+modules-left = i3
+modules-right = battery date
+
+[module/battery]
+
+[module/date]
+;color of text in module
+format-foreground = ${colors.red}

@@ -2,29 +2,28 @@
 # this file and re-run i3-config-wizard(1).
 
 # Variables:
-
 set $mod Mod1
 
 set $innerGaps 18
 set $outerGaps 0
 
 # Colors from .Xresources
-set_from_resource $black 	    color0 	#000000
-set_from_resource $white 	    color15 #000000
-set_from_resource $darkGrey 	color8 	#000000
-set_from_resource $lightGrey 	color7 	#000000
-set_from_resource $darkRed 	    color1 	#000000
-set_from_resource $red 		    color9 	#000000
-set_from_resource $darkGreen 	color2 	#000000
-set_from_resource $green 	    color10 #000000
-set_from_resource $darkYellow 	color3 	#000000
-set_from_resource $yellow 	    color11	#000000
-set_from_resource $darkBlue 	color4 	#000000
-set_from_resource $blue 	    color12	#000000
-set_from_resource $darkMagenta 	color5	#000000
-set_from_resource $magenta 	    color13	#000000
-set_from_resource $darkCyan 	color6 	#000000
-set_from_resource $cyan 	    color14	#000000
+#set_from_resource $black 	    color0 	#000000
+#set_from_resource $white 	    color15 #000000
+#set_from_resource $darkGrey 	color8 	#000000
+#set_from_resource $lightGrey 	color7 	#000000
+#set_from_resource $darkRed 	    color1 	#000000
+#set_from_resource $red 		    color9 	#000000
+#set_from_resource $darkGreen 	color2 	#000000
+#set_from_resource $green 	    color10 #000000
+#set_from_resource $darkYellow 	color3 	#000000
+#set_from_resource $yellow 	    color11	#000000
+#set_from_resource $darkBlue 	color4 	#000000
+#set_from_resource $blue 	    color12	#000000
+#set_from_resource $darkMagenta 	color5	#000000
+#set_from_resource $magenta 	    color13	#000000
+#set_from_resource $darkCyan 	color6 	#000000
+#set_from_resource $cyan 	    color14	#000000
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -69,7 +68,7 @@ exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name c
 #
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -79,7 +78,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
 
 # shutdown/reboot-dmenu-script-thingy
-bindsym $mod+Escape exec /home/jonas/.local/bin/dmenu_shutdown
+#bindsym $mod+Escape exec /home/jonas/.local/bin/dmenu_shutdown
 
 # change focus
 bindsym $mod+h focus left
@@ -191,9 +190,12 @@ bindsym $mod+Ctrl+0 gaps inner all set $innerGaps
 bindsym $mod+Ctrl+9 gaps outer all set $outerGaps
 
 # Autostart thingys
-exec_always setxkbmap -layout se,us
 # Switch to swerty: setxkbmap -layout se -variant swerty
+#exec_always setxkbmap -layout se,us
 #exec_always setxkbmap -option 'grp:alt_shift_toggle'
+
+# Set caps to control
+exec_always xmodmap /home/jonas/.xmodmap
 
 # Compton-tyrone
 exec_always compton
@@ -201,10 +203,12 @@ exec_always compton
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 
-#exec_always --no-startup-id xset r rate 225 20
-
 # Unclutter
 exec_always --no-startup-id unclutter -idle 1
+
+# Dunst
+exec_always dunst
+>>>>>>> master
 
 # i3lock-fancy
 bindsym $mod+shift+x exec i3lock-fancy --pixelate --font Hack-Bold --text "Enter the realm of the Yammosk" && systemctl suspend
@@ -262,3 +266,6 @@ bindsym $mod+p [instance="pulsemixer"] scratchpad show
 bindsym $mod+n exec --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -hold -name networks -e bash -c "nmcli d w l && nmcli c s && bash"
 
 bindsym $mod+c [instance="calcurse"] scratchpad show
+
+# Screenshots with scrot
+bindsym --release Print exec "scrot -s '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~/Pictures/screenshots'"
