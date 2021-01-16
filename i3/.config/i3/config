@@ -208,7 +208,6 @@ exec_always --no-startup-id unclutter -idle 1
 
 # Dunst
 exec_always dunst
->>>>>>> master
 
 # i3lock-fancy
 bindsym $mod+shift+x exec i3lock-fancy --pixelate --font Hack-Bold --text "Enter the realm of the Yammosk" && systemctl suspend
@@ -230,9 +229,6 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
 # Chromium
 bindsym $mod+i exec --no-startup-id chromium
-
-# Printscreen with scrot
-Bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 
 # Background
 exec_always feh --bg-scale /home/jonas/Pictures/wallpapers/wallhaven-6kl1q6.jpg
