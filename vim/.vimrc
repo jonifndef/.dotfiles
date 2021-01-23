@@ -1,5 +1,5 @@
 "
-"
+"             __
 "     __  __ /\_\    ___ ___   _ __   ___
 "    /\ \/\ \\/\ \ /' __` __`\/\`'__\/'___\
 "  __\ \ \_/ |\ \ \/\ \/\ \/\ \ \ \//\ \__/
@@ -28,6 +28,13 @@ set statusline+=%F
 set backspace=2 " make backspace work like most other programs
 set formatoptions-=cro " Disable continuation of comment at linebreaks
 
+" Tell vim to use xterm keys
+" This is needed to be able to use <C-arrowkeys>
+execute "set <xUp>=\e[1;*A"
+execute "set <xDown>=\e[1;*B"
+execute "set <xRight>=\e[1;*C"
+execute "set <xLeft>=\e[1;*D"
+
 " And the obligatory disabling of space
 "nnoremap <SPACE> <Nop>
 " Space is leader
@@ -47,8 +54,8 @@ hi Search ctermbg=Yellow
 hi Search ctermfg=Black
 
 " Popup menu (for autocomplete etc)
-hi Pmenu ctermbg=100
-hi PmenuSel ctermbg=237
+hi Pmenu guibg=#b8bb26 ctermbg=100
+hi PmenuSel guibg=#3a3a3a ctermbg=237
 
 " Vimdiff colors
 "hi DiffAdd ctermbg=
@@ -387,6 +394,10 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " nerdtree, or perhaps netrw DONE
 " ctags DONE
 " youcompleteme DONE
+"
+" Ascii art font:
+" patorjk.com
+" 'Larry 3D'
 "
 " Fix shortcuts for buffnext, buffprev, buffclose DONE
 " Fix shortcut for CtrlP, YcmCompleter FixIt DONE
