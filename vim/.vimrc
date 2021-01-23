@@ -27,6 +27,7 @@ set hlsearch
 set statusline+=%F
 set backspace=2 " make backspace work like most other programs
 set formatoptions-=cro " Disable continuation of comment at linebreaks
+set filetype=dosini
 
 " Tell vim to use xterm keys
 " This is needed to be able to use <C-arrowkeys>
