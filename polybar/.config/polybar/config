@@ -20,16 +20,21 @@
 ;  bat-5
 ;  arch
 ;  boring wifi 
-;   wifi full (big)
-;   wifi half full
-;   wifi half empty
-;   wifi empty
+;   wifi big full (big)
+;   wifi big half full
+;   wifi big half empty
+;   wifi big empty
 ;  muted
 ;  VIM
-;   Big
+;  VIM Big
 ;  C++
 ;  Debian Big
-; 
+;  履望 redshift?
+;  disk space? 
+;  keyboard
+;  keyboard
+;  cpu
+; 婢mute
 
 ;;;;;;;;;;; FROM REDDIT ;;;;;;;;;;;;;
 
@@ -239,17 +244,19 @@ tray-scale = 1.0
 
 ;modules
 modules-left = i3
-modules-right = xkeyboard backlight-acpi pulseaudio battery date ;wlan
+;modules-right = xkeyboard backlight-acpi pulseaudio battery date wlan
+modules-right = xkeyboard backlight-acpi pulseaudio battery date
 
 
 [module/date]
 type = internal/date
 ;color of text in module
-format-foreground = ${colors.datecolor}
+;format-foreground = ${colors.datecolor}
 interval = 5
-date = "%{T7}%{T-} %a %d %b"
-time = "%{T7}%{T-} %H:%M"
+date = "%{T7}%{F#689d6a}%{F-}%{T-} %a %d %b"
+time = "%{T7}%{F#b16286}%{F-}%{T-} %H:%M"
 label = %date% %time%
+
 
 [module/xwindow]
 type = internal/xwindow
@@ -259,8 +266,8 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-;format-prefix = "%{T7} %{T-}"
-format-prefix = " "
+format-prefix = "%{T7}%{F#cc241d} %{F-}%{T-}"
+;format-prefix = " "
 ;format-prefix-foreground = ${colors.foreground-alt}
 ;format-prefix-underline = ${colors.secondary}
 
@@ -272,6 +279,7 @@ label-indicator-margin = 1
 ;label-indicator-background = ${colors.secondary}
 ;;label-indicator-underline = ${colors.secondary}
 
+
 [module/filesystem]
 type = internal/fs
 interval = 25
@@ -281,6 +289,7 @@ mount-0 = /
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+
 
 [module/i3]
 type = internal/i3
@@ -326,7 +335,7 @@ label-urgent-padding = 2
 type = internal/xbacklight
 
 format = <label> 
-format-prefix = "%{T7}%{T-}"
+format-prefix = "%{T7}%{F#98971a}%{F-}%{T-}"
 ;format-prefix-foreground = #FFC100
 label = " %percentage%%"
 ;label-foreground = ${colors.foreground-alt}
@@ -386,7 +395,7 @@ format-disconnected =
 type = internal/pulseaudio
 
 format-volume = <label-volume> 
-label-volume = "%{T7}%{T-} %percentage%%"
+label-volume = "%{T7}%{F#d79921}%{F-}%{T-} %percentage%%"
 label-volume-foreground = ${root.foreground}
 
 label-muted = "%{T7}%{T-} muted"
@@ -458,4 +467,4 @@ ramp-capacity-2 = "%{T7}%{T-}"
 ramp-capacity-3 = "%{T7}%{T-}"
 ramp-capacity-4 = "%{T7}%{T-}" 
 
-ramp-capacity-foreground = ${root.foreground}
+ramp-capacity-foreground = ${colors.blue}
