@@ -12,146 +12,25 @@
 ; Icons that should be used:
 ;    chromium
 ;  terminal
-;  mail
-;  bat-1
-;  bat-2
-;  bat-3
-;  bat-4
-;  bat-5
-;  arch
-;  boring wifi 
-;   wifi big full (big)
-;   wifi big half full
-;   wifi big half empty
-;   wifi big empty
-;  muted
-;  VIM
-;  VIM Big
-;  C++
-;  Debian Big
-;  履望 redshift?
+;   mail
+;   bat-1
+;   bat-2
+;   bat-3
+;   bat-4
+;   bat-5
+;   arch
+;   boring wifi
+;   muted
+;   VIM
+;   VIM Big
+;   C++
+;   Debian Big
+;   履 望   redshift?
 ;  disk space? 
 ;  keyboard
 ;  keyboard
 ;  cpu
 ; 婢mute
-
-;;;;;;;;;;; FROM REDDIT ;;;;;;;;;;;;;
-
-;[vars]
-;color-bg-0 = #690f1419
-;color-bg-1 = #690f1419
-;color-focused = #ffffff
-;color-occupied-muted = #aaffffff
-;color-empty = #33ffffff
-;color-urgent = #E04E46
-;color-border = #0000ff
-;
-;underline-size = 0
-;padding-0 = 2
-;padding-1 = 1
-;;p-1 - p-0 = p-2
-;
-;[settings]
-;throttle-limit = 5
-;throttle-ms = 50
-;
-;[bar/laptop]
-;height = 35
-;offset-x = 50px
-;offset-y = 20px
-;
-;tray-position = right
-;tray-transparent = false
-;tray-detached = true
-;tray-background = ${vars.color-bg-0}
-;;
-;;border-bottom-size = 1
-;;border-bottom-color = ${vars.color-border}
-;
-;padding-left = ${vars.padding-0}
-;padding-right = ${vars.padding-0}
-;
-;background-0 = ${vars.color-bg-0}
-;background-1 = ${vars.color-bg-1}
-;foreground = ${vars.color-focused}
-;
-;spacing = 1
-;underline-size = ${vars.underline-size}
-;overline-size = 0
-;module-margin-left = ${vars.padding-1}
-;module-margin-right = ${vars.padding-1}
-
-;[bar/laptop]
-;monitor = ${env:MONITOR:HDMI-1}
-;;;;;;;;;;;
-;width = 98%
-;height = 28
-;offset-x = 
-;offset-y = 15%
-;;;;;;;;;;
-; no rounded corners!
-;radius = 0.0 
-;fixed-center = false
-;
-;background = ${colors.background}
-;foreground = ${colors.foreground}
-
-;line-size = 3
-;line-color = #f00
-;;;;;;;;;;;;;;;;;;
-; This border size along with the border color below gives the "gaps" look
-;border-size = 10
-; set this to the gruvbox-light-grey
-;border-color = #00000000
-;;;;;;;;;;;;;;;;;;
-
-;padding-left = 0
-;padding-right = 2
-;
-;module-margin-left = 1
-;module-margin-right = 2
-
-;;;;;;;;;; /MY OWN STUFF ;;;;;;;;;;;;
-
-;font-0 = fixed:pixelsize=13;1
-;font-1 = unifont:fontformat=truetype:size=10:antialias=false;1
-;font-2 = siji:pixelsize=10;1
-;font-3 = fixed:pixelsize=20;1
-;font-4 = unifont:fontformat=truetype:size=20:antialias=false;1
-;font-5 = fixed:pixelsize=28;7
-;font-6 = fixed:pixelsize=20;4
-;font-7 = FuraMonoForPowerline Nerd Font:pixelsize=20;4
-
-;modules-left = i3 xwindow
-;modules-center = 
-;modules-right = backlight-acpi pulseaudio wlan battery date
-
-;tray-position = right
-;tray-padding = 2
-;tray-background = #0063ff
-
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
-
-;cursor-click = pointer
-;cursor-scroll = ns-resize
-;;;;;;;;;; /FROM REDDIT ;;;;;;;;;;;;;
-
-
-;;;;;;;;;; MY OWN STUFF ;;;;;;;;;;;;;
-
-
-
-
 
 [settings]
 screenchange-reload = true
@@ -188,26 +67,27 @@ datecolor = ${colors.red}
 i3-background = #690f1419
 i3-empty = #33ffffff
 
-[bar/testing]
+[bar/laptop]
 width = 100%
 height = 3%
 offset-x =
 offset-y =
 
-background = #222222
+background = #66000000
 ;color of the font, find out why it is different to the white in the terminal
 foreground = #ebdbb2
 
 ;the last digit is vertical offset, higher means the text is pushed further down
 font-0 = Hack:mono:pixelsize=12;2
+font-1 = Hack nerd font:fontformat=truetype:size=14:20
 
-font-1 = unifont:fontformat=truetype:size=10:antialias=false;1
-font-2 = siji:pixelsize=10;1
-font-3 = fixed:pixelsize=20;1
-font-4 = unifont:fontformat=truetype:size=20:antialias=false;1
-font-5 = fixed:pixelsize=28;7
-font-6 = fixed:pixelsize=20;4
-font-7 = FuraMonoForPowerline Nerd Font:pixelsize=20;4
+;font-1 = unifont:fontformat=truetype:size=10:antialias=false;1
+;font-2 = siji:pixelsize=10;1
+;font-3 = fixed:pixelsize=20;1
+;font-4 = unifont:fontformat=truetype:size=20:antialias=false;1
+;font-5 = fixed:pixelsize=28;7
+;font-6 = fixed:pixelsize=20;4
+;font-7 = FuraMonoForPowerline Nerd Font:pixelsize=20;4
 
 
 ;border above bar, higher values moves the bar downwards
@@ -253,8 +133,8 @@ type = internal/date
 ;color of text in module
 ;format-foreground = ${colors.datecolor}
 interval = 5
-date = "%{T7}%{F#689d6a}%{F-}%{T-} %a %d %b"
-time = "%{T7}%{F#b16286}%{F-}%{T-} %H:%M"
+date = "%{T1}%{F#689d6a} %{F-}%{T-} %a %d %b"
+time = "%{T1}%{F#b16286} %{F-}%{T-} %H:%M"
 label = %date% %time%
 
 
@@ -266,7 +146,7 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = "%{T7}%{F#cc241d} %{F-}%{T-}"
+format-prefix = "%{T1}%{F#cc241d}  %{F-}%{T-}"
 ;format-prefix = " "
 ;format-prefix-foreground = ${colors.foreground-alt}
 ;format-prefix-underline = ${colors.secondary}
@@ -335,7 +215,7 @@ label-urgent-padding = 2
 type = internal/xbacklight
 
 format = <label> 
-format-prefix = "%{T7}%{F#98971a}%{F-}%{T-}"
+format-prefix = "%{T1}%{F#98971a} %{F-}%{T-}"
 ;format-prefix-foreground = #FFC100
 label = " %percentage%%"
 ;label-foreground = ${colors.foreground-alt}
@@ -356,7 +236,7 @@ interval = 3.0
 ;format-connected = <ramp-signal> <label-connected>
 format-connected = <label-connected>
 ;label-connected = " %essid%"
-;label-connected = "%{T7}%{T-} %essid%"
+;label-connected = "%{T1}%{T-} %essid%"
 label-connected = "%essid%"
 
  
@@ -395,10 +275,10 @@ format-disconnected =
 type = internal/pulseaudio
 
 format-volume = <label-volume> 
-label-volume = "%{T7}%{F#d79921}%{F-}%{T-} %percentage%%"
+label-volume = "%{T1}%{F#d79921} %{F-}%{T-} %percentage%%"
 label-volume-foreground = ${root.foreground}
 
-label-muted = "%{T7}%{T-} muted"
+label-muted = "%{T1} %{T-} muted"
 label-muted-foreground = #666
 interval = 2
 
@@ -461,10 +341,10 @@ label-charging = " %percentage%%"
 format-discharging = <ramp-capacity><label-discharging>
 label-discharging = " %percentage%%"
 
-ramp-capacity-0 = "%{T7}%{T-}"
-ramp-capacity-1 = "%{T7}%{T-}"
-ramp-capacity-2 = "%{T7}%{T-}"
-ramp-capacity-3 = "%{T7}%{T-}"
-ramp-capacity-4 = "%{T7}%{T-}" 
+ramp-capacity-0 = "%{T7} %{T-}"
+ramp-capacity-1 = "%{T7} %{T-}"
+ramp-capacity-2 = "%{T7} %{T-}"
+ramp-capacity-3 = "%{T7} %{T-}"
+ramp-capacity-4 = "%{T7} %{T-}" 
 
 ramp-capacity-foreground = ${colors.blue}
