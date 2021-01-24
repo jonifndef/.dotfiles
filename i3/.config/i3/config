@@ -1,3 +1,14 @@
+#          __                                 ___                 
+#    __  /'__`\                             /'___\ __             
+#   /\_\/\_\L\ \        ___    ___     ___ /\ \__//\_\     __     
+#   \/\ \/_/_\_<_      /'___\ / __`\ /' _ `\ \ ,__\/\ \  /'_ `\   
+#    \ \ \/\ \L\ \    /\ \__//\ \L\ \/\ \/\ \ \ \_/\ \ \/\ \L\ \  
+#     \ \_\ \____/    \ \____\ \____/\ \_\ \_\ \_\  \ \_\ \____ \ 
+#      \/_/\/___/      \/____/\/___/  \/_/\/_/\/_/   \/_/\/___L\ \
+#                                                          /\____/
+#                                                          \_/__/ 
+
+#
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 
@@ -41,6 +52,8 @@ set $ws10 "10"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Scratchpad-esque terminals
+
 # dropdown-style terminal "networks"
 for_window [instance="networks"] floating enable
 for_window [instance="networks"] resize set 950 450
@@ -48,14 +61,15 @@ for_window [instance="networks"] move position 820 px 55 px
 
 # dropdown-style scratchpad for pulsemixer
 for_window [instance="pulsemixer"] floating enable
-for_window [instance="pulsemixer"] resize set 800 350
-for_window [instance="pulsemixer"] move position 750 px 55 px
+for_window [instance="pulsemixer"] resize set 30 ppt 24 ppt
+for_window [instance="pulsemixer"] move position 61 ppt 4 ppt
 for_window [instance="pulsemixer"] move scratchpad
 
 # dropdown-style scratchpad for calcurse
 for_window [instance="calcurse"] floating enable
-for_window [instance="calcurse"] resize set 750 450
-for_window [instance="calcurse"] move position 1150 px 55 px
+#for_window [instance="calcurse"] resize set 750 450
+for_window [instance="calcurse"] resize set 30 ppt 32 ppt
+for_window [instance="calcurse"] move position 69 ppt 4 ppt 
 for_window [instance="calcurse"] move scratchpad
 
 # Terminal running pulsemixer, to be put on the scratchpad:
@@ -64,8 +78,8 @@ exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name p
 # Terminal running calcurse, to be put on the scratchpad:
 exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name calcurse -e calcurse
 
-#exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/5555 --deph 32 -name pulsemixer
-#
+
+
 
 # start a terminal
 bindsym $mod+Return exec st
@@ -189,19 +203,24 @@ bindsym $mod+Ctrl+minus gaps outer all minus 5
 bindsym $mod+Ctrl+0 gaps inner all set $innerGaps
 bindsym $mod+Ctrl+9 gaps outer all set $outerGaps
 
-# Autostart thingys
-# Switch to swerty: setxkbmap -layout se -variant swerty
-#exec_always setxkbmap -layout se,us
-#exec_always setxkbmap -option 'grp:alt_shift_toggle'
+
+#  _______ _______ _______ _______ _______ _______ _______ _______ _______ 
+# |\     /|\     /|\     /|\     /|\     /|\     /|\     /|\     /|\     /|
+# | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ |
+# | |   | | |   | | |   | | |   | | |   | | |   | | |   | | |   | | |   | |
+# | |a  | | |u  | | |t  | | |o  | | |s  | | |t  | | |a  | | |r  | | |t  | |
+# | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ |
+# |/_____\|/_____\|/_____\|/_____\|/_____\|/_____\|/_____\|/_____\|/_____\|
+#
+
+# nm-applet
+exec_always no-startup-id nm-applet
 
 # Set caps to control
 exec_always xmodmap /home/jonas/.xmodmap
 
 # Compton-tyrone
 exec_always compton
-
-# Polybar
-exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 
 # Unclutter
 exec_always --no-startup-id unclutter -idle 1
@@ -211,6 +230,10 @@ exec_always dunst
 
 # i3lock-fancy
 bindsym $mod+shift+x exec i3lock-fancy --pixelate --font Hack-Bold --text "Enter the realm of the Yammosk" && systemctl suspend
+
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
+
 
 # Pulse audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2
@@ -224,8 +247,8 @@ bindsym X86AudioNext exec playerctl next
 bindsym X86AudioPrev exec playerctl previous
 
 # Light
-bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 3 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 3 # decrease screen brightness
 
 # Chromium
 bindsym $mod+i exec --no-startup-id chromium

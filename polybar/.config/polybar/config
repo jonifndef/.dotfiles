@@ -121,6 +121,9 @@ dim-value = 0.9
 override-redirect = false
 
 
+;enable inter-process communication, i.e. commands like 'polybar-msg cmd restart'
+enable-ipc = true
+
 tray-position = right
 ;if this is true, the tray will cover other bar elements as it grows and more icons are added
 tray-detached = false
@@ -131,17 +134,18 @@ tray-scale = 1.0
 ;modules
 modules-left = i3
 ;modules-right = xkeyboard backlight-acpi pulseaudio battery date wlan
-modules-right = xkeyboard backlight-acpi pulseaudio battery date
+#modules-right = xkeyboard backlight-acpi pulseaudio battery date
+modules-right = swertykeeb backlight-acpi pulseaudio battery date
 
 
 [module/date]
 type = internal/date
 ;color of text in module
 ;format-foreground = ${colors.datecolor}
-interval = 5
+interval = 2
 date = "%{T1}%{F#98971a} %{F-}%{T-} %a %d %b"
 time = "%{T1}%{F#cc241d} %{F-}%{T-} %H:%M"
-label = %date% %time%
+label = %{A1:i3-msg '[instance="calcurse"] scratchpad show':}%date% %time%%{A}
 
 
 [module/xwindow]
@@ -164,6 +168,15 @@ label-indicator-padding = 2
 label-indicator-margin = 1
 ;label-indicator-background = ${colors.secondary}
 ;;label-indicator-underline = ${colors.secondary}
+
+
+[module/swertykeeb]
+type = custom/script
+exec = /home/jonas/.local/bin/scripts/keyboard-layout
+interval = 1
+format-prefix = "%{T2}%{F#689d6a}  %{F-}%{T-}"
+label = %output%
+click-left = /home/jonas/.local/bin/scripts/keyboard-layout toggle
 
 
 [module/filesystem]
@@ -287,23 +300,7 @@ label-volume-foreground = ${root.foreground}
 label-muted = "%{T1} %{T-} muted"
 label-muted-foreground = #666
 interval = 2
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+click-right = "/bin/sh -c 'i3-msg [instance="pulsemixer"] scratchpad show'
 
 
 [module/alsa]
@@ -347,7 +344,7 @@ label-charging = " %percentage%%"
 format-discharging = <ramp-capacity><label-discharging>
 label-discharging = " %percentage%%"
 
-ramp-capacity-0 = "%{T7} %{T-}"
+ramp-capacity-0 = "%{B#cc241d}%{T7} %{T-}%{B-}"
 ramp-capacity-1 = "%{T7} %{T-}"
 ramp-capacity-2 = "%{T7} %{T-}"
 ramp-capacity-3 = "%{T7} %{T-}"
