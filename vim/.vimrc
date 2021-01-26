@@ -33,6 +33,9 @@ set formatoptions-=cro " Disable continuation of comment at linebreaks
 " Space is leader
 let mapleader=" "
 
+" Remove coc.vim startup warning
+let g:coc_disable_startup_warning = 1
+
 " Colors
 colo slate
 set background=dark " A must for gruvbox + compton transparancy
@@ -87,8 +90,8 @@ nmap Q <Nop>
 "|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 "
 " Scrolling faster
-nnoremap <C-Down> 3<C-e>
-nnoremap <C-Up> 3<C-y>
+nmap <C-Down> 3<C-e>
+nmap <C-Up> 3<C-y>
 
 " Buffer navigation
 set hidden
@@ -97,7 +100,7 @@ nmap <Right> :bnext<cr>
 nmap <leader>q :bdelete<cr>
 
 " List open buffers
-nmap <leader>l :ls<cr>
+"nmap <leader>l :ls<cr>
 
 " CtrlP
 nmap <leader>c :CtrlP<cr>
@@ -110,7 +113,7 @@ nmap <Up> <C-y>
 nmap <Down> <C-e>
 
 " YCMCompleter
-nmap <leader>f :YcmCompleter FixIt<cr>
+"nmap <leader>f :YcmCompleter FixIt<cr>
 
 " Cscope extended regex search
 noremap <leader>e :cs find e
@@ -234,9 +237,11 @@ Plugin 'VundleVim/Vundle.vim' "Required
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
+"Plugin 'rdnetto/YCM-Generator'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
+Plugin 'sheerun/vim-polyglot'
 "Plugin 'jremmen/vim-ripgrep'
 "Plugin 'jeetsukumaran/vim-buffergator'
 "Plugin 'terryma/vim-multiple-cursors'
@@ -267,6 +272,15 @@ augroup END
 
 "set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
+
+
+" Coc.nvim bindings
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent><leader>gr <Plug>(coc-references)
+nmap <leader>ff <Plug>(coc-fix-current)
+
 
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
