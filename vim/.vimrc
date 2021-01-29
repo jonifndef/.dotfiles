@@ -37,7 +37,7 @@ let mapleader=" "
 let g:coc_disable_startup_warning = 1
 
 " Colors
-colo slate
+"colo slate
 set background=dark " A must for gruvbox + compton transparancy
 
 " Highlight trailing whitespaces
@@ -166,7 +166,6 @@ nnoremap <F5> :call LessMode()<CR>
 let g:lessmode = 0
 
 
-
 " Ugly little snippet done the Luke Smith-way, prints std::cout
 autocmd FileType cpp inoremap ;co std::cout<Space><<<Space>"f"<Space><<<Space>std::endl;<Esc>Ffcw
 " Same thing but for spdlog, they way it is set up in Timber/Cargo-Server
@@ -241,6 +240,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
+Plugin 'morhetz/gruvbox'
+"Plugin 'octol/vim-cpp-enhanced-highlight', {'for':['c', 'cpp']}
 Plugin 'sheerun/vim-polyglot'
 "Plugin 'jremmen/vim-ripgrep'
 "Plugin 'jeetsukumaran/vim-buffergator'
@@ -273,6 +274,10 @@ augroup END
 "set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
 
+
+" For gruvbox plugin:
+"autocmd vimenter * ++nested colorscheme gruvbox
+colo gruvbox
 
 " Coc.nvim bindings
 nmap <silent> gd <Plug>(coc-definition)
