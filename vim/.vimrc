@@ -268,10 +268,17 @@ nmap <leader>r :Rg<cr>
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_transparent_bg = 1
-let g:gruvbox_termcolors = 16
+let g:gruvbox_termcolors = 16 " 256 is nice but no transparancy, see comment below
 
-" Gruvbox colors
+" I have yet to get this to work with tmux and transparancy in vim
+"let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+"let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+"set t_Co=256
+"set termguicolors
+
+"Gruvbox colors
 colo gruvbox
+
 "
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()

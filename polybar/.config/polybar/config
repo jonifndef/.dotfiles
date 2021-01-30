@@ -294,13 +294,15 @@ format-disconnected =
 type = internal/pulseaudio
 
 format-volume = <label-volume> 
-label-volume = "%{T2}%{F#d79921} %{F-}%{T-} %percentage%%"
+label-volume = "%{A1:i3-msg '[instance="pulsemixer"] scratchpad show':}%{T2}%{F#d79921} %{F-}%{T-}%{A} %percentage%%"
 label-volume-foreground = ${root.foreground}
 
 label-muted = "%{T1} %{T-} muted"
 label-muted-foreground = #666
 interval = 2
-click-right = "/bin/sh -c 'i3-msg [instance="pulsemixer"] scratchpad show'
+;click-right = "/bin/sh -c 'i3-msg [instance="pulsemixer"] scratchpad show'
+;click-right = /home/jonas/.local/bin/scripts/keyboard-layout toggle
+
 
 
 [module/alsa]
@@ -351,3 +353,5 @@ ramp-capacity-3 = "%{T7} %{T-}"
 ramp-capacity-4 = "%{T7} %{T-}" 
 
 ramp-capacity-foreground = ${colors.blue}
+
+vim:ft=dosini

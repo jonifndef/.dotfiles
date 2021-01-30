@@ -214,7 +214,7 @@ bindsym $mod+Ctrl+9 gaps outer all set $outerGaps
 #
 
 # nm-applet
-exec_always no-startup-id nm-applet
+exec_always --no-startup-id nm-applet
 
 # Set caps to control
 exec_always xmodmap /home/jonas/.xmodmap
