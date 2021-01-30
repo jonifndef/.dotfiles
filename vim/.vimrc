@@ -42,8 +42,8 @@ execute "set <xLeft>=\e[1;*D"
 let mapleader=" "
 
 " Colors
-colo slate
 set background=dark " A must for gruvbox + compton transparancy
+
 
 " Highlight trailing whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -234,6 +234,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
+Plugin 'morhetz/gruvbox' 
+Plugin 'sheerun/vim-polyglot'
 "Plugin 'jeetsukumaran/vim-buffergator'
 "Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'mattn/vim-starwars'
@@ -264,6 +266,13 @@ augroup END
 set rtp+=~/.fzf
 nmap <leader>r :Rg<cr>
 
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_transparent_bg = 1
+let g:gruvbox_termcolors = 16
+
+" Gruvbox colors
+colo gruvbox
+"
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
 "  if exists("t:expl_buf_num")
