@@ -1,17 +1,17 @@
-;                ___             __                        
-;               /\_ \           /\ \                       
-;  _____     ___\//\ \    __  __\ \ \____     __     _ __  
+;                ___             __
+;               /\_ \           /\ \
+;  _____     ___\//\ \    __  __\ \ \____     __     _ __
 ; /\ '__`\  / __`\\ \ \  /\ \/\ \\ \ '__`\  /'__`\  /\`'__\
-; \ \ \L\ \/\ \L\ \\_\ \_\ \ \_\ \\ \ \L\ \/\ \L\.\_\ \ \/ 
-;  \ \ ,__/\ \____//\____\\/`____ \\ \_,__/\ \__/.\_\\ \_\ 
-;   \ \ \/  \/___/ \/____/ `/___/> \\/___/  \/__/\/_/ \/_/ 
-;    \ \_\                    /\___/                       
-;     \/_/                    \/__/                        
-; 
+; \ \ \L\ \/\ \L\ \\_\ \_\ \ \_\ \\ \ \L\ \/\ \L\.\_\ \ \/
+;  \ \ ,__/\ \____//\____\\/`____ \\ \_,__/\ \__/.\_\\ \_\
+;   \ \ \/  \/___/ \/____/ `/___/> \\/___/  \/__/\/_/ \/_/
+;    \ \_\                    /\___/
+;     \/_/                    \/__/
+;
 
 ; Icons that should be used:
 ;    chromium
-;  terminal
+;   terminal
 ;   mail
 ;   bat-1
 ;   bat-2
@@ -26,7 +26,7 @@
 ;   C++
 ;   Debian Big
 ;   履 望   redshift?
-;  disk space? 
+;  disk space?
 ;  keyboard
 ;  keyboard
 ;  cpu
@@ -86,6 +86,8 @@ foreground = #ebdbb2
 font-0 = Hack:mono:pixelsize=12;2
 font-1 = Hack nerd font:fontformat=truetype:size=14:3
 font-2 = Hack nerd font:fontformat=truetype:size=15:3
+font-3 = Hack nerd font:fontformat=truetype:size=13:1
+font-4 = Hack nerd font:fontformat=truetype:size=10:3
 
 ;font-1 = unifont:fontformat=truetype:size=10:antialias=false;1
 ;font-2 = siji:pixelsize=10;1
@@ -234,7 +236,7 @@ label-urgent-padding = 2
 type = internal/xbacklight
 
 format = <label> 
-format-prefix = "%{T1}%{F#98971a} %{F-}%{T-}"
+format-prefix = "%{T1}%{F#b16286} %{F-}%{T-}"
 ;format-prefix-foreground = #FFC100
 label = " %percentage%%"
 ;label-foreground = ${colors.foreground-alt}
@@ -258,14 +260,14 @@ format-connected = <label-connected>
 ;label-connected = "%{T1}%{T-} %essid%"
 label-connected = "%essid%"
 
- 
+
 
 format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
+ramp-signal-0 =
 ramp-signal-1 = 
 ramp-signal-2 = 
 ;ramp-signal-3 = 
@@ -293,11 +295,11 @@ format-disconnected =
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> 
+format-volume = <label-volume>
 label-volume = "%{T2}%{F#d79921} %{F-}%{T-} %percentage%%"
 label-volume-foreground = ${root.foreground}
 
-label-muted = "%{T1} %{T-} muted"
+label-muted = "%{T2} %{T-} muted"
 label-muted-foreground = #666
 interval = 2
 click-right = "/bin/sh -c 'i3-msg [instance="pulsemixer"] scratchpad show'
@@ -344,10 +346,11 @@ label-charging = " %percentage%%"
 format-discharging = <ramp-capacity><label-discharging>
 label-discharging = " %percentage%%"
 
-ramp-capacity-0 = "%{B#cc241d}%{T7} %{T-}%{B-}"
-ramp-capacity-1 = "%{T7} %{T-}"
-ramp-capacity-2 = "%{T7} %{T-}"
-ramp-capacity-3 = "%{T7} %{T-}"
-ramp-capacity-4 = "%{T7} %{T-}" 
+ramp-capacity-0 = "%{B#cc241d}%{T3}   %{T-}%{B-}"
+ramp-capacity-1 = "%{T3} %{T-}"
+ramp-capacity-2 = "%{T3} %{T-}"
+ramp-capacity-3 = "%{T3} %{T-}"
+ramp-capacity-4 = "%{T3} %{T-}"
 
 ramp-capacity-foreground = ${colors.blue}
+ramp-capacity-2-background = ${colors.red}
