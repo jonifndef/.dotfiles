@@ -234,7 +234,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
-Plugin 'morhetz/gruvbox' 
+Plugin 'morhetz/gruvbox'
 Plugin 'sheerun/vim-polyglot'
 "Plugin 'jeetsukumaran/vim-buffergator'
 "Plugin 'terryma/vim-multiple-cursors'

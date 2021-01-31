@@ -374,4 +374,4 @@ tail = true
 click-left = xdg-open https://mail.google.com
 
 
-vim:ft=dosini
+; vim:ft=dosini
