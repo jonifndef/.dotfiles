@@ -2,6 +2,13 @@
 
 # This script assumes you have swerty installed, and is only used to switch between regular se layout and swerty layout
 
+set_xmodmap_if_exists()
+{
+    if [ -f ~/.xmodmap ]; then
+        xmodmap ~/.xmodmap
+    fi
+}
+
 is_swerty()
 {
     echo $(setxkbmap -query | grep -c swerty)
@@ -11,8 +18,10 @@ toggle_layout()
 {
     if [[ $(is_swerty) -eq 1 ]]; then
         setxkbmap -layout se
+        set_xmodmap_if_exists
     else
         setxkbmap -layout se -variant swerty
+        set_xmodmap_if_exists
     fi
 }
 
