@@ -1,1 +1,35 @@
-../../../.dotfiles/scripts/.local/bin/scripts/keyboard-layout
+#/bin/bash
+
+# This script assumes you have swerty installed, and is only used to switch between regular se layout and swerty layout
+
+is_swerty()
+{
+    echo $(setxkbmap -query | grep -c swerty)
+}
+
+toggle_layout()
+{
+    if [[ $(is_swerty) -eq 1 ]]; then
+        setxkbmap -layout se
+    else
+        setxkbmap -layout se -variant swerty
+            fi
+}
+
+output_current_layout()
+{
+    if [[ $(is_swerty) -eq 1 ]]; then
+        echo "swerty"
+    else
+        echo "se"
+            fi
+}
+
+case "$1" in
+    "toggle")
+        toggle_layout
+        ;;
+    *)
+        output_current_layout
+        ;;
+esac

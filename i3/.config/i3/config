@@ -220,7 +220,7 @@ exec_always --no-startup-id nm-applet
 exec_always xmodmap /home/jonas/.xmodmap
 
 # Compton-tyrone
-exec_always compton
+exec compton
 
 # Unclutter
 exec_always --no-startup-id unclutter -idle 1
