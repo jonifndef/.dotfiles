@@ -207,35 +207,52 @@ label-mode-background = ${colors.i3-background}
 ;label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
+;label-focused = %index%
+label-focused = %icon%
 ;label-focused = %{T6}%{T-}
 label-focused-background = ${colors.i3-empty}
 ;label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = 2
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 2
+;label-unfocused = %index%
+label-unfocused = %icon%
+label-unfocused-padding = 1
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+;label-visible = %index%
+label-visible = %icon%
 label-visible-background = ${self.label-focused-background}
 ;label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%
+;label-urgent = %index%
+label-urgent = %icon%
 label-urgent-background = #ffffff
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 ; Separator in between workspaces
- label-separator = " "
+label-separator = " "
+
+;ws-icon-0 = "1;%{T3}%{F#d79921} %{F}%{T}"
+ws-icon-0 = "1;%{T3}%{F#cc241d} %{F}%{T}"
+ws-icon-1 = "2;%{T3}%{F#98971a} %{F}%{T}"
+ws-icon-2 = "3;%{T3}%{F#458588} %{F}%{T}"
+ws-icon-3 = "4;%{T3}4%{T}"
+ws-icon-4 = "5;%{T3}5%{T}"
+ws-icon-5 = "6;%{T3}6%{T}"
+ws-icon-6 = "7;%{T3}7%{T}"
+ws-icon-7 = "8;%{T3}8%{T}"
+ws-icon-8 = "9;%{T3}9%{T}"
+ws-icon-9 = "10;%{T3}10%{T}"
+;strip-wsnumbers = true
 
 
 [module/xbacklight]
 type = internal/xbacklight
 
-format = <label> 
+format = <label>
 format-prefix = "%{T1}%{F#b16286} %{F-}%{T-}"
 ;format-prefix-foreground = #FFC100
 label = " %percentage%%"
