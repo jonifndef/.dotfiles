@@ -1,5 +1,5 @@
 "
-"
+"             __
 "     __  __ /\_\    ___ ___   _ __   ___
 "    /\ \/\ \\/\ \ /' __` __`\/\`'__\/'___\
 "  __\ \ \_/ |\ \ \/\ \/\ \/\ \ \ \//\ \__/
@@ -27,6 +27,14 @@ set hlsearch
 set statusline+=%F
 set backspace=2 " make backspace work like most other programs
 set formatoptions-=cro " Disable continuation of comment at linebreaks
+set filetype=dosini
+
+" Tell vim to use xterm keys
+" This is needed to be able to use <C-arrowkeys>
+execute "set <xUp>=\e[1;*A"
+execute "set <xDown>=\e[1;*B"
+execute "set <xRight>=\e[1;*C"
+execute "set <xLeft>=\e[1;*D"
 
 " And the obligatory disabling of space
 "nnoremap <SPACE> <Nop>
@@ -37,7 +45,6 @@ let mapleader=" "
 let g:coc_disable_startup_warning = 1
 
 " Colors
-"colo slate
 set background=dark " A must for gruvbox + compton transparancy
 
 " Highlight trailing whitespaces
@@ -50,8 +57,8 @@ hi Search ctermbg=Yellow
 hi Search ctermfg=Black
 
 " Popup menu (for autocomplete etc)
-hi Pmenu ctermbg=100
-hi PmenuSel ctermbg=237
+hi Pmenu guibg=#b8bb26 ctermbg=100
+hi PmenuSel guibg=#3a3a3a ctermbg=237
 
 " Vimdiff colors
 "hi DiffAdd ctermbg=
@@ -125,6 +132,10 @@ nnoremap <esc>^[ <esc>^[
 " Search for text selected in visual mode
 vnoremap // y/<C-R>"<CR>
 
+" Yank/paste to/from +-register/system clipboard
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+
 " Search and replace
 xnoremap <leader>sr y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>"/\=replacement/g<CR>
 xnoremap <leader>sc y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>"/\=replacement/gc<CR>
@@ -171,7 +182,8 @@ autocmd FileType cpp inoremap ;co std::cout<Space><<<Space>"f"<Space><<<Space>st
 " Same thing but for spdlog, they way it is set up in Timber/Cargo-Server
 autocmd FileType cpp inoremap ;spd spdlog::get("log")->info("q");<Esc>Fqcw
 " Same thing for printf
-autocmd FileType c inoremap ;pf printf("q");<CR>fflush(stdout);<Esc>kFqcw
+autocmd FileType c inoremap ;pf printf("q");<Esc>Fqcw
+autocmd FileType cpp,c inoremap ;for for (int i = 0; i < q; i++)<CR>{<CR><CR>}<CR><Esc>kkkk0fqcw
 
 " For escaped quotes
 autocmd FileType cpp inoremap ++2 \"
@@ -198,9 +210,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "||__|||__|||__|||__|||__|||__|||__|||__|||__||
 "|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 "
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
 set laststatus=2            " Always display powerline in all windows
 set showtabline=2           " Always show tabline, even if there's just one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
@@ -241,9 +253,7 @@ Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
 Plugin 'morhetz/gruvbox'
-"Plugin 'octol/vim-cpp-enhanced-highlight', {'for':['c', 'cpp']}
 Plugin 'sheerun/vim-polyglot'
-"Plugin 'jremmen/vim-ripgrep'
 "Plugin 'jeetsukumaran/vim-buffergator'
 "Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'mattn/vim-starwars'
@@ -271,10 +281,6 @@ augroup CursorLine
 augroup END
 
 
-"set rtp+=/usr/local/opt/fzf
-set rtp+=~/.fzf
-
-
 " For gruvbox plugin:
 "autocmd vimenter * ++nested colorscheme gruvbox
 colo gruvbox
@@ -285,6 +291,24 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent><leader>gr <Plug>(coc-references)
 nmap <leader>ff <Plug>(coc-fix-current)
+
+
+" Use ripgrep with fzf
+set rtp+=~/.fzf
+nmap <leader>r :Rg<cr>
+
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_transparent_bg = 1
+let g:gruvbox_termcolors = 16 " 256 is nice but no transparancy, see comment below
+
+" I have yet to get this to work with tmux and transparancy in vim
+"let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+"let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+"set t_Co=256
+"set termguicolors
+
+"Gruvbox colors
+colo gruvbox
 
 
 " Toggle Vexplore with Ctrl-E
@@ -418,6 +442,10 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " nerdtree, or perhaps netrw DONE
 " ctags DONE
 " youcompleteme DONE
+"
+" Ascii art font:
+" patorjk.com
+" 'Larry 3D'
 "
 " Fix shortcuts for buffnext, buffprev, buffclose DONE
 " Fix shortcut for CtrlP, YcmCompleter FixIt DONE

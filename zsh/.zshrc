@@ -1,6 +1,6 @@
 # This is the legendary .zshrc!
 # # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -101,6 +101,11 @@ fi
 #
 # LC_COLLATE=C sorts ls output with dotfiles on top
 
+# Always start tmux
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    exec tmux && exit
+fi
+
 # History stuff
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -139,8 +144,6 @@ function mkcd() {
     fi
 }
 
-# Make a function that creates a dir and moves the file in question to that dir
-
 
 function pwin_start_cmd() {
     echo "LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/"
@@ -156,7 +159,6 @@ function build-deb () {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 #__conda_setup="$('/home/jonas/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -171,4 +173,3 @@ function build-deb () {
 #fi
 #unset __conda_setup
 # <<< conda initialize <<<
-
