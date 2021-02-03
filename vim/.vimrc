@@ -28,6 +28,8 @@ set statusline+=%F
 set backspace=2 " make backspace work like most other programs
 set formatoptions-=cro " Disable continuation of comment at linebreaks
 set filetype=dosini
+set guifont=Hack\ Nerd\ Font:h11
+set encoding=UTF-8
 
 " Tell vim to use xterm keys
 " This is needed to be able to use <C-arrowkeys>
@@ -43,7 +45,6 @@ let mapleader=" "
 
 " Colors
 set background=dark " A must for gruvbox + compton transparancy
-
 
 " Highlight trailing whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -77,11 +78,9 @@ au CursorHoldI * stopinsert
 au InsertEnter * let updaterestore=&updatetime | set updatetime=25000
 au InsertLeave * let &updatetime=updaterestore
 
-
 " Make right/lower window be the active one at a split
 set splitright
 set splitbelow
-
 
 " CTags looks recursivly on directory up all the way to root
 set tags=tags;/
@@ -214,6 +213,9 @@ set showtabline=2           " Always show tabline, even if there's just one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set t_Co=256               " Use 256 colors (Use this setting only if your terminal supports 256 colors)
 
+" Hide tmux status bar when in vim
+autocmd VimEnter,VimLeave * silent !tmux set status
+
 " ____ ____ ____ ____ ____ ____ ____
 "||P |||L |||U |||G |||I |||N |||S ||
 "||__|||__|||__|||__|||__|||__|||__||
@@ -236,6 +238,7 @@ Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
 Plugin 'morhetz/gruvbox'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'ryanoasis/vim-devicons'
 "Plugin 'jeetsukumaran/vim-buffergator'
 "Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'mattn/vim-starwars'
@@ -271,13 +274,17 @@ let g:gruvbox_transparent_bg = 1
 let g:gruvbox_termcolors = 16 " 256 is nice but no transparancy, see comment below
 
 " I have yet to get this to work with tmux and transparancy in vim
-"let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-"let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-"set t_Co=256
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+set t_Co=256
 "set termguicolors
 
 "Gruvbox colors
 colo gruvbox
+
+" Change default vim icon for vim-devicons
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ' '
 
 "
 " Toggle Vexplore with Ctrl-E
