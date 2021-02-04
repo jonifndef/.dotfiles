@@ -200,21 +200,20 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-" ____ ____ ____ ____ ____ ____ ____ ____ ____
-"||P |||O |||W |||E |||R |||L |||I |||N |||E ||
-"||__|||__|||__|||__|||__|||__|||__|||__|||__||
-"|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+" ____ ____ ____ ____ ____ ____ ____ ____
+"||A |||I |||R |||R |||L |||I |||N |||E ||
+"||__|||__|||__|||__|||__|||__|||__|||__||
+"|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 "
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
-set laststatus=2            " Always display powerline in all windows
+"
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2            " Always display airline in all windows
 set showtabline=2           " Always show tabline, even if there's just one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set t_Co=256               " Use 256 colors (Use this setting only if your terminal supports 256 colors)
 
 " Hide tmux status bar when in vim
-autocmd VimEnter,VimLeave * silent !tmux set status
+"autocmd VimEnter,VimLeave * silent !tmux set status
 
 " ____ ____ ____ ____ ____ ____ ____
 "||P |||L |||U |||G |||I |||N |||S ||
@@ -231,17 +230,13 @@ Plugin 'VundleVim/Vundle.vim' "Required
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'rdnetto/YCM-Generator'
+Plugin 'vim-airline/vim-airline'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
 Plugin 'morhetz/gruvbox'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'ryanoasis/vim-devicons'
-"Plugin 'jeetsukumaran/vim-buffergator'
-"Plugin 'terryma/vim-multiple-cursors'
-"Plugin 'mattn/vim-starwars'
 
 " <======== /PLUGINS =======>
 
