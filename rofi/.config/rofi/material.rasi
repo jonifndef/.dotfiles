@@ -21,7 +21,8 @@
 	base0A: #FFCB6B;
 	base0B: #C3E88D;
 	base0C: #89DDFF;
-	base0D: #82AAFF;
+	base0D: #98971a; /* gruvbox green */
+	/*base0D: #b8bb26; brigt gruvbox green*/
 	base0E: #C792EA;
 	base0F: #FF5370;
 
