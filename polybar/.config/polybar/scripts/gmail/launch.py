@@ -23,12 +23,21 @@ error_prefix = '%{F' + args.color + '}\uf06a %{F-}'
 count_was = 0
 
 def print_count(count, is_odd=False):
-    tilde = '~' if is_odd else ''
+    #tilde = '~' if is_odd else ''
+    #output = ''
+    #if count > 0:
+    #    output = unread_prefix + tilde + str(count)
+    #else:
+    #    output = (args.prefix + ' ' + tilde).strip()
+    #print(output, flush=True)
+
     output = ''
-    if count > 0:
-        output = unread_prefix + tilde + str(count)
+    if count < 1:
+        output = (args.prefix + ' ' + 'no mail').strip()
+    if count == 1:
+        output = unread_prefix + str(count) + ' mail'
     else:
-        output = (args.prefix + ' ' + tilde).strip()
+        output = unread_prefix + str(count) + ' mails'
     print(output, flush=True)
 
 def update_count(count_was):
