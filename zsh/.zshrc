@@ -1,6 +1,6 @@
 # This is the legendary .zshrc!
 # # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -122,7 +122,8 @@ alias fuck='pkill -9'
 alias ':q'=exit
 alias ':wq'=exit
 alias psx='ps ax | grep -i'
-alias ssh='TERM="xterm-256color" && ssh'
+#alias ssh='TERM="xterm-256color" && ssh'
+alias pgrep='pgrep -l'
 
 # Whitelisting specific commands for zsh autocorrect
 alias git='nocorrect git'
@@ -173,3 +174,4 @@ function build-deb () {
 #unset __conda_setup
 # <<< conda initialize <<<
 
+if [ -e /home/jonas/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jonas/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -95,6 +95,9 @@ bindsym $mod+d exec rofi -show run
 # shutdown/reboot-dmenu-script-thingy
 #bindsym $mod+Escape exec /home/jonas/.local/bin/dmenu_shutdown
 
+# Keyboard layout toggle (specifically for custom swerty-script)
+bindsym $mod+t exec ~/.config/polybar/scripts/keyboard-layout toggle
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -205,7 +208,7 @@ bindsym $mod+Ctrl+0 gaps inner all set $innerGaps
 bindsym $mod+Ctrl+9 gaps outer all set $outerGaps
 
 
-#  _______ _______ _______ _______ _______ _______ _______ _______ _______ 
+#  _______ _______ _______ _______ _______ _______ _______ _______ _______
 # |\     /|\     /|\     /|\     /|\     /|\     /|\     /|\     /|\     /|
 # | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ |
 # | |   | | |   | | |   | | |   | | |   | | |   | | |   | | |   | | |   | |
@@ -220,7 +223,7 @@ exec_always --no-startup-id nm-applet
 # Set caps to control
 exec_always xmodmap /home/jonas/.xmodmap
 
-# Compton-tyrone
+# Compton-tryone
 exec compton
 
 # Unclutter
@@ -235,6 +238,11 @@ bindsym $mod+shift+x exec i3lock-fancy --pixelate --font Hack-Bold --text "Enter
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 
+# xss-lock
+exec_always --no-startup-id xss-lock -l ~/.local/bin/sleep-lock-delay.sh
+
+# xidlehook
+exec --no-startup-id $HOME/.nix-profile/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 900 'systemctl suspend' ''
 
 # Pulse audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2
