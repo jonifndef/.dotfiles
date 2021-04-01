@@ -28,6 +28,8 @@ set statusline+=%F
 set backspace=2 " make backspace work like most other programs
 set formatoptions-=cro " Disable continuation of comment at linebreaks
 set filetype=dosini
+set guifont=Hack\ Nerd\ Font:h11
+set encoding=UTF-8
 
 " Tell vim to use xterm keys
 " This is needed to be able to use <C-arrowkeys>
@@ -79,11 +81,9 @@ au CursorHoldI * stopinsert
 au InsertEnter * let updaterestore=&updatetime | set updatetime=25000
 au InsertLeave * let &updatetime=updaterestore
 
-
 " Make right/lower window be the active one at a split
 set splitright
 set splitbelow
-
 
 " CTags looks recursivly on directory up all the way to root
 set tags=tags;/
@@ -205,15 +205,14 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-" ____ ____ ____ ____ ____ ____ ____ ____ ____
-"||P |||O |||W |||E |||R |||L |||I |||N |||E ||
-"||__|||__|||__|||__|||__|||__|||__|||__|||__||
-"|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+" ____ ____ ____ ____ ____ ____ ____ ____
+"||A |||I |||R |||R |||L |||I |||N |||E ||
+"||__|||__|||__|||__|||__|||__|||__|||__||
+"|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 "
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
-set laststatus=2            " Always display powerline in all windows
+"
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2            " Always display airline in all windows
 set showtabline=2           " Always show tabline, even if there's just one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set t_Co=256               " Use 256 colors (Use this setting only if your terminal supports 256 colors)
@@ -247,16 +246,13 @@ Plugin 'VundleVim/Vundle.vim' "Required
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'rdnetto/YCM-Generator'
+Plugin 'vim-airline/vim-airline'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
 Plugin 'morhetz/gruvbox'
 Plugin 'sheerun/vim-polyglot'
-"Plugin 'jeetsukumaran/vim-buffergator'
-"Plugin 'terryma/vim-multiple-cursors'
-"Plugin 'mattn/vim-starwars'
+Plugin 'ryanoasis/vim-devicons'
 
 " <======== /PLUGINS =======>
 
@@ -302,15 +298,19 @@ let g:gruvbox_transparent_bg = 1
 let g:gruvbox_termcolors = 256 " 256 is nice but no transparancy, see comment below
 
 " I have yet to get this to work with tmux and transparancy in vim
-"let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-"let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-"set t_Co=256
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+set t_Co=256
 "set termguicolors
 
 "Gruvbox colors
 colo gruvbox
 
+" Change default vim icon for vim-devicons
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ' '
 
+"
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
 "  if exists("t:expl_buf_num")

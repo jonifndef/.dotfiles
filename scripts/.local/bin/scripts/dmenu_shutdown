@@ -1,0 +1,21 @@
+#!/bin/bash
+
+options="Shutdown
+Reboot
+Hibernate"
+selection=$(echo -e "${options}" | rofi -dmenu)
+
+case "${selection}" in 
+    "Shutdown")
+        shutdown now
+    ;;
+    "Reboot")
+        reboot
+    ;;
+    "Hibernate")
+        systemctl hibernate
+    ;;
+    *)
+        echo "Invalid usage"
+    ;;
+esac
