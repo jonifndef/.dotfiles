@@ -253,10 +253,10 @@ bindsym XF86MonBrightnessUp exec light -A 3 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 3 # decrease screen brightness
 
 # Chromium
-bindsym $mod+i exec --no-startup-id chromium
+bindsym $mod+i exec --no-startup-id google-chrome
 
 # Background
-exec_always feh --bg-scale /home/jonas/Pictures/wallpapers/active
+exec_always feh --bg-fill /home/jonas/Pictures/wallpapers/active
 
 # Borderless:
 default_border pixel 2
