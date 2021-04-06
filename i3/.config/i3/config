@@ -222,7 +222,7 @@ exec_always xmodmap /home/jonas/.xmodmap
 exec compton
 
 # Unclutter
-exec_always --no-startup-id unclutter -idle 1
+#exec_always --no-startup-id unclutter -idle 1
 
 # Dunst
 exec_always dunst

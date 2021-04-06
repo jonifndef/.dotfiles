@@ -345,26 +345,26 @@ full-at = 98
 
 format-charging = <animation-charging><label-charging>
 label-charging = " %percentage%%"
-label-full = "%{T3} %{T-} %percentage%%"
+label-full = "%{F#458588}%{T3} %{T-}%{F} %percentage%%"
 
 format-discharging = <ramp-capacity><label-discharging>
 label-discharging = " %percentage%%"
 
 ramp-capacity-0 = "%{B#cc241d}%{T3}   %{T-}%{B-}"
-ramp-capacity-1 = "%{T3} %{T-}"
-ramp-capacity-2 = "%{T3} %{T-}"
-ramp-capacity-3 = "%{T3} %{T-}"
-ramp-capacity-4 = "%{T3} %{T-}"
+ramp-capacity-1 = "%{F#458588}%{T3} %{T-}%{F}"
+ramp-capacity-2 = "%{F#458588}%{T3} %{T-}%{F}"
+ramp-capacity-3 = "%{F#458588}%{T3} %{T-}%{F}"
+ramp-capacity-4 = "%{F#458588}%{T3} %{T-}%{F}"
 
-animation-charging-0 = "%{T3} %{T-}"
-animation-charging-1 = "%{T3} %{T-}"
-animation-charging-2 = "%{T3} %{T-}"
-animation-charging-3 = "%{T3} %{T-}"
-animation-charging-4 = "%{T3} %{T-}"
+animation-charging-0 = "%{F#458588}%{T3} %{T-}%{F}"
+animation-charging-1 = "%{F#458588}%{T3} %{T-}%{F}"
+animation-charging-2 = "%{F#458588}%{T3} %{T-}%{F}"
+animation-charging-3 = "%{F#458588}%{T3} %{T-}%{F}"
+animation-charging-4 = "%{F#458588}%{T3} %{T-}%{F}"
 
-ramp-capacity-foreground = ${colors.blue}
-animation-charging-foreground = ${colors.blue}
-label-full-foreground = ${colors.blue}
+#ramp-capacity-foreground = ${colors.blue}
+#animation-charging-foreground = ${colors.blue}
+#label-full-foreground = ${colors.blue}
 
 animation-charging-framerate = 750
 
