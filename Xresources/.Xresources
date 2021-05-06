@@ -1,5 +1,5 @@
 ! font
-URxvt.font :xft:Hack:style=Regular:size=12, \
+URxvt.font :xft:Hack Nerd Font:style=Regular:size=12, \
             xft:FontAwesome:size=12, \
             xft:icomoon:size=12, \
             xft:FuraMonoForPowerline Nerd Font:style=Medium,Regular:size=12, \
@@ -49,8 +49,8 @@ URxvt.internalBorder: 13
 
 !*background: #282828
 
-urxvt*depth: 32
-urxvt*background: rgba:0040/0040/0040/afff
+Urxvt*depth: 32
+Urxvt*background: rgba:0040/0040/0040/afff
 
 ! Fake transparency
 !*background: #282828
@@ -58,7 +58,7 @@ urxvt*background: rgba:0040/0040/0040/afff
 !*shading: 25
 
 ! soft contrast: *background: #32302f
-*foreground: #ebdbb2
+Urxvt*foreground: #ebdbb2
 ! Black + DarkGrey
 *color0:  #282828
 *color8:  #928374

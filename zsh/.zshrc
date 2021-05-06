@@ -12,6 +12,9 @@ export EDITOR="vim"
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 
+export PYTHONPATH="/home/jonas/Development/cindos_sdk/sdk/timspect_pipe/build/comlib/dcomlib:/home/jonas/Development/cindos_sdk/sdk/timspect_pipe/passage_pusher"
+export COMLIB=/home/jonas/Development/cindos_sdk/sdk/timspect_pipe/build/comlib/dcomlib/dcomlib/libdcomlib.so
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -128,6 +131,7 @@ alias ':q'=exit
 alias ':wq'=exit
 alias psx='ps ax | grep -i'
 alias ssh='TERM="xterm-256color" && ssh'
+alias cnfl='git diff --name-only --diff-filter=U'
 
 # Whitelisting specific commands for zsh autocorrect
 alias git='nocorrect git'
