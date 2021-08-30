@@ -1,6 +1,6 @@
 # This is the legendary .zshrc!
 # # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -12,8 +12,8 @@ export EDITOR="vim"
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 
-export PYTHONPATH="/home/jonas/Development/cindos_sdk/sdk/timspect_pipe/build/comlib/dcomlib:/home/jonas/Development/cindos_sdk/sdk/timspect_pipe/passage_pusher"
-export COMLIB=/home/jonas/Development/cindos_sdk/sdk/timspect_pipe/build/comlib/dcomlib/dcomlib/libdcomlib.so
+export PYTHONPATH="/home/jonas/Development/timspect_pipe/build/comlib/dcomlib:/home/jonas/Development/timspect_pipe/passage_pusher"
+export COMLIB=/home/jonas/Development/timspect_pipe/build/comlib/dcomlib/dcomlib/libdcomlib.so
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -135,6 +135,8 @@ alias cnfl='git diff --name-only --diff-filter=U'
 
 # Whitelisting specific commands for zsh autocorrect
 alias git='nocorrect git'
+
+alias cindpipe='cd /home/jonas/Development/cindos_sdk/sdk/timspect_pipe/'
 
 function fdt() {
     if [ "$1" = "1" ]; then

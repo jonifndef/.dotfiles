@@ -61,15 +61,15 @@ for_window [instance="networks"] move position 820 px 55 px
 
 # dropdown-style scratchpad for pulsemixer
 for_window [instance="pulsemixer"] floating enable
-for_window [instance="pulsemixer"] resize set 30 ppt 24 ppt
-for_window [instance="pulsemixer"] move position 61 ppt 4 ppt
+for_window [instance="pulsemixer"] resize set 30 px 24 px
+for_window [instance="pulsemixer"] move position 61 px 4 px
 for_window [instance="pulsemixer"] move scratchpad
 
 # dropdown-style scratchpad for calcurse
 for_window [instance="calcurse"] floating enable
 #for_window [instance="calcurse"] resize set 750 450
-for_window [instance="calcurse"] resize set 30 ppt 32 ppt
-for_window [instance="calcurse"] move position 69 ppt 4 ppt
+for_window [instance="calcurse"] resize set 30 px 32 px
+for_window [instance="calcurse"] move position 69 px 4 px
 for_window [instance="calcurse"] move scratchpad
 
 # Terminal running pulsemixer, to be put on the scratchpad:
@@ -236,6 +236,11 @@ exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 # xss-lock
 exec_always --no-startup-id xss-lock -l $HOME/.local/bin/scripts/xss-sleeper-delay.sh
 
+# xset repeat rate
+exec_always --no-startup-id xset r rate 225 35
+
+# autorandr
+exec_always --no-startup-id autorandr -c
 
 # Pulse audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2
