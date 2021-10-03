@@ -237,6 +237,8 @@ exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 # xss-lock
 exec_always --no-startup-id xss-lock -l $HOME/.local/bin/scripts/xss-sleeper-delay.sh
 
+# xidlehook
+exec_always --no-startup-id $HOME/.nix-profile/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 900 'systemctl hibernate' ''
 
 # Pulse audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2

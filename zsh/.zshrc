@@ -142,3 +142,4 @@ function mkcd() {
 #
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -e /home/jonas/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jonas/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
