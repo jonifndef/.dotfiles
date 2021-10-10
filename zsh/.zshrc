@@ -183,3 +183,5 @@ function build-deb () {
 #fi
 #unset __conda_setup
 # <<< conda initialize <<<
+#
+if [ -e /home/jonas/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jonas/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -242,6 +242,9 @@ exec_always --no-startup-id xset r rate 225 35
 # autorandr
 exec_always --no-startup-id autorandr -c
 
+# xidlehook
+exec_always --no-startup-id $HOME/.nix-profile/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 900 'systemctl hibernate' ''
+
 # Pulse audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2
 bindsym XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -2
