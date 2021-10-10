@@ -1,6 +1,6 @@
 # This is the legendary .zshrc!
 # # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -72,6 +72,7 @@ plugins=(git
          zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.jenkins_token.zsh
 
 # Accept autosuggestion
 bindkey '^n' autosuggest-accept
@@ -121,6 +122,11 @@ alias fuck='pkill -9'
 alias ':q'=exit
 alias ':wq'=exit
 alias psx='ps ax | grep -i'
+#alias ssh='TERM="xterm-256color" && ssh'
+alias pgrep='pgrep -l'
+
+# Whitelisting specific commands for zsh autocorrect
+alias git='nocorrect git'
 
 function fdt() {
     if [ "$1" = "1" ]; then
@@ -138,8 +144,33 @@ function mkcd() {
     fi
 }
 
-# Make a function that creates a dir and moves the file in question to that dir
-#
+function pwin_start_cmd() {
+    echo "LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/"
+}
+
+function build-deb () {
+        (
+                cd debian
+                ./gen_deb_version.sh
+        )
+        fakeroot dpkg-buildpackage -tc -uc -us --build=binary
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$('/home/jonas/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/home/jonas/miniconda3/etc/profile.d/conda.sh" ]; then
+#        . "/home/jonas/miniconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/home/jonas/miniconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+# <<< conda initialize <<<
+
 if [ -e /home/jonas/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jonas/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

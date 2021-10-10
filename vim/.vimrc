@@ -43,6 +43,9 @@ execute "set <xLeft>=\e[1;*D"
 " Space is leader
 let mapleader=" "
 
+" Remove coc.vim startup warning
+let g:coc_disable_startup_warning = 1
+
 " Colors
 set background=dark " A must for gruvbox + compton transparancy
 
@@ -94,8 +97,8 @@ nmap Q <Nop>
 "|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 "
 " Scrolling faster
-nnoremap <C-Down> 3<C-e>
-nnoremap <C-Up> 3<C-y>
+nmap <C-Down> 3<C-e>
+nmap <C-Up> 3<C-y>
 
 " Buffer navigation
 set hidden
@@ -104,17 +107,20 @@ nmap <Right> :bnext<cr>
 nmap <leader>q :bdelete<cr>
 
 " List open buffers
-nmap <leader>l :ls<cr>
+"nmap <leader>l :ls<cr>
 
 " CtrlP
 nmap <leader>c :CtrlP<cr>
+
+" RipGrep
+nmap <leader>r :Rg<cr>
 
 " Scroll
 nmap <Up> <C-y>
 nmap <Down> <C-e>
 
 " YCMCompleter
-nmap <leader>f :YcmCompleter FixIt<cr>
+"nmap <leader>f :YcmCompleter FixIt<cr>
 
 " Cscope extended regex search
 noremap <leader>e :cs find e
@@ -171,7 +177,6 @@ nnoremap <F5> :call LessMode()<CR>
 let g:lessmode = 0
 
 
-
 " Ugly little snippet done the Luke Smith-way, prints std::cout
 autocmd FileType cpp inoremap ;co std::cout<Space><<<Space>"f"<Space><<<Space>std::endl;<Esc>Ffcw
 " Same thing but for spdlog, they way it is set up in Timber/Cargo-Server
@@ -214,6 +219,19 @@ set t_Co=256               " Use 256 colors (Use this setting only if your termi
 
 " Hide tmux status bar when in vim
 "autocmd VimEnter,VimLeave * silent !tmux set status
+" ____ ____ ____ ____ ____
+"||C |||T |||R |||L |||P ||
+"||__|||__|||__|||__|||__||
+"|/__\|/__\|/__\|/__\|/__\|
+"
+let g:ctrlp_custom_ignore = 'build\|git' " Ignore certain directories when using ctrlP
+
+"" Use RipGrep with CtrlP:
+"if executable('rg')
+"  set grepprg=rg\ --color=never
+"  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"  let g:ctrlp_use_caching = 0
+"endif
 
 " ____ ____ ____ ____ ____ ____ ____
 "||P |||L |||U |||G |||I |||N |||S ||
@@ -260,13 +278,16 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
+
 " Use ripgrep with fzf
 set rtp+=~/.fzf
 nmap <leader>r :Rg<cr>
 
+
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_transparent_bg = 1
 let g:gruvbox_termcolors = 16 " 256 is nice but no transparancy, see comment below
+
 
 " I have yet to get this to work with tmux and transparancy in vim
 let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
@@ -277,11 +298,20 @@ set t_Co=256
 "Gruvbox colors
 colo gruvbox
 
+
 " Change default vim icon for vim-devicons
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ' '
 
-"
+
+" Coc.nvim bindings
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent><leader>gr <Plug>(coc-references)
+nmap <leader>ff <Plug>(coc-fix-current)
+
+
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
 "  if exists("t:expl_buf_num")
@@ -453,7 +483,7 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " rsync -arv --include="2019-10-16/" --include="2019-10-16/07_20_51" --include="2019-10-16/07_20_51/*.avi" --exclude="*" ljungträ:/data/passages/ .
 "
 " Mounting samba drive:
-" sudo mount -t cifs -o username=jonas,password=stduma+T4l0n //192.168.1.90/cind /home/jonas/share/nas/
+" sudo mount -t cifs //192.168.1.90/cind /home/jonas/share/nas/ -o credentials=/home/jonas/.smb_creds2.txt,vers=2.0
 "
 " Make vim session: mks ~/.vim/sessions/ollebolle.vim
 "
@@ -471,6 +501,9 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " Run pwin and tell linker which libs to link at runtime
 " LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/ ./pwin -cmd ~/Development/pwin_command_files/TIM-995_dynamic_plane_offset/evalute_2019-10-31.pwin
 "
+" mysqldump:
+" mysqldump -u user -p database-name > dump_name-$(date "+%Y-%m-%d_%H_%M_%S").sql
+"
 "   's'   symbol: find all references to the token under cursor
 "   'g'   global: find global definition(s) of the token under cursor
 "   'c'   calls:  find all calls to the function name under cursor
@@ -483,3 +516,12 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 "   Build cmake with debug flags:
 "       cmake -DCMAKE_BUILD_TYPE=Debug ..
 "
+" To set mouse speed (not accel), use: xinput set-prop 23 "Coordinate
+" Transformation Matrix" 2.6 0 0 0 2.6 0 0 0 1, where 23 is the id given to
+" the mouse when running xinput list
+" To set swerty as layout, after you've set it up, run
+" setxkbmap -layout se -variant swerty
+" To reset to regular swe-layout, simply run
+" setxkbmap -layout se
+" To increase keyboard repeat speed:
+" xset r rate 235 20
