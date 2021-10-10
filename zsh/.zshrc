@@ -72,7 +72,6 @@ plugins=(git
          zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.jenkins_token.zsh
 
 # Accept autosuggestion
 bindkey '^n' autosuggest-accept
