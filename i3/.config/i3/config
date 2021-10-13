@@ -80,8 +80,8 @@ exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name c
 
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec st
+#bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -92,6 +92,9 @@ bindsym $mod+d exec rofi -show run
 
 # shutdown/reboot-dmenu-script-thingy
 #bindsym $mod+Escape exec /home/jonas/.local/bin/dmenu_shutdown
+
+# Keyboard layout toggle (specifically for custom swerty-script)
+bindsym $mod+t exec ~/.config/polybar/scripts/keyboard-layout toggle
 
 # change focus
 bindsym $mod+h focus left
@@ -218,7 +221,7 @@ exec_always --no-startup-id nm-applet
 # Set caps to control
 exec_always xmodmap /home/jonas/.xmodmap
 
-# Compton-tyrone
+# Compton-tryone
 exec compton
 
 # Unclutter
@@ -244,6 +247,8 @@ exec_always --no-startup-id autorandr -c
 
 # xidlehook
 exec_always --no-startup-id $HOME/.nix-profile/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 900 'systemctl hibernate' ''
+
+exec_always --no-startup-id xss-lock -l ~/.local/bin/sleep-lock-delay.sh
 
 # Pulse audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2

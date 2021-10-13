@@ -293,9 +293,11 @@ nmap <leader>ff <Plug>(coc-fix-current)
 set rtp+=~/.fzf
 nmap <leader>r :Rg<cr>
 
+
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_transparent_bg = 1
 let g:gruvbox_termcolors = 16 " 256 is nice but no transparancy, see comment below
+
 
 " I have yet to get this to work with tmux and transparancy in vim
 let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
@@ -306,11 +308,19 @@ set t_Co=256
 "Gruvbox colors
 colo gruvbox
 
+
 " Change default vim icon for vim-devicons
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ' '
 
-"
+
+" Coc.nvim bindings
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent><leader>gr <Plug>(coc-references)
+nmap <leader>ff <Plug>(coc-fix-current)
+
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
 "  if exists("t:expl_buf_num")
