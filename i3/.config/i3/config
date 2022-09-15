@@ -233,7 +233,9 @@ exec_always --no-startup-id unclutter -idle 1
 exec_always dunst
 
 # i3lock-fancy
-bindsym $mod+shift+x exec i3lock-fancy --pixelate --font Hack-Bold --text "Enter the realm of the Yammosk" && systemctl suspend
+bindsym $mod+shift+x exec i3lock-fancy --pixelate
+
+bindsym $mod+shift+s exec i3lock-fancy --pixelate && systemctl suspend
 
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
@@ -242,9 +244,7 @@ exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 exec_always --no-startup-id xss-lock -l $HOME/.local/bin/scripts/xss-sleeper-delay.sh
 
 # xidlehook
-exec_always --no-startup-id $HOME/.nix-profile/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 900 'systemctl hibernate' ''
-
-exec_always --no-startup-id xss-lock -l ~/.local/bin/sleep-lock-delay.sh
+exec_always --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 200 'i3lock-fancy -p' ''
 
 # Pulse audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2
@@ -262,10 +262,10 @@ bindsym XF86MonBrightnessUp exec light -A 3 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 3 # decrease screen brightness
 
 # Chromium
-bindsym $mod+i exec --no-startup-id chromium
+bindsym $mod+i exec --no-startup-id google-chrome-stable
 
 # Background
-exec_always feh --bg-scale /home/jonas/Pictures/wallpapers/active
+exec_always feh --bg-fill /home/jonas/Pictures/wallpapers/active
 
 # Borderless:
 default_border pixel 2
@@ -283,7 +283,7 @@ client.background       #fffff
 # Assume you are on workspace "1: www" and switch to "2: IM" using mod+2
 # because somebody sent you a message. You don’t need to remember
 # where you came from now, you can just press $mod+2 again to switch back to "1: www".
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 
 # Hides vertical and horizontal borders when there's only one window.
 hide_edge_borders none
@@ -298,4 +298,4 @@ bindsym $mod+n exec --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32
 bindsym $mod+c [instance="calcurse"] scratchpad show
 
 # Screenshots with scrot
-bindsym --release Print exec "scrot -s '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~/Pictures/screenshots'"
+bindsym --release Print exec "scrot -s '%Y-%m-%d-%H_%M_%S.png' -e 'mv $f ~/Pictures/screenshots'"

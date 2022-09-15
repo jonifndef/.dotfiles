@@ -5,8 +5,10 @@ export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-export BROWSER="chromium"
+export BROWSER="google-chrome-stable"
 export EDITOR="vim"
+
+export ICAROOT="/opt/Citrix/ICAClient/ICAClient"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

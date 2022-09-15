@@ -136,8 +136,9 @@ tray-scale = 1.0
 ;modules
 modules-left = i3
 ;modules-right = xkeyboard backlight-acpi pulseaudio battery date wlan
-#modules-right = xkeyboard backlight-acpi pulseaudio battery date
-modules-right = gmail redshift swertykeeb backlight-acpi pulseaudio battery date
+;modules-right = xkeyboard backlight-acpi pulseaudio battery date
+;modules-right = gmail redshift swertykeeb backlight-acpi pulseaudio battery date
+modules-right = redshift swertykeeb backlight-acpi pulseaudio battery date
 
 
 [module/date]
