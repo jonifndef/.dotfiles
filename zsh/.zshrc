@@ -1,6 +1,6 @@
 # This is the legendary .zshrc!
 # # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$HOME/Development/fzf-zsh-plugin/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -112,6 +112,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 HISTSAVE=10000
 
+# Having this just in the .xinitrc doesn't really work
+xset r rate 250 25
+
 alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
 alias ll='LC_COLLATE=C ls -lh --color=auto --group-directories-first'
 alias la='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
@@ -157,7 +160,8 @@ function build-deb () {
         fakeroot dpkg-buildpackage -tc -uc -us --build=binary
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh ] && source ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

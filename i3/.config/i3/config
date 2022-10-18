@@ -72,6 +72,9 @@ for_window [instance="calcurse"] resize set 30 ppt 32 ppt
 for_window [instance="calcurse"] move position 69 ppt 4 ppt
 for_window [instance="calcurse"] move scratchpad
 
+# run completely boarderless
+for_window [class="^.*"] border pixel 0
+
 # Terminal running pulsemixer, to be put on the scratchpad:
 exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name pulsemixer -e pulsemixer
 
@@ -223,8 +226,8 @@ exec_always --no-startup-id nm-applet
 # Set caps to control
 exec_always xmodmap /home/jonas/.xmodmap
 
-# Compton-tryone
-exec compton
+# Compositor
+exec picom
 
 # Unclutter
 exec_always --no-startup-id unclutter -idle 1
@@ -245,6 +248,9 @@ exec_always --no-startup-id xss-lock -l $HOME/.local/bin/scripts/xss-sleeper-del
 
 # xidlehook
 exec_always --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 200 'i3lock-fancy -p' ''
+
+# bitwarden
+exec --no-startup-id bitwarden-desktop
 
 # Pulse audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +2
