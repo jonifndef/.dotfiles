@@ -1,3 +1,4 @@
 client_secrets.json
 credentials.json
-scripts/.local/share
+scripts/.local/*
+!scripts/.local/bin/scripts
