@@ -182,7 +182,7 @@ autocmd FileType cpp inoremap ;co std::cout<Space><<<Space>"f"<Space><<<Space>st
 " Same thing but for spdlog, they way it is set up in Timber/Cargo-Server
 autocmd FileType cpp inoremap ;spd spdlog::get("log")->info("q");<Esc>Fqcw
 " Same thing for printf
-autocmd FileType c inoremap ;pf printf("q");<Esc>Fqcw
+autocmd FileType c inoremap ;pf printf("q\n");<Esc>Fqcw
 autocmd FileType cpp,c inoremap ;for for (int i = 0; i < q; i++)<CR>{<CR><CR>}<CR><Esc>kkkk0fqcw
 
 " For escaped quotes
@@ -525,3 +525,6 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 " setxkbmap -layout se
 " To increase keyboard repeat speed:
 " xset r rate 235 20
+
+" To reset a borked terminal when a ssh session loses connection:
+" 'enter~.'

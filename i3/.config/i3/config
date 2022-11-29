@@ -304,4 +304,4 @@ bindsym $mod+n exec --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32
 bindsym $mod+c [instance="calcurse"] scratchpad show
 
 # Screenshots with scrot
-bindsym --release Print exec "scrot -s '%Y-%m-%d-%H_%M_%S.png' -e 'mv $f ~/Pictures/screenshots'"
+bindsym --release Print exec "scrot -s '%Y-%m-%d-%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/screenshots'"
