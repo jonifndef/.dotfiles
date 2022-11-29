@@ -349,7 +349,7 @@ label-charging = " %percentage%%"
 format-discharging = <ramp-capacity><label-discharging>
 label-discharging = " %percentage%%"
 
-format-full = "<ramp-capacity> <label-full>"
+format-full = "<ramp-capacity><label-full>"
 label-full = "%percentage%%"
 
 ramp-capacity-0 = "%{B#cc241d}%{T3}   %{T-}%{B-}"
