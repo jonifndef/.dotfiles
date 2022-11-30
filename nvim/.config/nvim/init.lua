@@ -8,4 +8,7 @@
 --                                                      
 
 require("configs.general")
+require("configs.plugins")
 require("configs.mappings")
+
+require("plugins.gruvbox")
