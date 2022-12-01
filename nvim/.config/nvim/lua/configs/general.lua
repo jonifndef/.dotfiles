@@ -28,3 +28,5 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 -- navigation
+vim.opt.splitright = true
+vim.opt.splitbelow = true
