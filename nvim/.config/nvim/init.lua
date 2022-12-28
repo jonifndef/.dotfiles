@@ -8,7 +8,9 @@
 --                                                      
 
 require("configs.general")
-require("configs.plugins")
+require("configs.packer")
 require("configs.mappings")
 
 require("plugins.gruvbox")
+require("plugins.telescope")
+require("plugins.treesitter")

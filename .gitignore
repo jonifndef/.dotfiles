@@ -2,3 +2,4 @@ client_secrets.json
 credentials.json
 scripts/.local/*
 !scripts/.local/bin/scripts
+nvim/.config/nvim/plugin/packer_compiled.lua
