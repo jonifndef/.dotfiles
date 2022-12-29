@@ -35,3 +35,18 @@ vim.keymap.set("n", "<S-Down>", ":resize +4<CR>")
 
 -- searching
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true })
+
+-- yank and paste
+--vim.keymap.set("v", "<Leader>y", '"+y')
+vim.keymap.set("n", "<Leader>p", '"+p')
+
+vim.keymap.set("n", "<Leader>y", function()
+    print("hejhej")
+end
+)
+
+--vim.keymap.set("x", "<Leader>y", function()
+--    print("Copied to system clipboard")
+--end,
+--{ silent = false }
+--)
