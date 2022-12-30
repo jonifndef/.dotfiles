@@ -12,9 +12,9 @@ vim.keymap.set("n", "<Space>", "")
 vim.g.mapleader = " "
 
 -- buffers
-vim.keymap.set("n", "<Right>", ":bnext<cr>")
-vim.keymap.set("n", "<Left>", ":bprevious<cr>")
-vim.keymap.set("n", "<leader>q", ":bdelete<cr>")
+vim.keymap.set("n", "<Right>", ":bnext<cr>", { silent = true })
+vim.keymap.set("n", "<Left>", ":bprevious<cr>", { silent = true })
+vim.keymap.set("n", "<leader>q", ":bdelete<cr>", { silent = true })
 
 -- scrolling
 vim.keymap.set("n", "<Up>", "<C-y>")
