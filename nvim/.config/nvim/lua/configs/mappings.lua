@@ -28,10 +28,10 @@ vim.keymap.set("n", "<C-j>", ":wincmd j<CR>")
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>")
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>")
 
-vim.keymap.set("n", "<S-Right>", ":vertical resize +4<CR>")
-vim.keymap.set("n", "<S-Left>", ":vertical resize -4<CR>")
-vim.keymap.set("n", "<S-Up>", ":resize -4<CR>")
-vim.keymap.set("n", "<S-Down>", ":resize +4<CR>")
+vim.keymap.set("n", "<C-Right>", ":vertical resize +4<CR>")
+vim.keymap.set("n", "<C-Left>", ":vertical resize -4<CR>")
+vim.keymap.set("n", "<C-Up>", ":resize -4<CR>")
+vim.keymap.set("n", "<C-Down>", ":resize +4<CR>")
 
 -- searching
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true })
