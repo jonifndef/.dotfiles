@@ -11,8 +11,14 @@
 
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
+    use 'lewis6991/impatient.nvim'
     use 'ellisonleao/gruvbox.nvim'
     use 'nvim-tree/nvim-web-devicons'
+    use {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+        cond = vim.fn.executable 'make' == 1
+    }
     use {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',

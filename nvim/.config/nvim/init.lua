@@ -7,8 +7,9 @@
 --    \/_/\/_/\/_/\/_/\/__/\/_/\/____/ \/___/  \/__/\/_/
 --                                                      
 
-require("configs.general")
 require("configs.packer")
+require("impatient")
+require("configs.general")
 require("configs.mappings")
 
 require("plugins.gruvbox")
