@@ -3,21 +3,22 @@ vim.g.loaded_netrwPlugin = 1
 
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
+  auto_reload_on_write = true,
   view = {
-    adaptive_size = true,
+    adaptive_size = false,
+    width = 30,
     mappings = {
       list = {
-        { key = "u", action = "dir_up" },
-        { key = "c", action = "collapse_all" },
+        { key = "c", action = "close_node" },
       },
     },
   },
   renderer = {
     group_empty = true,
   },
-  filters = {
-    dotfiles = true,
-  },
+  --filters = {
+  --  dotfiles = false,
+  --},
 })
 
 vim.keymap.set("n", "<f12>", "<Cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
