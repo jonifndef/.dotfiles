@@ -7,6 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 export BROWSER="google-chrome-stable"
 export EDITOR="vim"
+#export TERM="tmux-256color"
 
 export ICAROOT="/opt/Citrix/ICAClient/ICAClient"
 

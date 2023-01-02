@@ -247,7 +247,7 @@ exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 exec_always --no-startup-id xss-lock -l $HOME/.local/bin/scripts/xss-sleeper-delay.sh
 
 # xidlehook
-exec_always --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 200 'i3lock-fancy -p' ''
+exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 200 'i3lock-fancy -p' ''
 
 # bitwarden
 exec --no-startup-id bitwarden-desktop
