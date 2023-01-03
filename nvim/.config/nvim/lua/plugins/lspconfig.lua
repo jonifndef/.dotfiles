@@ -23,7 +23,7 @@ vim.keymap.set("n", "<Leader>dp", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<Leader>dn", vim.diagnostic.goto_next)
 
 local on_attach = function(_, bufnr)
-  --vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   vim.keymap.set("n", "gd", vim.lsp.buf.definition)
   vim.keymap.set("n", "gr", vim.lsp.buf.references)
@@ -37,14 +37,14 @@ local on_attach = function(_, bufnr)
   --vim.keymap.set("n", "<Leader>sd", vim.lsp.buf.signature_help)
 
 end
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
---local capabilities = vim.lsp.protocol.make_client_capabilities()
---capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 mason_lspconfig.setup_handlers {
   function(server_name)
     require("lspconfig")[server_name].setup {
-      --capabilities = capabilities,
+      capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
     }
