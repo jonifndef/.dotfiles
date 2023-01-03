@@ -1,0 +1,30 @@
+Try without the
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+line first
+
+lsp mappings:
+    gd
+    gr - references
+    gD - goto declaration?
+    gi - implementation
+    <Leader?>gD type definition ?
+    <Leader> or not leader? K hover
+    <Leader>rn - rename
+    <Leader>ca - code action
+    format?
+
+    things to use telescope for:
+        - references
+        - (maybe) definitions (if multiple)
+        - (maybe) workspace symbols
+
+    what are:
+        - document symbols?
+        - workspace symbols?
+        - signature documentation?
+
+    Make the references list disappear when we goto a reference
+
+    Maybe add ClangdSwitchSourceHeader
+
+Add cmp
