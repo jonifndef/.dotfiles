@@ -10,6 +10,7 @@
 
 vim.keymap.set("n", "<Space>", "")
 vim.g.mapleader = " "
+vim.keymap.set("i", "jj", "<Esc>")
 
 -- buffers
 vim.keymap.set("n", "<Right>", ":bnext<cr>", { silent = true })
@@ -37,16 +38,5 @@ vim.keymap.set("n", "<C-Down>", ":resize +4<CR>")
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true })
 
 -- yank and paste
---vim.keymap.set("v", "<Leader>y", '"+y')
+vim.keymap.set("v", "<Leader>y", '"+y')
 vim.keymap.set("n", "<Leader>p", '"+p')
-
-vim.keymap.set("n", "<Leader>y", function()
-    print("hejhej")
-end
-)
-
---vim.keymap.set("x", "<Leader>y", function()
---    print("Copied to system clipboard")
---end,
---{ silent = false }
---)

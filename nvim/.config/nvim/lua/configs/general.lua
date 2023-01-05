@@ -30,3 +30,6 @@ vim.opt.smartindent = true
 -- navigation
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+-- mouse
+vim.opt.mouse = nil
