@@ -6,7 +6,7 @@ export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$
 export ZSH=$HOME/.oh-my-zsh
 
 export BROWSER="google-chrome-stable"
-export EDITOR="vim"
+export EDITOR="nvim"
 
 export ICAROOT="/opt/Citrix/ICAClient/ICAClient"
 
@@ -88,9 +88,9 @@ bindkey '^n' autosuggest-accept
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='nvim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -121,8 +121,8 @@ alias ll='LC_COLLATE=C ls -lh --color=auto --group-directories-first'
 alias la='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
 alias ..='cd ..'
 alias ...='cd ../../'
-alias nano='vim'
-alias vi='vim'
+alias nano='nvim'
+alias vi='nvim'
 alias fuck='pkill -9'
 alias ':q'=exit
 alias ':wq'=exit
