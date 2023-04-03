@@ -118,8 +118,7 @@ HISTSAVE=10000
 xset r rate 250 25
 
 alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
-alias ll='LC_COLLATE=C ls -lh --color=auto --group-directories-first'
-alias la='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
+alias ll='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
 alias ..='cd ..'
 alias ...='cd ../../'
 alias nano='nvim'

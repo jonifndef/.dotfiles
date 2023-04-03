@@ -5,7 +5,7 @@ local servers = {
   pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
@@ -20,14 +20,16 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
+local telescope = require("telescope.builtin")
+
 vim.keymap.set("n", "<Leader>dp", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<Leader>dn", vim.diagnostic.goto_next)
 
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references)
+  vim.keymap.set("n", "gd", function() telescope.lsp_definitions() end)
+  vim.keymap.set("n", "gr", function() telescope.lsp_references() end)
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
   vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.type_definition)
@@ -36,6 +38,10 @@ local on_attach = function(_, bufnr)
   vim.keymap.set("n", "<Leader>co", vim.lsp.buf.code_action)
   vim.keymap.set("n", "<Leader>fo", vim.lsp.buf.format)
   --vim.keymap.set("n", "<Leader>sd", vim.lsp.buf.signature_help)
+
+  if client.name == "clangd" then
+    vim.keymap.set("n", "<Leader>o", [[<Cmd>ClangdSwitchSourceHeader<CR>]])
+  end
 
 end
 
