@@ -34,7 +34,7 @@ require('packer').startup(function(use)
     }
     use {
         'akinsho/bufferline.nvim',
-        tag = "v3.*",
+        tag = "*",
         requires = 'nvim-tree/nvim-web-devicons'
     }
     use {
@@ -55,6 +55,10 @@ require('packer').startup(function(use)
         'hrsh7th/nvim-cmp',
         requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
     }
+    --use {
+    --    'johnfrankmorgan/whitespace.nvim'
+    --}
+    use "ntpeters/vim-better-whitespace"
     use "onsails/lspkind.nvim"
     use {
     'https://codeberg.org/esensar/nvim-dev-container',

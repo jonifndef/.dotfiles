@@ -48,6 +48,16 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -161,6 +171,16 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym $mod+Ctrl+1 workspace $ws11
+bindsym $mod+Ctrl+2 workspace $ws12
+bindsym $mod+Ctrl+3 workspace $ws13
+bindsym $mod+Ctrl+4 workspace $ws14
+bindsym $mod+Ctrl+5 workspace $ws15
+bindsym $mod+Ctrl+6 workspace $ws16
+bindsym $mod+Ctrl+7 workspace $ws17
+bindsym $mod+Ctrl+8 workspace $ws18
+bindsym $mod+Ctrl+9 workspace $ws19
+bindsym $mod+Ctrl+0 workspace $ws20
 
 # switch to prev/next workspace
 bindsym $mod+Ctrl+l workspace next
@@ -177,6 +197,16 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+Ctrl+1 move container to workspace $ws11
+bindsym $mod+Shift+Ctrl+2 move container to workspace $ws12
+bindsym $mod+Shift+Ctrl+3 move container to workspace $ws13
+bindsym $mod+Shift+Ctrl+4 move container to workspace $ws14
+bindsym $mod+Shift+Ctrl+5 move container to workspace $ws15
+bindsym $mod+Shift+Ctrl+6 move container to workspace $ws16
+bindsym $mod+Shift+Ctrl+7 move container to workspace $ws17
+bindsym $mod+Shift+Ctrl+8 move container to workspace $ws18
+bindsym $mod+Shift+Ctrl+9 move container to workspace $ws19
+bindsym $mod+Shift+Ctrl+10 move container to workspace $ws20
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -207,8 +237,8 @@ bindsym $mod+minus gaps inner all minus 5
 bindsym $mod+Ctrl+plus gaps outer all plus 5
 bindsym $mod+Ctrl+minus gaps outer all minus 5
 
-bindsym $mod+Ctrl+0 gaps inner all set $innerGaps
-bindsym $mod+Ctrl+9 gaps outer all set $outerGaps
+bindsym $mod+Ctrl+Home gaps inner all set $innerGaps
+bindsym $mod+Ctrl+End gaps outer all set $outerGaps
 
 
 #  _______ _______ _______ _______ _______ _______ _______ _______ _______
@@ -247,7 +277,7 @@ exec_always --no-startup-id $HOME/.config/polybar/polybar_launch.sh
 exec_always --no-startup-id xss-lock -l $HOME/.local/bin/scripts/xss-sleeper-delay.sh
 
 # xidlehook
-exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 200 'i3lock-fancy -p' ''
+exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 300 'i3lock-fancy -p' ''
 
 # bitwarden
 exec --no-startup-id bitwarden-desktop
@@ -269,9 +299,6 @@ bindsym XF86MonBrightnessDown exec light -U 3 # decrease screen brightness
 
 # Chromium
 bindsym $mod+i exec --no-startup-id google-chrome-stable
-
-# Background
-exec_always feh --bg-fill /home/jonas/Pictures/wallpapers/active
 
 # Borderless:
 default_border pixel 2
@@ -305,3 +332,8 @@ bindsym $mod+c [instance="calcurse"] scratchpad show
 
 # Screenshots with scrot
 bindsym --release Print exec "scrot -s '%Y-%m-%d-%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/screenshots'"
+
+exec_always autorandr -c
+
+# Background
+exec_always feh --bg-fill /home/jonas/Pictures/wallpapers/active

@@ -9,7 +9,8 @@ export BROWSER="google-chrome-stable"
 export EDITOR="nvim"
 #export TERM="tmux-256color"
 
-export ICAROOT="/opt/Citrix/ICAClient/ICAClient"
+export ICAROOT="/opt/Citrix/ICAClient"
+export TFTP_DIRECTORY="/srv/tftp"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -159,6 +160,10 @@ function build-deb () {
                 ./gen_deb_version.sh
         )
         fakeroot dpkg-buildpackage -tc -uc -us --build=binary
+}
+
+function md2b() {
+    pandoc $1 > /tmp/$1.html && google-chrome-stable /tmp/$1.html
 }
 
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
