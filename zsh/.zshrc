@@ -1,6 +1,6 @@
 # This is the legendary .zshrc!
 # # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$HOME/Development/fzf-zsh-plugin/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$HOME/Development/fzf-zsh-plugin/bin:$HOME/.cargo/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -74,9 +74,13 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git
          wd
          zsh-autosuggestions
-         zsh-syntax-highlighting)
+         zsh-syntax-highlighting
+         fzf-zsh-plugin)
+
 
 source $ZSH/oh-my-zsh.sh
+
+source $HOME/.fonts/*.sh
 
 # Accept autosuggestion
 bindkey '^n' autosuggest-accept
@@ -167,7 +171,7 @@ function md2b() {
 }
 
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh ] && source ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+#[ -f ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh ] && source ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
