@@ -42,7 +42,7 @@ require('packer').startup(function(use)
         requires = {
             'nvim-tree/nvim-web-devicons', -- optional, for file icons
         },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
+        --tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
     use {
         'neovim/nvim-lspconfig',
@@ -60,8 +60,4 @@ require('packer').startup(function(use)
     --}
     use "ntpeters/vim-better-whitespace"
     use "onsails/lspkind.nvim"
-    use {
-    'https://codeberg.org/esensar/nvim-dev-container',
-    requires = { 'nvim-treesitter/nvim-treesitter' }
-    }
 end)

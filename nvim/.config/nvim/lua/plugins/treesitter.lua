@@ -8,7 +8,6 @@ require'nvim-treesitter.configs'.setup {
     "cpp",
     "java",
     "json",
-    "latex",
     "lua",
     "make",
     "markdown",

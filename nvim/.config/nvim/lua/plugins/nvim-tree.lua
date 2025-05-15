@@ -7,11 +7,11 @@ require("nvim-tree").setup({
   view = {
     adaptive_size = false,
     width = 30,
-    mappings = {
-      list = {
-        { key = "c", action = "close_node" },
-      },
-    },
+    --mappings = {
+    --  list = {
+    --    { key = "c", action = "close_node" },
+    --  },
+    --},
   },
   renderer = {
     group_empty = true,
