@@ -1,6 +1,6 @@
 # This is the legendary .zshrc!
 # # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$HOME/Development/fzf-zsh-plugin/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$HOME/Development/fzf-zsh-plugin/bin:$HOME/.cargo/bin:/opt/nvim-linux-x86_64/bin:$HOME/.npm/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -137,6 +137,10 @@ alias pgrep='pgrep -l'
 
 # Whitelisting specific commands for zsh autocorrect
 alias git='nocorrect git'
+alias pytest='nocorrect pytest'
+
+# Nevermind that, just disable that shit
+#unsetopt correct # doesn't seem to work unfortunately :'(
 
 function fdt() {
     if [ "$1" = "1" ]; then
@@ -170,6 +174,10 @@ function md2b() {
     pandoc $1 > /tmp/$1.html && google-chrome-stable /tmp/$1.html
 }
 
+function ff() {
+    find . -type f -iname "*$1*"
+}
+
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #[ -f ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh ] && source ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
@@ -189,3 +197,8 @@ function md2b() {
 # <<< conda initialize <<<
 
 if [ -e /home/jonas/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jonas/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

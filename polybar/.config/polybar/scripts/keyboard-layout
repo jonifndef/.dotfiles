@@ -16,10 +16,11 @@ is_swerty()
 
 toggle_layout()
 {
-    if [[ $(is_swerty) -eq 1 ]]; then
+    if [ $(is_swerty) -eq 1 ]; then
         setxkbmap -layout se
         set_xmodmap_if_exists
     else
+        setxkbmap -layout se
         setxkbmap -layout se -variant swerty
         set_xmodmap_if_exists
     fi

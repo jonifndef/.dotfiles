@@ -7,7 +7,7 @@
 --   \ \ \/ \/____/ \/___/  \/___L\ \/_/\/_/\/_/\/___/ 
 --    \ \_\                   /\____/                  
 --     \/_/                   \_/__/                   
--- 
+--
 
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
@@ -42,26 +42,14 @@ require('packer').startup(function(use)
         requires = {
             'nvim-tree/nvim-web-devicons', -- optional, for file icons
         },
-        --tag = 'nightly' -- optional, updated every week. (see issue #1193)
-    }
-    use {
-        'neovim/nvim-lspconfig',
-        requires = {
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
-        },
     }
     use {
         'hrsh7th/nvim-cmp',
         requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
     }
-    --use {
-    --    'johnfrankmorgan/whitespace.nvim'
-    --}
     use "ntpeters/vim-better-whitespace"
     use "onsails/lspkind.nvim"
     use {
-    'https://codeberg.org/esensar/nvim-dev-container',
-    requires = { 'nvim-treesitter/nvim-treesitter' }
+        'freed-wu/bitbake-language-server'
     }
 end)

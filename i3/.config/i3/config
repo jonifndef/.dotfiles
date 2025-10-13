@@ -97,6 +97,7 @@ exec_always --no-startup-id urxvt -bg rgba:0040/0040/0040/3333 --deph 32 -name c
 # start a terminal
 bindsym $mod+Return exec st
 #bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec /home/jonas/.local/bin/open-wezterm-current-dir.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
