@@ -6,13 +6,21 @@ vim.pack.add({
 require "blink.cmp".setup({
     completion = {
         documentation = { auto_show = true, auto_show_delay_ms = 500 },
+        menu = {
+          draw = {
+            columns = {
+              { "label", "label_description", gap = 1 },
+              { "kind_icon", "kind" }
+            },
+          }
+        },
     },
     signature = { enabled = true },
     fuzzy = { implementation = "rust" },
     sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
-
+    snippets = { preset = 'luasnip' },
 })
 
 vim.cmd("highlight Pmenu guibg=NONE")
