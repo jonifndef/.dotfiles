@@ -21,6 +21,10 @@
       "rev": "ad7146a",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "mini.trailspace": {
+      "rev": "fab31f4",
+      "src": "https://github.com/nvim-mini/mini.trailspace.git"
+    },
     "nvim-tree.lua": {
       "rev": "64e2192",
       "src": "https://github.com/nvim-tree/nvim-tree.lua.git"

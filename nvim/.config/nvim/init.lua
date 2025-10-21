@@ -11,8 +11,10 @@ require("plugins.lualine")
 require("plugins.nvim-tree")
 require("plugins.treesitter-context")
 require("plugins.luasnip")
+require("plugins.trailspace")
 
-require("configs.trailing-whitespace")
+--require("configs.trailing-whitespace")
+require("configs.terminal")
 require("configs.lsp_settings")
 
 -- todo:
