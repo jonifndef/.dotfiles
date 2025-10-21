@@ -13,3 +13,21 @@ ls.add_snippets("lua", {
         t('print("hello world")')
     })
 })
+
+ls.add_snippets("cpp", {
+  s("cout", {
+    t('std::cout << "'),
+    i(1),
+    t('" << std::endl;'),
+  }),
+})
+
+ls.add_snippets("cpp", {
+  s("spdlog", {
+    t('spdlog::'),
+    i(1),
+    t('("'),
+    i(2),
+    t('");'),
+  }),
+})
