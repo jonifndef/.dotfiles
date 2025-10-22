@@ -14,5 +14,6 @@ require("plugins.treesitter-context")
 require("plugins.luasnip")
 require("plugins.trailspace")
 require("plugins.vs-tasks")
+require("plugins.nvim-dap")
 
 require("configs.lsp_settings")

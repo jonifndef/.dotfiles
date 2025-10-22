@@ -25,6 +25,22 @@
       "rev": "fab31f4",
       "src": "https://github.com/nvim-mini/mini.trailspace.git"
     },
+    "nvim-dap": {
+      "rev": "6782b09",
+      "src": "https://github.com/mfussenegger/nvim-dap.git"
+    },
+    "nvim-dap-ui": {
+      "rev": "cf91d5e",
+      "src": "https://github.com/rcarriga/nvim-dap-ui.git"
+    },
+    "nvim-dap-virtual-text": {
+      "rev": "fbdb48c",
+      "src": "https://github.com/theHamsta/nvim-dap-virtual-text.git"
+    },
+    "nvim-nio": {
+      "rev": "21f5324",
+      "src": "https://github.com/nvim-neotest/nvim-nio.git"
+    },
     "nvim-tree.lua": {
       "rev": "64e2192",
       "src": "https://github.com/nvim-tree/nvim-tree.lua.git"
