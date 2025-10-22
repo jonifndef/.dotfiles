@@ -1,5 +1,6 @@
 require("configs.general")
 require("configs.mappings")
+require("configs.terminal")
 
 require("plugins.nvim-web-devicons")
 require("plugins.treesitter")
@@ -14,12 +15,4 @@ require("plugins.luasnip")
 require("plugins.trailspace")
 require("plugins.vs-tasks")
 
---require("configs.trailing-whitespace")
-require("configs.terminal")
 require("configs.lsp_settings")
-
--- todo:
--- add snippets
--- vscode tasks plugin
--- floating, toggle terminal
--- DAP
