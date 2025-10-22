@@ -27,6 +27,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnum = args.buf
     set_lsp_keymaps(bufnum)
+    vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" })
   end,
 })
 
