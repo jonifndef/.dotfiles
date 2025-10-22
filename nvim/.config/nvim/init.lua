@@ -12,6 +12,7 @@ require("plugins.nvim-tree")
 require("plugins.treesitter-context")
 require("plugins.luasnip")
 require("plugins.trailspace")
+require("plugins.vs-tasks")
 
 --require("configs.trailing-whitespace")
 require("configs.terminal")

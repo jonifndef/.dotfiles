@@ -45,9 +45,17 @@
       "rev": "b9fd522",
       "src": "https://github.com/nvim-lua/plenary.nvim.git"
     },
+    "popup.nvim": {
+      "rev": "b7404d3",
+      "src": "https://github.com/nvim-lua/popup.nvim.git"
+    },
     "telescope.nvim": {
       "rev": "b4da76b",
       "src": "https://github.com/nvim-telescope/telescope.nvim.git"
+    },
+    "vs-tasks.nvim": {
+      "rev": "99d8e41",
+      "src": "https://github.com/EthanJWright/vs-tasks.nvim.git"
     }
   }
 }
