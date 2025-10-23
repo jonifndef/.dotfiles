@@ -1,19 +1,12 @@
---                                            ___      
---                                           /\_ \     
---   __      __    ___      __   _ __    __  \//\ \    
--- /'_ `\  /'__`\/' _ `\  /'__`\/\`'__\/'__`\  \ \ \   
---/\ \L\ \/\  __//\ \/\ \/\  __/\ \ \//\ \L\.\_ \_\ \_ 
---\ \____ \ \____\ \_\ \_\ \____\\ \_\\ \__/.\_\/\____\
--- \/___L\ \/____/\/_/\/_/\/____/ \/_/ \/__/\/_/\/____/
---   /\____/                                           
---   \_/__/                                            
-
 -- Visual settings
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.linebreak = true
 vim.opt.scrolloff = 5
 vim.opt.cursorline = true
+vim.opt.winborder = "rounded"
+-- would like to have 0 here, but that breaks telescope (for now)
+vim.opt.cmdheight = 1
 --vim.opt.signcolumn = 'yes'
 
 -- Searching
@@ -33,3 +26,6 @@ vim.opt.splitbelow = true
 
 -- mouse
 vim.opt.mouse = ""
+
+-- Spellcheck
+vim.opt.spelllang = "en_us"

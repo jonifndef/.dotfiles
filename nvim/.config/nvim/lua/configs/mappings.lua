@@ -1,13 +1,3 @@
---
---                                      __
---   ___ ___      __     _____   _____ /\_\    ___      __     ____
--- /' __` __`\  /'__`\  /\ '__`\/\ '__`\/\ \ /' _ `\  /'_ `\  /',__\
--- /\ \/\ \/\ \/\ \L\.\_\ \ \L\ \ \ \L\ \ \ \/\ \/\ \/\ \L\ \/\__, `\
--- \ \_\ \_\ \_\ \__/.\_\\ \ ,__/\ \ ,__/\ \_\ \_\ \_\ \____ \/\____/
---  \/_/\/_/\/_/\/__/\/_/ \ \ \/  \ \ \/  \/_/\/_/\/_/\/___L\ \/___/
---                         \ \_\   \ \_\                /\____/
---                          \/_/    \/_/                \_/__/
-
 vim.keymap.set("n", "<Space>", "")
 vim.g.mapleader = " "
 vim.keymap.set("i", "jj", "<Esc>")
@@ -41,19 +31,10 @@ vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true })
 vim.keymap.set("v", "<Leader>y", '"+y')
 vim.keymap.set("n", "<Leader>p", '"+p')
 
-local function hide_diagnostics()
-    vim.diagnostic.config({  -- https://neovim.io/doc/user/diagnostic.html
-        virtual_text = false,
-        signs = false,
-        underline = false,
-    })
-end
-local function show_diagnostics()
-    vim.diagnostic.config({
-        virtual_text = true,
-        signs = true,
-        underline = true,
-    })
-end
-vim.keymap.set("n", "<leader>dh", hide_diagnostics)
-vim.keymap.set("n", "<leader>ds", show_diagnostics)
+-- spellcheck
+vim.keymap.set('n', "<leader>sc", function()
+    vim.opt.spell = not(vim.opt.spell:get())
+end)
+
+-- terminal
+vim.keymap.set('t', "<esc><esc>", "<C-\\><C-n>")
