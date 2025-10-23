@@ -1,7 +1,7 @@
-vim.pack.add({
-    { src = "https://github.com/Saghen/blink.cmp.git",
-    version = vim.version.range('1.*'), },
-})
+vim.pack.add(
+    {{ src = "https://github.com/Saghen/blink.cmp.git", version = vim.version.range('1.*') },},
+    { confirm = false }
+)
 
 require "blink.cmp".setup({
     completion = {

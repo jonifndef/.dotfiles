@@ -1,6 +1,7 @@
-vim.pack.add({
-    { src = "https://github.com/L3MON4D3/LuaSnip.git" }
-})
+vim.pack.add(
+    {{ src = "https://github.com/L3MON4D3/LuaSnip.git" },},
+    { confirm = false }
+)
 
 local ls = require("luasnip")
 local s = ls.snippet

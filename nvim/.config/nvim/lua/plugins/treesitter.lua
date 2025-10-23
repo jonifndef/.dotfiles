@@ -1,20 +1,23 @@
-vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' })
+vim.pack.add(
+    {{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },},
+    { confirm = false }
+)
 
 local configs = require('nvim-treesitter.configs')
 
 configs.setup({
   ensure_installed = {
+    'astro',
     'c',
     'cpp',
-    'lua',
-    'vim',
-    'vimdoc',
     'html',
     'http',
-    'json',
     'javascript',
+    'json',
+    'lua',
     'typescript',
-    'astro',
+    'vim',
+    'vimdoc',
   },
   auto_install = true,
   modules = {},

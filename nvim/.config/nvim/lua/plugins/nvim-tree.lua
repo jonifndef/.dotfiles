@@ -1,6 +1,7 @@
-vim.pack.add({
-    { src = "https://github.com/nvim-tree/nvim-tree.lua.git" }
-})
+vim.pack.add(
+    {{ src = "https://github.com/nvim-tree/nvim-tree.lua.git" },},
+    { confirm = false }
+)
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

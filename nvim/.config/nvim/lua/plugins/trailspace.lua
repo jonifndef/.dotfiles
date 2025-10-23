@@ -1,8 +1,9 @@
-vim.pack.add({
-    { src = "https://github.com/nvim-mini/mini.trailspace.git", ver = 'main' }
-})
+vim.pack.add(
+    {{ src = "https://github.com/nvim-mini/mini.trailspace.git" },},
+    { confirm = false }
+)
 
 local ts = require("mini.trailspace")
 
 ts.setup{}
-vim.keymap.set('n', "<leader>tw", ts.trim) 
+vim.keymap.set('n', "<leader>tw", ts.trim)

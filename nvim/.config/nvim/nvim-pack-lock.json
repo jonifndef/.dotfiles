@@ -1,0 +1,77 @@
+{
+  "plugins": {
+    "LuaSnip": {
+      "rev": "ccf25a5",
+      "src": "https://github.com/L3MON4D3/LuaSnip.git"
+    },
+    "blink.cmp": {
+      "rev": "327fff9",
+      "src": "https://github.com/Saghen/blink.cmp.git",
+      "version": "1.0.0 - 2.0.0"
+    },
+    "gruvbox.nvim": {
+      "rev": "5e0a460",
+      "src": "https://github.com/ellisonleao/gruvbox.nvim.git"
+    },
+    "lualine.nvim": {
+      "rev": "3946f01",
+      "src": "https://github.com/nvim-lualine/lualine.nvim.git"
+    },
+    "mason.nvim": {
+      "rev": "ad7146a",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "mini.trailspace": {
+      "rev": "fab31f4",
+      "src": "https://github.com/nvim-mini/mini.trailspace.git"
+    },
+    "nvim-dap": {
+      "rev": "6782b09",
+      "src": "https://github.com/mfussenegger/nvim-dap.git"
+    },
+    "nvim-dap-ui": {
+      "rev": "cf91d5e",
+      "src": "https://github.com/rcarriga/nvim-dap-ui.git"
+    },
+    "nvim-dap-virtual-text": {
+      "rev": "fbdb48c",
+      "src": "https://github.com/theHamsta/nvim-dap-virtual-text.git"
+    },
+    "nvim-nio": {
+      "rev": "21f5324",
+      "src": "https://github.com/nvim-neotest/nvim-nio.git"
+    },
+    "nvim-tree.lua": {
+      "rev": "64e2192",
+      "src": "https://github.com/nvim-tree/nvim-tree.lua.git"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-treesitter-context": {
+      "rev": "ec308c7",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context.git"
+    },
+    "nvim-web-devicons": {
+      "rev": "b8221e4",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons.git"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim.git"
+    },
+    "popup.nvim": {
+      "rev": "b7404d3",
+      "src": "https://github.com/nvim-lua/popup.nvim.git"
+    },
+    "telescope.nvim": {
+      "rev": "b4da76b",
+      "src": "https://github.com/nvim-telescope/telescope.nvim.git"
+    },
+    "vs-tasks.nvim": {
+      "rev": "99d8e41",
+      "src": "https://github.com/EthanJWright/vs-tasks.nvim.git"
+    }
+  }
+}

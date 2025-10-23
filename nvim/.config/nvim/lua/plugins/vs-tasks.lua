@@ -1,8 +1,12 @@
-vim.pack.add({ "https://github.com/nvim-lua/popup.nvim.git" })
+vim.pack.add(
+    {{ src = "https://github.com/nvim-lua/popup.nvim.git" },},
+    { confirm = false }
+)
 
-vim.pack.add({
-    { src = "https://github.com/EthanJWright/vs-tasks.nvim.git" }
-})
+vim.pack.add(
+    {{ src = 'https://github.com/EthanJWright/vs-tasks.nvim.git' },},
+    { confirm = false }
+)
 
 require("vstask").setup{}
 require("telescope").load_extension("vstask")

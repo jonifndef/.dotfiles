@@ -1,6 +1,12 @@
-vim.pack.add({ 'https://github.com/nvim-lua/plenary.nvim.git' })
+vim.pack.add(
+    {{ src = "https://github.com/nvim-lua/plenary.nvim.git" },},
+    { confirm = false }
+)
 
-vim.pack.add({ 'https://github.com/nvim-telescope/telescope.nvim.git' })
+vim.pack.add(
+    {{ src = "https://github.com/nvim-telescope/telescope.nvim.git" },},
+    { confirm = false }
+)
 
 require("telescope").setup{
     defaults = {
