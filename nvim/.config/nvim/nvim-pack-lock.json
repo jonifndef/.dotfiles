@@ -65,6 +65,10 @@
       "rev": "b7404d3",
       "src": "https://github.com/nvim-lua/popup.nvim.git"
     },
+    "telescope-ui-select.nvim": {
+      "rev": "6e51d7d",
+      "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim.git"
+    },
     "telescope.nvim": {
       "rev": "b4da76b",
       "src": "https://github.com/nvim-telescope/telescope.nvim.git"

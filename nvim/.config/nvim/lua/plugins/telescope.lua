@@ -8,6 +8,11 @@ vim.pack.add(
     { confirm = false }
 )
 
+vim.pack.add({
+    { src = "https://github.com/nvim-telescope/telescope-ui-select.nvim.git" },},
+    { confirm = false }
+)
+
 require("telescope").setup{
     defaults = {
         layout_strategy = "flex",
@@ -28,8 +33,15 @@ require("telescope").setup{
             hidden = true,
             no_ignore=true,
         },
+    },
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown()
+        }
     }
 }
+
+require("telescope").load_extension("ui-select")
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
