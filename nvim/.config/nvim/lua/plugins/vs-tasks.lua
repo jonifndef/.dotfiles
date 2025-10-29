@@ -1,3 +1,19 @@
+local hooks = function(ev)
+  -- Use available |event-data|
+  local name, kind = ev.data.spec.name, ev.data.kind
+  -- Run build script after plugin's code has changed
+  if name == 'lua-json5' and (kind == 'install' or kind == 'update') then
+    vim.system({ './install.sh' }, { cwd = ev.data.path })
+  end
+end
+
+vim.api.nvim_create_autocmd('PackChanged', { callback = hooks })
+
+vim.pack.add(
+    {{ src = "https://github.com/Joakker/lua-json5.git" },},
+    { confirm = false }
+)
+
 vim.pack.add(
     {{ src = "https://github.com/nvim-lua/popup.nvim.git" },},
     { confirm = false }
@@ -8,7 +24,9 @@ vim.pack.add(
     { confirm = false }
 )
 
-require("vstask").setup{}
+require("vstask").setup({
+    json_parser = require("json5").parse
+})
 require("telescope").load_extension("vstask")
 
 vim.keymap.set('n', "<Leader>ta", require("telescope").extensions.vstask.tasks)

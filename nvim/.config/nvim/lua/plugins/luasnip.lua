@@ -32,3 +32,23 @@ ls.add_snippets("cpp", {
     t('");'),
   }),
 })
+
+
+ls.add_snippets("c", {
+  s("Log_print0", {
+    t('Log_print0(Diags_ENTRY | Diags_INFO, "'),
+    i(1),
+    t('");'),
+  }),
+})
+
+ls.add_snippets("c", {
+  s("Log_print1", {
+    t('Log_print1(Diags_ENTRY | Diags_INFO, "'),
+    i(1),
+    t('", '),
+    i(2),
+    t(');'),
+  }),
+})
+
