@@ -178,6 +178,10 @@ function ff() {
     find . -type f -iname "*$1*"
 }
 
+function zaffura() {
+    nohup zathura $1 & > /dev/null 2&>1
+}
+
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #[ -f ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh ] && source ~/Development/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
