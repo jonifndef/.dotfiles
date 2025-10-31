@@ -28,5 +28,5 @@ vim.cmd("highlight Pmenu guibg=NONE")
 
 -- in order to solve the Ctrl-p issue in completion, add a ~/.docker/config.json with the following contents:
 -- {
---     "detachKeys": "ctrl-e,e"
+--     "detachKeys": "ctrl-z,z"
 -- }

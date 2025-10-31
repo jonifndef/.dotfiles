@@ -13,6 +13,10 @@
       "rev": "5e0a460",
       "src": "https://github.com/ellisonleao/gruvbox.nvim.git"
     },
+    "lua-json5": {
+      "rev": "8ffccf7",
+      "src": "https://github.com/Joakker/lua-json5.git"
+    },
     "lualine.nvim": {
       "rev": "3946f01",
       "src": "https://github.com/nvim-lualine/lualine.nvim.git"
