@@ -13,10 +13,28 @@ HYPHEN_INSENSITIVE="true"
 
 export UPDATE_ZSH_DAYS=30
 
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
+unsetopt correct_all
+unsetopt correct
+
 COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="yyyy-mm-dd"
+
+# Install plugins
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+
+if [ ! -d ~/.oh-my-zsh/custom/plugins/fzf-zsh-plugin ]; then
+    git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
+fi
+
+[ -d ~/.fzf ] || { git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && yes | ~/.fzf/install --key-bindings --completion --no-update-rc; }
 
 plugins=(git
          wd
@@ -27,14 +45,24 @@ plugins=(git
 # Path to your oh-my-zsh installation.
 if [ -n "$ZSH" ]; then
     # If $ZSH is set by Nix
-    source "$ZSH/oh-my-zsh.sh"
+    if [ -f "$ZSH/oh-my-zsh.sh" ]; then
+        source "$ZSH/oh-my-zsh.sh"
+    else
+        echo "Cannot find oh-my-zsh.sh"
+    fi
 else
     # Fallback to manually installed version
+    if [ ! -d $HOME/.oh-my-zsh ]; then
+        curl -fsSL -o /tmp/install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        KEEP_ZSHRC='yes' sh /tmp/install.sh --unattended
+    fi
     export ZSH=$HOME/.oh-my-zsh
     [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 fi
 
-source $HOME/.fonts/*.sh
+if [ -f $HOME/.fonts ]; then
+    source $HOME/.fonts/*.sh
+fi
 
 # Accept autosuggestion
 bindkey '^n' autosuggest-accept
@@ -45,8 +73,12 @@ else
   export EDITOR='nvim'
 fi
 
+function in_docker() {
+    [ -f /.dockerenv ] || grep -qa docker /proc/1/cgroup;
+}
+
 # Always start tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && ! in_docker; then
     exec tmux && exit
 fi
 
@@ -56,7 +88,7 @@ HISTSIZE=10000
 HISTSAVE=10000
 
 # Having this just in the .xinitrc doesn't really work
-xset r rate 250 25
+xset r rate 250 25 > /dev/null 2&>1
 
 alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
 alias ll='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
@@ -92,10 +124,6 @@ function mkcd() {
     else
         echo "Directory already exists, pleb!"
     fi
-}
-
-function pwin_start_cmd() {
-    echo "LD_LIBRARY_PATH=/home/jonas/Development/pwin/timbeter.opencv3.4.1/lib/:/home/jonas/Development/pwin/pylon-5.2.0.13457-x86_64/lib64/"
 }
 
 function build-deb () {
