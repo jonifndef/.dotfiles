@@ -1,4 +1,12 @@
-# This is the legendary .zshrc!
+#                   __
+#                  /\ \
+#     ____     ____\ \ \___   _ __   ___
+#    /\_ ,`\  /',__\\ \  _ `\/\`'__\/'___\
+#  __\/_/  /_/\__, `\\ \ \ \ \ \ \//\ \__/
+# /\_\ /\____\/\____/ \ \_\ \_\ \_\\ \____\
+# \/_/ \/____/\/___/   \/_/\/_/\/_/ \/____/
+#
+
 export PATH=$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/bin:/usr/local/bin:$HOME/.nix-profile:$HOME/Development/fzf-zsh-plugin/bin:$HOME/.cargo/bin:/opt/nvim-linux-x86_64/bin:$HOME/.npm/bin:$PATH
 
 export BROWSER="google-chrome-stable"
@@ -21,21 +29,6 @@ COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="yyyy-mm-dd"
 
-# Install plugins
-if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
-
-if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-fi
-
-if [ ! -d ~/.oh-my-zsh/custom/plugins/fzf-zsh-plugin ]; then
-    git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
-fi
-
-[ -d ~/.fzf ] || { git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && yes | ~/.fzf/install --key-bindings --completion --no-update-rc; }
-
 plugins=(git
          wd
          zsh-autosuggestions
@@ -51,11 +44,6 @@ if [ -n "$ZSH" ]; then
         echo "Cannot find oh-my-zsh.sh"
     fi
 else
-    # Fallback to manually installed version
-    if [ ! -d $HOME/.oh-my-zsh ]; then
-        curl -fsSL -o /tmp/install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-        KEEP_ZSHRC='yes' sh /tmp/install.sh --unattended
-    fi
     export ZSH=$HOME/.oh-my-zsh
     [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 fi
@@ -146,7 +134,9 @@ function zaffura() {
     nohup zathura $1 & > /dev/null 2&>1
 }
 
-#if [ -e /home/jonas/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jonas/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+    . $HOME/.nix-profile/etc/profile.d/nix.sh;
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
