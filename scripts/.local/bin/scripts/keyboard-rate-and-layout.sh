@@ -12,6 +12,9 @@
         "6582060d") # Wilba tech Salvation
             /usr/bin/setxkbmap -layout se -variant swerty
             ;;
+        "08530134") # Leopold fc660c
+            /usr/bin/setxkbmap -layout se -variant swerty
+            ;;
         *)
             setxkbmap -layout se
             ;;
