@@ -16,20 +16,20 @@ parse_arguments()
       case $1 in
         -p|--dockerfile-path)
           DOCKERFILE_PATH="$2"
-          shift # past argument
-          shift # past value
+          shift
+          shift
           ;;
         -h|--help)
           usage
           exit
-          shift # past argument
-          shift # past value
+          shift
+          shift
           ;;
         *)
           echo "Unknown option $1"
           usage
           exit 1
-          shift # past argument
+          shift
           ;;
       esac
     done
@@ -45,7 +45,8 @@ NL='
             echo "The workspace contains more than one Dockerfile. Which one would you like to build?"
             ;;
               *)
-            echo "just one line"
+            DOCKERFILE_PATH="$DOCKERFILES"
+            return
             ;;
     esac
 
@@ -60,9 +61,12 @@ NL='
 
     read -p "Enter number: " NUM
 
-    for i in "${DOCKERFILES_ARR[@]}"; do
-        echo "$i"
-    done
+    if [ $NUM -gt $INDEX ] || [ $NUM -lt 1 ]; then
+        echo "Invalid choice"
+        exit 1
+    fi
+
+    DOCKERFILE_PATH="${DOCKERFILES_ARR[(($NUM-1))]}"
 }
 
 main()
