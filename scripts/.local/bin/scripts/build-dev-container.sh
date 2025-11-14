@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 DOCKERFILE_PATH=""
 
 usage()
@@ -72,10 +74,20 @@ NL='
 main()
 {
     parse_arguments "$@"
+
     if [ -z "${DOCKERFILE_PATH}" ]; then
         set_dockerfile_path
     fi
-    echo "DOCKERFILE_PATH is set to: ${DOCKERFILE_PATH}"
+
+    OG_IMAGE_NAME="devcontainer_$(uuidgen)"
+    docker build -t "$OG_IMAGE_NAME" -f "${DOCKERFILE_PATH}" .
+
+    # Build overlay here
+
+    docker image rm "${OG_IMAGE_NAME}"
+    docker system prune
+
+    echo "SUCCUESS"
 }
 
 main "$@"
