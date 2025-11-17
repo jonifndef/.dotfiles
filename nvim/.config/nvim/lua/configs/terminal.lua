@@ -86,4 +86,4 @@ vim.api.nvim_create_user_command("Floatingterminal", toggle_floating_terminal, {
 vim.api.nvim_create_user_command("Smallterminal", toggle_floating_terminal, {})
 
 vim.keymap.set({'n', 't'}, "<leader>ft", toggle_floating_terminal)
-vim.keymap.set({'n', 't'}, "<leader>st", toggle_small_terminal)
+vim.keymap.set({'n', 't'}, "<leader>bt", toggle_small_terminal)
