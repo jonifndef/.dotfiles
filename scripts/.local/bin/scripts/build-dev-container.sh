@@ -4,6 +4,9 @@ set -euo pipefail
 
 DOCKERFILE_PATH=""
 OG_IMAGE_NAME=""
+NIX_TARBALL_URL="https://releases.nixos.org/nix/nix-2.32.4/nix-2.32.4-x86_64-linux.tar.xz"
+NIX_TARBALL=""
+DEV_USER="dev"
 
 usage()
 {
@@ -96,12 +99,18 @@ set_username()
     USERNAME=$(docker run --rm "${OG_IMAGE_NAME}" sh -c 'grep "1000:1000" /etc/passwd | cut -d: -f1')
 }
 
+download_nix_tarball()
+{
+    NIX_TARBALL=$(mktemp)
+    curl -L "${NIX_TARBALL_URL}" -o "${NIX_TARBALL}"
+}
+
 build_overlay()
 {
     CONTEXT=$(mktemp -d)
-    DEV_USER="dev"
+    cp "${NIX_TARBALL}" "${CONTEXT}/nix.tar.xz"
 
-    docker build -t devcontainer_jonas -f - "${CONTEXT}" <<-EOF
+    docker build -t devcontainer_jonas --progress=plain -f - "${CONTEXT}" <<-EOF
 FROM $OG_IMAGE_NAME
 
 RUN set -eux; \
@@ -115,12 +124,23 @@ useradd -D -u 1000 -G $DEV_USER $DEV_USER; \
 fi; \
 fi
 
-RUN mkdir /nix && chown -R ${USERNAME:-$DEV_USER} /nix
+RUN mkdir -p /nix && chmod 755 /nix
+
+COPY nix.tar.xz /tmp/nix.tar.xz
+
+RUN tar -xJf /tmp/nix.tar.xz -C /tmp && \
+rm /tmp/nix.tar.xz && \
+chown -R ${USERNAME:-$DEV_USER} /tmp
 
 ENV USER=${USERNAME:-$DEV_USER}
 ENV HOME=/home/${USERNAME:-$DEV_USER}
 USER ${USERNAME:-$DEV_USER}
 WORKDIR /home/${USERNAME:-$DEV_USER}
+
+
+ENV PATH="/tmp/nix-*/bin:\$PATH"
+
+RUN ls -lah /tmp/
 
 RUN git clone --branch ubuntu-cab https://github.com/jonifndef/.dotfiles.git && \
 ln -s .dotfiles/home-manager/.config/home-manager .config/home-manager && \
@@ -140,6 +160,7 @@ main()
     set_dockerfile_path
     build_og_image
     set_username
+    download_nix_tarball
     build_overlay
     cleanup
 
