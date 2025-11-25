@@ -38,3 +38,6 @@ end)
 
 -- terminal
 vim.keymap.set('t', "<esc><esc>", "<C-\\><C-n>")
+
+-- remove command history window
+vim.keymap.set("n", "q:", "<Nop>")
