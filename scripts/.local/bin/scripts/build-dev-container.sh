@@ -102,38 +102,35 @@ build_overlay()
     DEV_USER="dev"
 
     docker build -t devcontainer_jonas -f - "${CONTEXT}" <<-EOF
-        FROM $OG_IMAGE_NAME
+FROM $OG_IMAGE_NAME
 
-        # First, add a user with id 1000 if it does not exist
-        RUN set -eux \
-            if [ "$USERNAMEx" = "x" ]; then \
-                if usermod -v > /dev/null 2>&1; then \
-                    # We are prolly in arch-/debian-/fedoraland \
-                    groupadd -g 1000 $DEV_USER; \
-                    useradd -m -u 1000 -g 1000 -s /bin/sh $DEV_USER; \
-                else \
-                    # We are prolly in alpine-with-just-busybox-land \
-                    addgroup -g 1000 $DEV_USER; \
-                    useradd -D -u 1000 -G $DEV_USER $DEV_USER; \
-                fi
+RUN set -eux; \
+if [ "${USERNAME}x" = "x" ]; then \
+if usermod -v > /dev/null 2>&1; then \
+groupadd -g 1000 $DEV_USER; \
+useradd -m -u 1000 -g 1000 -s /bin/sh $DEV_USER; \
+else \
+addgroup -g 1000 $DEV_USER; \
+useradd -D -u 1000 -G $DEV_USER $DEV_USER; \
+fi; \
+fi
 
-        # Then, we add the actual nix environment
-        RUN mkdir /nix && chown -R ${USERNAME:-$DEV_USER}
+RUN mkdir /nix && chown -R ${USERNAME:-$DEV_USER} /nix
 
-        ENV USER=${USERNAME:-$DEV_USER}
-        ENV HOME=/home/${USERNAME:-$DEV_USER}
-        USER ${USERNAME:-$DEV_USER}
-        WORKDIR /home/${USERNAME:-$DEV_USER}
+ENV USER=${USERNAME:-$DEV_USER}
+ENV HOME=/home/${USERNAME:-$DEV_USER}
+USER ${USERNAME:-$DEV_USER}
+WORKDIR /home/${USERNAME:-$DEV_USER}
 
-        RUN git clone https://github.com/jonifndef/.dotfiles && \
-            ln -s .dotfiles/home-manager/.config/home-manager .config/home-manager
-            ln -s .dotfiles/nix/.config/nix .config/nix
+RUN git clone --branch ubuntu-cab https://github.com/jonifndef/.dotfiles.git && \
+ln -s .dotfiles/home-manager/.config/home-manager .config/home-manager && \
+ln -s .dotfiles/nix/.config/nix .config/nix
 
-        #RUN curl -L https://nixos.org/nix/install | sh
+#RUN curl -L https://nixos.org/nix/install | sh
 
-        #ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
+#ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
 
-        #RUN nix run home-manager/master -- switch --flake .config/home-manager#ubuntu --impure
+#RUN nix run home-manager/master -- switch --flake .config/home-manager#ubuntu --impure
 EOF
 }
 
