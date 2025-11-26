@@ -39,5 +39,7 @@ end)
 -- terminal
 vim.keymap.set('t', "<esc><esc>", "<C-\\><C-n>")
 
--- remove command history window
+-- remove some commands that are mistyped frequently, yes I'm a bum
 vim.keymap.set("n", "q:", "<Nop>")
+vim.keymap.set("c", "wä", "<Nop>")
+vim.keymap.set("c", "w1", "<Nop>")
