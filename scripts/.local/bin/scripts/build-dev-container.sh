@@ -104,7 +104,7 @@ set_username()
     USERNAME=$(docker run --rm "${OG_IMAGE_NAME}" sh -c 'grep "1000:1000" /etc/passwd | cut -d: -f1')
 }
 
-download_dependencies_and_create_context()
+download_dependencies()
 {
     CONTEXT=$(mktemp -d)
     git clone https://github.com/jonifndef/Busybox-static.git /tmp/Busybox-static
@@ -116,8 +116,10 @@ download_dependencies_and_create_context()
 
 build_overlay()
 {
-    docker build -t devcontainer_jonas -f - "${CONTEXT}" <<-EOF
+    docker build -t creone_devcontainer_jonas -f - "${CONTEXT}" <<-EOF
 FROM $OG_IMAGE_NAME
+
+USER root
 
 RUN set -eux; \
 if [ "${USERNAME}x" = "x" ]; then \
@@ -132,7 +134,7 @@ chown -R $DEV_USER:$DEV_USER /home/$DEV_USER; \
 fi; \
 fi
 
-RUN mkdir -p /nix && chmod 755 /nix
+RUN mkdir -p /nix && chmod 755 /nix && chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /nix
 
 COPY busybox /tmp/busybox
 COPY .dotfiles /tmp/.dotfiles
@@ -147,22 +149,23 @@ chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /home/${USERNAME:-$DEV_US
 
 ENV USER=${USERNAME:-$DEV_USER}
 ENV HOME=/home/${USERNAME:-$DEV_USER}
-USER ${USERNAME:-$DEV_USER}
 WORKDIR /home/${USERNAME:-$DEV_USER}
+
+RUN /tmp/wget https://nixos.org/nix/install -O install.sh && \
+chmod +x install.sh && \
+chown ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} install.sh
+
+USER ${USERNAME:-$DEV_USER}
 
 ENV PATH="\$PATH:/tmp"
 RUN mkdir -p .config && \
 ln -s "../.dotfiles/home-manager/.config/home-manager" ".config/home-manager" && \
 ln -s "../.dotfiles/nix/.config/nix" ".config/nix"
 
-
+RUN ./install.sh
+ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
+RUN nix run home-manager/master -- switch --flake .config/home-manager#ubuntu --impure
 EOF
-##RUN curl -L https://nixos.org/nix/install | sh
-#
-##ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
-#
-##RUN nix run home-manager/master -- switch --flake .config/home-manager#ubuntu --impure
-#EOF
 }
 
 main()
@@ -171,7 +174,7 @@ main()
     set_dockerfile_path
     build_og_image
     set_username
-    download_dependencies_and_create_context
+    download_dependencies
     build_overlay
     cleanup
 
