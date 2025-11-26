@@ -4,6 +4,8 @@ set -euo pipefail
 
 cleanup()
 {
+    echo "Cleaning up..."
+
     if [ -n "${OG_IMAGE_NAME}" ]; then
         docker image rm "${OG_IMAGE_NAME}"
         docker system prune
@@ -13,7 +15,7 @@ cleanup()
     [ -d "/tmp/Busybox-static" ] && rm -rf "/tmp/Busybox-static"
 }
 
-trap 'cleanup' ERR
+trap 'cleanup' ERR EXIT
 
 DOCKERFILE_PATH=""
 OG_IMAGE_NAME=""
@@ -104,38 +106,41 @@ set_username()
     USERNAME=$(docker run --rm "${OG_IMAGE_NAME}" sh -c 'grep "1000:1000" /etc/passwd | cut -d: -f1')
 }
 
-download_dependencies_and_create_context()
+download_dependencies()
 {
     CONTEXT=$(mktemp -d)
-    git clone https://github.com/jonifndef/Busybox-static.git /tmp/Busybox-static
-    cp /tmp/Busybox-static/busybox_x86 "${CONTEXT}/busybox"
+    git clone https://github.com/jonifndef/Busybox-static.git ${CONTEXT}/Busybox-static
 
-    git clone --branch ubuntu-cab https://github.com/jonifndef/.dotfiles.git /tmp/.dotfiles
-    cp -r /tmp/.dotfiles "${CONTEXT}/.dotfiles"
+    git clone --branch ubuntu-cab https://github.com/jonifndef/.dotfiles.git ${CONTEXT}/.dotfiles
+
+    wget http://nixos.org/nix/install -O ${CONTEXT}/install.sh
 }
 
 build_overlay()
 {
-    docker build -t devcontainer_jonas -f - "${CONTEXT}" <<-EOF
+    docker build -t creone_devcontainer_jonas -f - "${CONTEXT}" <<-EOF
 FROM $OG_IMAGE_NAME
+
+USER root
 
 RUN set -eux; \
 if [ "${USERNAME}x" = "x" ]; then \
-if usermod -v > /dev/null 2>&1; then \
+if command -v usermod > /dev/null 2>&1; then \
 groupadd -g 1000 $DEV_USER; \
 useradd -m -u 1000 -g 1000 -s /bin/sh $DEV_USER; \
 else \
-addgroup -g 1000 $DEV_USER; \
+addgroup --gid 1000 $DEV_USER; \
 adduser -D -u 1000 -G $DEV_USER $DEV_USER; \
 mkdir -p /home/$DEV_USER; \
 chown -R $DEV_USER:$DEV_USER /home/$DEV_USER; \
 fi; \
 fi
 
-RUN mkdir -p /nix && chmod 755 /nix
+RUN mkdir -p /nix && chmod 755 /nix && chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /nix
 
-COPY busybox /tmp/busybox
+COPY Busybox-static/busybox_x86 /tmp/busybox
 COPY .dotfiles /tmp/.dotfiles
+COPY install.sh /tmp/install.sh
 RUN mv /tmp/.dotfiles /home/${USERNAME:-$DEV_USER}/
 RUN chmod 755 /tmp/busybox && \
 ln -s /tmp/busybox /tmp/tar && \
@@ -145,24 +150,25 @@ ln -s /tmp/busybox /tmp/sha256sum && \
 chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /tmp && \
 chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /home/${USERNAME:-$DEV_USER}
 
+RUN mv /tmp/install.sh /home/${USERNAME:-$DEV_USER} && \
+chown ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /home/${USERNAME:-$DEV_USER}/install.sh && \
+chmod 755 /home/${USERNAME:-$DEV_USER}/install.sh
+
 ENV USER=${USERNAME:-$DEV_USER}
 ENV HOME=/home/${USERNAME:-$DEV_USER}
-USER ${USERNAME:-$DEV_USER}
 WORKDIR /home/${USERNAME:-$DEV_USER}
 
-ENV PATH="\$PATH:/tmp"
+USER ${USERNAME:-$DEV_USER}
+
+ENV PATH="\$PATH:/tmp/"
 RUN mkdir -p .config && \
 ln -s "../.dotfiles/home-manager/.config/home-manager" ".config/home-manager" && \
 ln -s "../.dotfiles/nix/.config/nix" ".config/nix"
 
-
+RUN ./install.sh
+ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
+RUN nix run home-manager/master -- switch --flake .config/home-manager#${USERNAME:-DEV_USER} --impure
 EOF
-##RUN curl -L https://nixos.org/nix/install | sh
-#
-##ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
-#
-##RUN nix run home-manager/master -- switch --flake .config/home-manager#ubuntu --impure
-#EOF
 }
 
 main()
@@ -171,9 +177,8 @@ main()
     set_dockerfile_path
     build_og_image
     set_username
-    download_dependencies_and_create_context
+    download_dependencies
     build_overlay
-    cleanup
 
     echo "SUCCESS"
 }
