@@ -113,6 +113,7 @@ download_dependencies()
     git clone https://github.com/jonifndef/Busybox-static.git ${CONTEXT}/Busybox-static
     git clone --branch ubuntu-cab https://github.com/jonifndef/.dotfiles.git ${CONTEXT}/.dotfiles
     curl -L "${NIX_TARBALL_URL}" -o "${CONTEXT}/nix.tar.xz"
+    curl -L https://curl.se/ca/cacert.pem -o ${CONTEXT}/ca-certificates.crt
 }
 
 build_overlay()
