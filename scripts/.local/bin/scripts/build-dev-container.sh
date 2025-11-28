@@ -140,6 +140,7 @@ RUN mkdir -p /nix && chmod 755 /nix && chown -R ${USERNAME:-$DEV_USER}:${USERNAM
 COPY Busybox-static/busybox_x86 /tmp/busybox
 COPY .dotfiles /tmp/.dotfiles
 COPY nix.tar.xz /tmp/nix.tar.xz
+COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 RUN mv /tmp/.dotfiles /home/${USERNAME:-$DEV_USER}/
 
@@ -158,6 +159,12 @@ chmod 755 /home/${USERNAME:-$DEV_USER}/nix.tar.xz
 ENV USER=${USERNAME:-$DEV_USER}
 ENV HOME=/home/${USERNAME:-$DEV_USER}
 WORKDIR /home/${USERNAME:-$DEV_USER}
+
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+ENV CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+ENV GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt
+ENV HTTPS_CA_CERT=/etc/ssl/certs/ca-certificates.crt
+ENV SSL_CERT_DIR=/etc/ssl/certs
 
 USER ${USERNAME:-$DEV_USER}
 
