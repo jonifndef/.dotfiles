@@ -156,6 +156,10 @@ RUN mv /tmp/nix.tar.xz /home/${USERNAME:-$DEV_USER} && \
 chown ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /home/${USERNAME:-$DEV_USER}/nix.tar.xz && \
 chmod 755 /home/${USERNAME:-$DEV_USER}/nix.tar.xz
 
+RUN if [ -f /etc/alpine-release ]; then \
+apk add --no-cache coreutils xz; \
+fi
+
 ENV USER=${USERNAME:-$DEV_USER}
 ENV HOME=/home/${USERNAME:-$DEV_USER}
 WORKDIR /home/${USERNAME:-$DEV_USER}
@@ -176,7 +180,7 @@ ln -s "../.dotfiles/nix/.config/nix" ".config/nix"
 RUN tar -xf nix.tar.xz && ./nix-*/install --no-daemon
 
 ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
-RUN nix run home-manager/master -- switch --flake .config/home-manager#${USERNAME:-DEV_USER} --impure
+RUN nix run home-manager/master -- switch --flake .config/home-manager#${USERNAME:-$DEV_USER} --impure
 EOF
 }
 
