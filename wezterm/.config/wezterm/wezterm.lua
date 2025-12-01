@@ -3,7 +3,7 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 config.font_size = 13
-config.font = wezterm.font 'Hack'
+config.font = wezterm.font 'Hack Nerd Font'
 config.color_scheme = 'GruvboxDarkHard'
 
 config.enable_tab_bar = false
@@ -15,6 +15,15 @@ config.window_padding = {
     bottom = 15
 }
 
-config.window_background_opacity = 0.7
+config.window_background_opacity = 0.55
+
+config.colors = {
+    background = '#000000'
+}
+config.keys = {
+  { key = '+', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
+  { key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
+  { key = '=', mods = 'CTRL', action = wezterm.action.ResetFontSize },
+}
 
 return config
