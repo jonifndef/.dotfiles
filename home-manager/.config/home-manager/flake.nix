@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of ubuntu";
+  description = "Dynamic multi-environment PDE";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -21,8 +21,8 @@
 
       impure = builtins.getEnv "USER" != "";
 
-      username = if impure then builtins.getEnv "USER" else "ubuntu";
-      homeDir = if impure then builtins.getEnv "HOME" else "/home/ubuntu";
+      username = if impure then builtins.getEnv "USER" else "jonas";
+      homeDir = if impure then builtins.getEnv "HOME" else "/home/jonas";
     in
     {
       homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
