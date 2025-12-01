@@ -26,4 +26,14 @@ config.keys = {
   { key = '=', mods = 'CTRL', action = wezterm.action.ResetFontSize },
 }
 
+config.scrollback_lines = 10000
+
+config.keys = {
+    {
+        key = 'Escape',
+        mods = 'ALT',
+        action = wezterm.action.ActivateCopyMode
+    },
+}
+
 return config
