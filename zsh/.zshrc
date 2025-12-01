@@ -70,6 +70,9 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
     exec tmux && exit
 fi
 
+# Start keychain
+eval $(keychain --quiet --eval id_ed25519)
+
 # History stuff
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
