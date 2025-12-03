@@ -8,21 +8,21 @@ cleanup()
 
     if [ -n "${OG_IMAGE_NAME}" ]; then
         docker image rm "${OG_IMAGE_NAME}"
-        docker system prune
+        docker image prune
     fi
 
-    [ -d "/tmp/.dotfiles" ] && rm -rf "/tmp/.dotfiles"
-    [ -d "/tmp/Busybox-static" ] && rm -rf "/tmp/Busybox-static"
-    [ -d "${CONTEXT}" ] && rm -rf "${CONTEXT}"
+    [ -d "${CONTEXT_TMPDIR}" ] && rm -rf "${CONTEXT_TMPDIR}"
 }
 
 trap 'cleanup' ERR EXIT
 
 DOCKERFILE_PATH=""
+DOCKERIMAGE_NAME=""
 OG_IMAGE_NAME=""
 NIX_TARBALL_URL="https://releases.nixos.org/nix/nix-2.32.4/nix-2.32.4-x86_64-linux.tar.xz"
 NIX_TARBALL=""
 DEV_USER="dev"
+USER_CONTEXT=""
 
 usage()
 {
@@ -41,6 +41,16 @@ parse_arguments()
           shift
           shift
           ;;
+        -n|--dockerimage-name)
+          DOCKERIMAGE_NAME="$2"
+          shift
+          shift
+          ;;
+        -c|--user-context)
+          USER_CONTEXT="$2"
+          shift
+          shift
+          ;;
         -h|--help)
           usage
           exit
@@ -55,6 +65,10 @@ parse_arguments()
           ;;
       esac
     done
+
+    if [ -z "${USER_CONTEXT}" ]; then
+        USER_CONTEXT=$(pwd)
+    fi
 }
 
 set_dockerfile_path()
@@ -95,10 +109,24 @@ NL='
     DOCKERFILE_PATH="${DOCKERFILES_ARR[(($NUM-1))]}"
 }
 
+set_dockerimage_name()
+{
+    if [ -n "${DOCKERIMAGE_NAME}" ]; then
+        return
+    fi
+
+    read -p "Enter the name you want to give your dockerimage: " DOCKERIMAGE_NAME
+
+    if [ "${DOCKERIMAGE_NAME}x" = "x" ]; then
+        echo "Invalid name"
+        exit 1
+    fi
+}
+
 build_og_image()
 {
     OG_IMAGE_NAME="devcontainer_$(uuidgen)"
-    docker build -t "${OG_IMAGE_NAME}" -f "${DOCKERFILE_PATH}" .
+    docker build -t "${OG_IMAGE_NAME}" -f "${DOCKERFILE_PATH}" "${USER_CONTEXT}"
 }
 
 set_username()
@@ -109,16 +137,17 @@ set_username()
 
 download_dependencies()
 {
-    CONTEXT=$(mktemp -d)
-    git clone https://github.com/jonifndef/Busybox-static.git ${CONTEXT}/Busybox-static
-    git clone --branch ubuntu-cab https://github.com/jonifndef/.dotfiles.git ${CONTEXT}/.dotfiles
-    curl -L "${NIX_TARBALL_URL}" -o "${CONTEXT}/nix.tar.xz"
-    curl -L https://curl.se/ca/cacert.pem -o ${CONTEXT}/ca-certificates.crt
+    CONTEXT_TMPDIR=$(mktemp -d --tmpdir="${USER_CONTEXT}")
+
+    git clone https://github.com/jonifndef/Busybox-static.git ${CONTEXT_TMPDIR}/Busybox-static
+    git clone --branch ubuntu-cab https://github.com/jonifndef/.dotfiles.git ${CONTEXT_TMPDIR}/.dotfiles
+    curl -L "${NIX_TARBALL_URL}" -o "${CONTEXT_TMPDIR}/nix.tar.xz"
+    curl -L https://curl.se/ca/cacert.pem -o ${CONTEXT_TMPDIR}/ca-certificates.crt
 }
 
 build_overlay()
 {
-    docker build -t creone_devcontainer_jonas -f - "${CONTEXT}" <<-EOF
+    docker build -t "${DOCKERIMAGE_NAME}" -f - "${USER_CONTEXT}" <<-EOF
 FROM $OG_IMAGE_NAME
 USER root
 
@@ -137,10 +166,10 @@ fi
 
 RUN mkdir -p /nix && chmod 755 /nix && chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /nix
 
-COPY Busybox-static/busybox_x86 /tmp/busybox
-COPY .dotfiles /tmp/.dotfiles
-COPY nix.tar.xz /tmp/nix.tar.xz
-COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY $(basename ${CONTEXT_TMPDIR})/Busybox-static/busybox_x86 /tmp/busybox
+COPY $(basename ${CONTEXT_TMPDIR})/.dotfiles /tmp/.dotfiles
+COPY $(basename ${CONTEXT_TMPDIR})/nix.tar.xz /tmp/nix.tar.xz
+COPY $(basename ${CONTEXT_TMPDIR})/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 RUN mv /tmp/.dotfiles /home/${USERNAME:-$DEV_USER}/
 
@@ -188,6 +217,7 @@ main()
 {
     parse_arguments "$@"
     set_dockerfile_path
+    set_dockerimage_name
     build_og_image
     set_username
     download_dependencies
