@@ -12,6 +12,10 @@
     tmux
     nodejs_20
     fzf
+
+    # dependencies
+    git
+    curl
   ];
 
   # The only applications that Home Mangager sets up are zsh with oh-my-zsh, the plugins, and fzf. Everything else is managed by standard dotfiles
