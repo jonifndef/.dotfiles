@@ -24,16 +24,9 @@ config.keys = {
   { key = '+', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
   { key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
   { key = '=', mods = 'CTRL', action = wezterm.action.ResetFontSize },
+  { key = 'Escape', mods = 'SHIFT|ALT', action = wezterm.action.ActivateCopyMode },
 }
 
 config.scrollback_lines = 10000
-
-config.keys = {
-    {
-        key = 'Escape',
-        mods = 'ALT',
-        action = wezterm.action.ActivateCopyMode
-    },
-}
 
 return config
