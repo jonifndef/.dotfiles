@@ -6,9 +6,6 @@
 IMAGE=$1
 USER=$2
 
-eval $(ssh-agent -s)
-ssh-add ~/.ssh/id_ed25519
-
 docker run --rm -it \
     --user $(id -u):$(id -g) \
     -v ${SSH_AUTH_SOCK}:/ssh-agent \
@@ -17,9 +14,8 @@ docker run --rm -it \
     -v ${HOME}/.config/nvim:/home/${USER}/.config/nvim \
     -v $(pwd):/workspace \
     -w /workspace \
-    ${IMAGE}
-
-ssh-agent -k
+    ${IMAGE} \
+    zsh || bash
 
 # Another way to run:
 #
