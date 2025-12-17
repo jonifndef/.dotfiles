@@ -15,6 +15,9 @@
         "08530134") # Leopold fc660c
             /usr/bin/setxkbmap -layout se -variant swerty
             ;;
+        "54506a31") # Prototypist J-01
+            /usr/bin/setxkbmap -layout se
+            ;;
         *)
             setxkbmap -layout se
             ;;
