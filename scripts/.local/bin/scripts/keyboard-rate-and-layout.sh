@@ -6,13 +6,16 @@
 
     /usr/bin/xset r rate 225 25
 
-    echo "Vendor: $ID_VENDOR_ID, model: $ID_MODEL_ID, device: $DEVNAME" > /tmp/olle.txt
+    echo "Vendor: $ID_VENDOR_ID, model: $ID_MODEL_ID, device: $DEVNAME" > /tmp/keyboard-event-vendor-id-and-model-id.txt
 
     case "$ID_VENDOR_ID$ID_MODEL_ID" in
         "6582060d") # Wilba tech Salvation
             /usr/bin/setxkbmap -layout se -variant swerty
             ;;
         "08530134") # Leopold fc660c
+            /usr/bin/setxkbmap -layout se -variant swerty
+            ;;
+        "38743876") # MM Class60
             /usr/bin/setxkbmap -layout se -variant swerty
             ;;
         "54506a31") # Prototypist J-01
