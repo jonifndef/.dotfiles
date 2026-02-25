@@ -39,6 +39,9 @@ end)
 -- terminal
 vim.keymap.set('t', "<esc><esc>", "<C-\\><C-n>")
 
+-- other
+vim.keymap.set("n", "<leader>m", ":Man<CR>")
+
 -- remove some commands that are mistyped frequently, yes I'm a bum
 vim.keymap.set("n", "q:", "<Nop>")
 vim.keymap.set("c", "wä", "<Nop>")
