@@ -6,16 +6,12 @@
   home.username = username;
   home.homeDirectory = homeDirectory;
 
-  home.packages = with pkgs; [
-    neovim
-    ripgrep
-    tmux
-    nodejs_20
-    fzf
+  imports = [
+    ./common.nix
+  ];
 
-    # dependencies
-    git
-    curl
+  home.packages = with pkgs; [
+    kitty
   ];
 
   # The only applications that Home Mangager sets up are zsh with oh-my-zsh, the plugins, and fzf. Everything else is managed by standard dotfiles
