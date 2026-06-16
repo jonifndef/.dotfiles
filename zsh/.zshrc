@@ -80,9 +80,9 @@ function in_docker() {
 }
 
 # Always start tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && ! in_docker; then
-    exec tmux && exit
-fi
+#if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && ! in_docker; then
+#    exec tmux && exit
+#fi
 
 # Start keychain
 eval $(keychain --quiet --eval id_ed25519 id_rsa)
