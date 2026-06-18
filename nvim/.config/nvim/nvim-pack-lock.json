@@ -13,6 +13,14 @@
       "rev": "5e0a460",
       "src": "https://github.com/ellisonleao/gruvbox.nvim.git"
     },
+    "kitty-scrollback.nvim": {
+      "rev": "53fd294",
+      "src": "https://github.com/mikesmithgh/kitty-scrollback.nvim.git"
+    },
+    "lua-json5": {
+      "rev": "8ffccf71abf6d9b082045fdab1d318a5357193ea",
+      "src": "https://github.com/Joakker/lua-json5.git"
+    },
     "lualine.nvim": {
       "rev": "3946f01",
       "src": "https://github.com/nvim-lualine/lualine.nvim.git"
@@ -64,6 +72,10 @@
     "popup.nvim": {
       "rev": "b7404d3",
       "src": "https://github.com/nvim-lua/popup.nvim.git"
+    },
+    "telescope-ui-select.nvim": {
+      "rev": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2",
+      "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim.git"
     },
     "telescope.nvim": {
       "rev": "b4da76b",
