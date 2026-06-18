@@ -226,9 +226,9 @@ hl.config({
 hl.config({
     input = {
         kb_layout  = "se",
-        kb_variant = "",
+        kb_variant = "swerty",
         kb_model   = "",
-        kb_options = "",
+        kb_options = "ctrl:nocaps",
         kb_rules   = "",
 
         follow_mouse = 1,
