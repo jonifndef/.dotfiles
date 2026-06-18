@@ -31,7 +31,7 @@ config.scrollback_lines = 10000
 config.keys = {
     {
         key = 'Escape',
-        mods = 'ALT',
+        mods = 'SHIFT',
         action = wezterm.action.ActivateCopyMode
     },
 }
