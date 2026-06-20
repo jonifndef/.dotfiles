@@ -16,6 +16,14 @@
 -- Create your files separately and then require them like this:
 -- require("myColors")
 
+-- What packages have been installed now?
+--
+-- Waybar, cliphist, wl-clipboard
+
+-- What needs to be installed?
+--
+-- Authentication manager
+
 
 ------------------
 ---- MONITORS ----
@@ -50,11 +58,11 @@ local menu        = "rofi -show run"
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
 --
--- hl.on("hyprland.start", function ()
---   hl.exec_cmd(terminal)
---   hl.exec_cmd("nm-applet")
---   hl.exec_cmd("waybar & hyprpaper & firefox")
--- end)
+hl.on("hyprland.start", function ()
+  hl.exec_cmd("nm-applet")
+  hl.exec_cmd("wl-paste --watch cliphist store")
+  hl.exec_cmd("waybar")
+end)
 
 
 -------------------------------
@@ -225,10 +233,10 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "se",
-        kb_variant = "swerty",
+        kb_layout  = "se,se",
+        kb_variant = "swerty,",
         kb_model   = "",
-        kb_options = "ctrl:nocaps",
+        kb_options = "ctrl:nocaps,win_space_toggle",
         kb_rules   = "",
 
         follow_mouse = 1,
@@ -280,6 +288,7 @@ hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + K",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -315,6 +324,7 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
+hl.bind(mainMod .. " + Y",  hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----

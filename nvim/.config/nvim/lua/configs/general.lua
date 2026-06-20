@@ -29,3 +29,6 @@ vim.opt.mouse = ""
 
 -- Spellcheck
 vim.opt.spelllang = "en_us"
+
+-- clipboard
+vim.opt.clipboard = "unnamedplus"
