@@ -10,8 +10,18 @@
     ./common.nix
   ];
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+    xwayland.enable = true;
+  };
+
   home.packages = with pkgs; [
     kitty
+    waybar
+    cliphist
+    wl-clipboard
+    rofi
   ];
 
   # The only applications that Home Mangager sets up are zsh with oh-my-zsh, the plugins, and fzf. Everything else is managed by standard dotfiles
@@ -63,6 +73,10 @@
 
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
+  };
+
+  home.file = {
+    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/hyprland/.config/hypr";
   };
 
   home.sessionVariables = {

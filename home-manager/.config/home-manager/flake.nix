@@ -39,7 +39,7 @@
         inherit pkgs;
 
         modules = [
-          ./desktop.nix.nix.nix
+          ./desktop.nix
         ];
 
         extraSpecialArgs = {
