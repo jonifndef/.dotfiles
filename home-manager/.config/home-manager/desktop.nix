@@ -31,6 +31,12 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    profileExtra = ''
+    if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+      exec Hyprland
+    fi
+    '';
+
     oh-my-zsh = {
       enable = true;
       theme = "garyblessington";
