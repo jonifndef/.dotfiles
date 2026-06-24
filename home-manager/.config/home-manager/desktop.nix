@@ -82,7 +82,7 @@
   };
 
   home.file = {
-    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/hyprland/.config/hypr";
+    ".config/hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/hyprland/.config/hypr/hyprland.lua";
   };
 
   home.sessionVariables = {
