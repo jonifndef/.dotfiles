@@ -23,6 +23,14 @@
 -- What needs to be installed?
 --
 -- Authentication manager
+-- xdg desktop portal
+-- qt wayland support
+-- something for screen sharing
+
+
+-- how to toggle keyboard layout variant:
+--
+-- hyprctl eval "hl.config({input={kb_variant=''}})"
 
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
@@ -64,6 +72,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("wl-paste --watch cliphist store")
   hl.exec_cmd("waybar")
+  hl.exec_cmd("dunst")
 end)
 
 
@@ -173,9 +182,9 @@ hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "
 hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
 hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slide" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
@@ -200,6 +209,7 @@ hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "
 hl.config({
     dwindle = {
         preserve_split = true, -- You probably want this
+        force_split    = 2,
     },
 })
 
@@ -235,11 +245,11 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "se,se",
-        kb_variant = "swerty,",
-        kb_model   = "",
-        kb_options = "ctrl:nocaps,win_space_toggle",
-        kb_rules   = "",
+        --kb_layout  = "se,se",
+        --kb_variant = "swerty,",
+        --kb_model   = "",
+        --kb_options = "ctrl:nocaps,win_space_toggle",
+        --kb_rules   = "",
 
         follow_mouse = 1,
 
@@ -254,19 +264,53 @@ hl.config({
     },
 })
 
+-- Example per-device config
+    -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
+hl.device({
+    name       = "at-translated-set-2-keyboard",
+    kb_layout  = "se",
+    kb_variant = "",
+    kb_model   = "",
+    kb_options = "ctrl:nocaps,win_space_toggle",
+})
+
+hl.device({
+    name       = "wilba.tech-wt60-d-keyboard",
+    kb_layout  = "se",
+    kb_variant = "swerty",
+    kb_model   = "",
+    kb_options = "",
+})
+
+hl.device({
+    name       = "wilba.tech-wt60-d",
+    kb_layout  = "se",
+    kb_variant = "swerty",
+    kb_model   = "",
+    kb_options = "",
+})
+
+hl.device({
+    name       = "wilba.tech-wt60-d-system-control",
+    kb_layout  = "se",
+    kb_variant = "swerty",
+    kb_model   = "",
+    kb_options = "",
+})
+
+hl.device({
+    name       = "wilba.tech-wt60-d-consumer-control",
+    kb_layout  = "se",
+    kb_variant = "swerty",
+    kb_model   = "",
+    kb_options = "",
+})
+
 hl.gesture({
     fingers = 3,
     direction = "horizontal",
     action = "workspace"
 })
-
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
-hl.device({
-    name        = "epic-mouse-v1",
-    sensitivity = -0.5,
-})
-
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -290,7 +334,6 @@ hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + K",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
-hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -299,6 +342,10 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
+
+-- Move horzontally through workspaces
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + CTRL + H",  hl.dsp.focus({ workspace = "e-1" }))
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
@@ -311,6 +358,11 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- resize windows with mainMod + Ctrl (+ Shift too maybe) and arrow keys
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
+--hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 20, y = 0, relative = true }))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.layout("splitratio 0.05"))
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
