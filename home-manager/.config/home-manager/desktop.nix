@@ -2,7 +2,7 @@
 
 {
   programs.home-manager.enable = true;
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
   home.username = username;
   home.homeDirectory = homeDirectory;
 
@@ -10,13 +10,14 @@
     ./common.nix
   ];
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package = pkgs.hyprland;
-    xwayland.enable = true;
-  };
+#  wayland.windowManager.hyprland = {
+#    enable = true;
+#    package = pkgs.hyprland;
+#    xwayland.enable = true;
+#  };
 
   home.packages = with pkgs; [
+    hyprland
     kitty
     waybar
     cliphist
@@ -79,10 +80,10 @@
 
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
-  };
-
-  home.file = {
-    ".config/hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/hyprland/.config/hypr/hyprland.lua";
+    ".config/hypr" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/hyprland/.config/hypr";
+      force = true;
+    };
   };
 
   home.sessionVariables = {

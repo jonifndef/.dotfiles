@@ -17,8 +17,8 @@
 
       impure = builtins.getEnv "USER" != "";
 
-      username = if impure then builtins.getEnv "USER" else "ubuntu";
-      homeDir = if impure then builtins.getEnv "HOME" else "/home/ubuntu";
+      username = if impure then builtins.getEnv "USER" else "jonas";
+      homeDir = let h = builtins.getEnv "HOME"; in if h != "" then h else "/home/${username}";
     in
     {
       homeConfigurations = {
