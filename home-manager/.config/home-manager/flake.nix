@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs =
@@ -14,6 +15,9 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      overlays = [
+        (import "${self}/overlays/kitty.nix")
+      ];
 
       impure = builtins.getEnv "USER" != "";
 
@@ -40,11 +44,15 @@
 
         modules = [
           ./desktop.nix
+          {
+            nixpkgs.overlays = overlays;
+          }
         ];
 
         extraSpecialArgs = {
           username = "${username}";
           homeDirectory = "${homeDir}";
+	  inherit inputs;
         };
       };
     };

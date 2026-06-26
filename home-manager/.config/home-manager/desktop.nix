@@ -1,5 +1,11 @@
-{ config, pkgs, username, homeDirectory, ... }:
+{ config, pkgs, username, homeDirectory, inputs, ... }:
 
+let
+  nixgl = inputs.nixgl.packages.${pkgs.stdenv.hostPlatform.system};
+  kittyWrapped = pkgs.writeShellScriptBin "kitty" ''
+    exec ${nixgl.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
+  '';
+in
 {
   programs.home-manager.enable = true;
   home.stateVersion = "26.05";
@@ -18,7 +24,8 @@
 
   home.packages = with pkgs; [
     hyprland
-    kitty
+    #kitty
+    kittyWrapped
     waybar
     cliphist
     wl-clipboard
@@ -34,7 +41,7 @@
 
     profileExtra = ''
     if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-      exec Hyprland
+      start-hyprland
     fi
     '';
 
