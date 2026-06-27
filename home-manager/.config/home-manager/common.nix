@@ -32,6 +32,8 @@
     };
 
     initContent = ''
+      eval $(keychain --quiet --eval id_ed25519)
+
       alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
       alias ll='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
       alias ..='cd ..'
