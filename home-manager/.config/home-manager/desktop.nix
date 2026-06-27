@@ -43,8 +43,10 @@ in
 
     profileExtra = ''
     if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-      start-hyprland
+      exec ${nixgl.nixGLDefault}/bin/nixGL ${pkgs.hyprland}/bin/Hyprland
     fi
+
+    if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
     '';
 
     oh-my-zsh = {
