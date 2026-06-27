@@ -45,7 +45,7 @@ hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
-    scale    = "1",
+    scale    = "1.33",
 })
 
 
@@ -245,11 +245,11 @@ hl.config({
 
 hl.config({
     input = {
-        --kb_layout  = "se,se",
-        --kb_variant = "swerty,",
-        --kb_model   = "",
-        --kb_options = "ctrl:nocaps,win_space_toggle",
-        --kb_rules   = "",
+        kb_layout  = "se",
+        kb_variant = "",
+        kb_model   = "",
+        kb_options = "ctrl:nocaps,win_space_toggle",
+        kb_rules   = "",
 
         follow_mouse = 1,
 
@@ -429,3 +429,6 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+
+-- hyprmon: managed monitor profile include
+require("hyprmon")
