@@ -44,7 +44,8 @@ in
 
     profileExtra = ''
     if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-      exec ${nixgl.nixGLDefault}/bin/nixGL ${pkgs.hyprland}/bin/Hyprland
+        export PATH="${nixgl.nixGLDefault}/bin:$HOME/.nix-profile/bin:$PATH"
+        exec start-hyprland > ~/hyprland-launch.log 2>&1
     fi
 
     if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
