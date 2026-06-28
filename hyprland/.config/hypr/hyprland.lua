@@ -73,6 +73,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("wl-paste --watch cliphist store")
   hl.exec_cmd("waybar")
   hl.exec_cmd("dunst")
+  hl.exec_cmd("if ! -d $HOME/Pictures/screenshots; then mkdir -p $HOME/Pictures/screenshots; fi")
 end)
 
 
@@ -363,6 +364,9 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
 --hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 20, y = 0, relative = true }))
 hl.bind(mainMod .. " + CTRL + right", hl.dsp.layout("splitratio 0.05"))
+
+-- screenshot
+hl.bind("Print", hl.dsp.exec_cmd('grim - | satty -f - --copy-command wl-copy -o "~/Pictures/screenshots/%Y%m%d_%H%M%S.png"'))
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })

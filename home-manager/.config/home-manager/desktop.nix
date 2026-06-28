@@ -33,6 +33,12 @@ in
     hyprmon
     nerd-fonts.hack
     keychain
+    wlr-randr
+    hyprlock
+    grim
+    satty
+    wiremix
+    hyprlock
   ];
 
   # The only applications that Home Mangager sets up are zsh with oh-my-zsh, the plugins, and fzf. Everything else is managed by standard dotfiles
@@ -45,7 +51,8 @@ in
     profileExtra = ''
     if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
         export PATH="${nixgl.nixGLDefault}/bin:$HOME/.nix-profile/bin:$PATH"
-        exec start-hyprland > ~/hyprland-launch.log 2>&1
+        exec nixGL -- start-hyprland > ~/hyprland-launch.log 2>&1
+
     fi
 
     if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
