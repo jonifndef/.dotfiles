@@ -32,6 +32,8 @@
     };
 
     initContent = ''
+      export PATH="$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH"
+
       eval $(keychain --quiet --eval id_ed25519)
 
       alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
@@ -60,6 +62,7 @@
 
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
+    ".local/bin/scripts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/scripts/.local/bin/scripts";
   };
 
   home.sessionVariables = {
