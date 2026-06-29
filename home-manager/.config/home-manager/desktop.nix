@@ -38,7 +38,6 @@ in
     grim
     satty
     wiremix
-    hyprlock
     networkmanagerapplet
     dunst
   ];
@@ -104,6 +103,10 @@ in
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
     ".config/hypr" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/hyprland/.config/hypr";
+      force = true;
+    };
+    ".config/swaylock" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/swaylock/.config/swaylock";
       force = true;
     };
   };
