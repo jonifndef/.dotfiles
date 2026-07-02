@@ -2,6 +2,9 @@
 
 let
   nixgl = inputs.nixgl.packages.${pkgs.stdenv.hostPlatform.system};
+  nixGLNvidia = nixgl.nixGLNvidia.override {
+    nvidiaVersion = "595.71.05";
+  };
   kittyWrapped = pkgs.writeShellScriptBin "kitty" ''
     exec ${nixgl.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
   '';
@@ -37,10 +40,12 @@ in
     hyprlock
     grim
     satty
+    slurp
     wiremix
     networkmanagerapplet
     dunst
     hyprpaper
+    xdg-desktop-portal-hyprland
   ];
 
   # The only applications that Home Mangager sets up are zsh with oh-my-zsh, the plugins, and fzf. Everything else is managed by standard dotfiles
@@ -52,9 +57,11 @@ in
 
     profileExtra = ''
     if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-        export PATH="${nixgl.nixGLDefault}/bin:$HOME/.nix-profile/bin:$PATH"
-        exec nixGL -- start-hyprland > ~/hyprland-launch.log 2>&1
+        #export PATH="${nixgl.nixGLDefault}/bin:$HOME/.nix-profile/bin:$PATH"
+        export PATH="${nixGLNvidia}/bin:$HOME/.nix-profile/bin:$PATH"
 
+        #exec nixGL -- start-hyprland > ~/hyprland-launch.log 2>&1
+        exec nixGLNvidia -- start-hyprland > ~/hyprland-launch.log 2>&1
     fi
 
     if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
@@ -111,6 +118,10 @@ in
     ".config/swaylock" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/swaylock/.config/swaylock";
       force = true;
+    };
+
+    ".config/systemd/user/xdg-desktop-portal-hyprland.service" = {
+      source = "${pkgs.xdg-desktop-portal-hyprland}/lib/systemd/user/xdg-desktop-portal-hyprland.service";
     };
   };
 
