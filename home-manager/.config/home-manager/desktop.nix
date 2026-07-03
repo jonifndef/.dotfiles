@@ -57,10 +57,8 @@ in
 
     profileExtra = ''
     if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-        #export PATH="${nixgl.nixGLDefault}/bin:$HOME/.nix-profile/bin:$PATH"
         export PATH="${nixGLNvidia}/bin:$HOME/.nix-profile/bin:$PATH"
 
-        #exec nixGL -- start-hyprland > ~/hyprland-launch.log 2>&1
         exec nixGLNvidia -- start-hyprland > ~/hyprland-launch.log 2>&1
     fi
 
