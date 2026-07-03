@@ -3,4 +3,14 @@ vim.pack.add(
     { confirm = false }
 )
 
-require "kitty-scrollback".setup({})
+require "kitty-scrollback".setup({
+    {
+        visual_selection_highlight_mode = 'nvim',
+        --scrollback_columns = 5000,
+        callbacks = {
+            after_ready = function()
+                vim.opt_local.wrap = true
+            end,
+        }
+    }
+})
