@@ -236,7 +236,7 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "se",
+        kb_layout  = "se,us",
         kb_variant = "",
         kb_model   = "",
         kb_options = "ctrl:nocaps,win_space_toggle",
@@ -373,6 +373,8 @@ hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
 hl.bind(mainMod .. " + Y",  hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
+
+hl.bind(mainMod .. " + T",  hl.dsp.exec_cmd("hyprctl switchxkblayout main next"))
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
