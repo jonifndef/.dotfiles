@@ -2,9 +2,6 @@
 
 let
   nixgl = inputs.nixgl.packages.${pkgs.stdenv.hostPlatform.system};
-  nixGLNvidia = nixgl.nixGLNvidia.override {
-    nvidiaVersion = "595.71.05";
-  };
   kittyWrapped = pkgs.writeShellScriptBin "kitty" ''
     exec ${nixgl.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
   '';
@@ -57,9 +54,8 @@ in
 
     profileExtra = ''
     if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-        export PATH="${nixGLNvidia}/bin:$HOME/.nix-profile/bin:$PATH"
-
-        exec nixGLNvidia -- start-hyprland > ~/hyprland-launch.log 2>&1
+        export PATH="$HOME/.nix-profile/bin:$PATH"
+        exec start-hyprland > ~/hyprland-launch.log 2>&1
     fi
 
     if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
