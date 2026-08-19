@@ -25,6 +25,10 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    profileExtra = ''
+    if [ - $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
+    '';
+
     oh-my-zsh = {
       enable = true;
       theme = "garyblessington";
