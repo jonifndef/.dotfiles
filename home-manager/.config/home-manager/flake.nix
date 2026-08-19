@@ -29,11 +29,11 @@
     in
     {
       homeConfigurations = {
-        "${username}-headless" = home-manager.lib.homeManagerConfiguration {
+        "${username}-devcontainer" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         modules = [
-          ./headless.nix
+          ./devcontainer.nix
         ];
 
         extraSpecialArgs = {
@@ -42,11 +42,11 @@
         };
       };
 
-      "${username}-desktop" = home-manager.lib.homeManagerConfiguration {
+      "${username}-desktop-hyprland" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         modules = [
-          ./desktop.nix
+          ./desktop-hyprland.nix
           {
             nixpkgs.overlays = overlays;
           }
@@ -58,6 +58,24 @@
 	  inherit inputs;
         };
       };
+
+      "${username}-desktop-generic" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        modules = [
+          ./desktop-generic.nix
+          {
+            nixpkgs.overlays = overlays;
+          }
+        ];
+
+        extraSpecialArgs = {
+          username = "${username}";
+          homeDirectory = "${homeDir}";
+	  inherit inputs;
+        };
+      };
+
     };
   };
 }
