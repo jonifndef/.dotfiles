@@ -34,6 +34,11 @@ in
 
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
+
+    ".config/kitty/kitty.conf" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/kitty/.config/kitty/kitty.conf";
+      force = true;
+    };
   };
 
   home.sessionVariables = {
