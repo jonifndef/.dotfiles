@@ -60,12 +60,17 @@ in
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
 
     ".config/hypr" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/hyprland/.config/hypr";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/hypr/.config/hypr";
       force = true;
     };
 
     ".config/swaylock" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/swaylock/.config/swaylock";
+      force = true;
+    };
+
+    ".config/kitty" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/kitty/.config/kitty";
       force = true;
     };
 
@@ -77,9 +82,9 @@ in
   home.sessionVariables = {
     SHELL = "${pkgs.zsh}/bin/zsh";
 
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    WLR_NO_HARDWARE_CURSORS = "1";  # avoids cursor glitches on nvidia
+        #LIBVA_DRIVER_NAME = "nvidia";
+        #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        #GBM_BACKEND = "nvidia-drm";
+        #WLR_NO_HARDWARE_CURSORS = "1";  # avoids cursor glitches on nvidia
   };
 }

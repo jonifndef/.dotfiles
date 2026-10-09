@@ -14,8 +14,8 @@
 --
 -- hyprctl eval "hl.config({input={kb_variant=''}})"
 
-hl.env("LIBVA_DRIVER_NAME", "nvidia")
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+--hl.env("LIBVA_DRIVER_NAME", "nvidia")
+--hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 
 ------------------
 ---- MONITORS ----
@@ -427,4 +427,4 @@ hl.window_rule({
 })
 
 -- hyprmon: managed monitor profile include
-require("hyprmon")
+--require("hyprmon")
