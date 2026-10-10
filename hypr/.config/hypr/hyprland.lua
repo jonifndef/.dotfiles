@@ -56,6 +56,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("waybar")
   hl.exec_cmd("dunst")
   hl.exec_cmd("hyprpaper")
+  hl.exec_cmd("kanshi")
 
   hl.exec_cmd("if ! -d $HOME/Pictures/screenshots; then mkdir -p $HOME/Pictures/screenshots; fi")
   -- screensharing
@@ -375,6 +376,9 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 hl.bind(mainMod .. " + Y",  hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
 
 hl.bind(mainMod .. " + T",  hl.dsp.exec_cmd("hyprctl switchxkblayout main next"))
+
+-- Kanshi backup binding
+hl.bind(mainMod .. " + SHIFT + P",  hl.dsp.exec_cmd("hyprctl dispatch exec kanshi"))
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----

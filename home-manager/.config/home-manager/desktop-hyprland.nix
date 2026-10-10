@@ -23,25 +23,26 @@ in
 #  };
 
   home.packages = with pkgs; [
-    hyprland
     #kitty
-    kittyWrapped
-    waybar
     cliphist
-    wl-clipboard
-    rofi
-    hyprmon
-    nerd-fonts.hack
-    keychain
-    wlr-randr
-    hyprlock
+    dunst
     grim
+    hyprland
+    hyprlock
+    hyprmon
+    hyprpaper
+    kanshi
+    keychain
+    kittyWrapped
+    nerd-fonts.hack
+    networkmanagerapplet
+    rofi
     satty
     slurp
+    waybar
     wiremix
-    networkmanagerapplet
-    dunst
-    hyprpaper
+    wl-clipboard
+    wlr-randr
     xdg-desktop-portal-hyprland
   ];
 
