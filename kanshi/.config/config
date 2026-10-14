@@ -5,6 +5,17 @@ output "AU Optronics 0x272D" {
     alias $PRIV_LAPTOP_SCRN
 }
 
+output "Ancor Communications Inc ROG PG279Q F9LMQS054901"
+    mode 2560x1440@59.951000
+    position 0,0
+    scale 1
+    alias $ASUS_ROG_SCRN
+
 profile priv_laptop_only {
     output $PRIV_LAPTOP_SCRN enable
+}
+
+profile home_office_priv_laptop {
+    output $ASUS_ROG_SCRN enable
+    output $PRIV_LAPTOP_SCRN disable
 }
