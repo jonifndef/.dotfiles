@@ -74,8 +74,15 @@ end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
+-- make sure that the theme is extracted with the following directory structure:
+-- .local/share/icons/my_theme/cursors
+-- e.g. .local/share/icons/Adwaita/
 hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XCURSOR_THEME", "Adwaita")
+hl.env("XCURSOR_PATH", "${XCURSOR_PATH}:~/.local/share/icons")
+-- Here we can set a hyprcursor theme if that's preferred
+--hl.env("HYPRCURSOR_SIZE", "24")
+--hl.env("HYPRCURSOR_THEME", "hyprcursor-compatible theme")
 
 
 -----------------------
