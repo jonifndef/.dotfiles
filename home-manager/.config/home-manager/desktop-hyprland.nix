@@ -75,6 +75,10 @@ in
       force = true;
     };
 
+    ".config/kanshi" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/kanshi/.config/kanshi";
+      force = true;
+    };
     ".config/systemd/user/xdg-desktop-portal-hyprland.service" = {
       source = "${pkgs.xdg-desktop-portal-hyprland}/lib/systemd/user/xdg-desktop-portal-hyprland.service";
     };
