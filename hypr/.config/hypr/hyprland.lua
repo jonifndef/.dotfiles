@@ -359,9 +359,26 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- resize windows with mainMod + Ctrl (+ Shift too maybe) and arrow keys
-hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
---hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 20, y = 0, relative = true }))
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.layout("splitratio 0.05"))
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.resize({ x = -20, y = 0, relative = true }), { repeating = true})
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 20, y = 0, relative = true }), { repeating = true})
+hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.resize({ x = 0, y = -20, relative = true }), { repeating = true})
+hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.resize({ x = 0, y = 20, relative = true }), { repeating = true})
+
+-- Move windows up, down, left, right
+hl.bind(mainMod .. " + SHIFT + H",
+    hl.dsp.window.move({ direction = "left" }))
+
+hl.bind(mainMod .. " + SHIFT + L",
+    hl.dsp.window.move({ direction = "right" }))
+
+hl.bind(mainMod .. " + SHIFT + K",
+    hl.dsp.window.move({ direction = "up" }))
+
+hl.bind(mainMod .. " + SHIFT + J",
+    hl.dsp.window.move({ direction = "down" }))
+
+
+--hl.bind(mainMod .. " + CTRL + right", hl.dsp.layout("splitratio 0.05"))
 
 -- screenshot
 hl.bind("Print", hl.dsp.exec_cmd('grim - | satty -f - --copy-command wl-copy -o "~/Pictures/screenshots/%Y%m%d_%H%M%S.png"'))
