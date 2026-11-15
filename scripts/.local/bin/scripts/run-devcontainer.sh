@@ -15,7 +15,7 @@ docker run --rm -it \
     -v $(pwd):/workspace \
     -w /workspace \
     ${IMAGE} \
-    zsh || bash
+    zsh
 
 # Another way to run:
 #

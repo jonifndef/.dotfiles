@@ -8,7 +8,7 @@ cleanup()
 
     if [ -n "${OG_IMAGE_NAME}" ]; then
         docker image rm "${OG_IMAGE_NAME}"
-        docker system prune
+        docker image prune
     fi
 
     [ -d "/tmp/.dotfiles" ] && rm -rf "/tmp/.dotfiles"
@@ -43,14 +43,11 @@ parse_arguments()
         -h|--help)
           usage
           exit
-          shift
-          shift
           ;;
         *)
           echo "Unknown option $1"
           usage
           exit 1
-          shift
           ;;
       esac
     done
@@ -86,7 +83,7 @@ NL='
 
     read -p "Enter number: " NUM
 
-    if [ $NUM -gt $INDEX ] || [ $NUM -lt 1 ]; then
+    if [ $NUM -ge $INDEX ] || [ $NUM -lt 1 ]; then
         echo "Invalid choice"
         exit 1
     fi
@@ -111,7 +108,7 @@ download_dependencies()
     CONTEXT=$(mktemp -d)
     git clone https://github.com/jonifndef/Busybox-static.git ${CONTEXT}/Busybox-static
 
-    git clone --branch ubuntu-cab https://github.com/jonifndef/.dotfiles.git ${CONTEXT}/.dotfiles
+    git clone --branch master https://github.com/jonifndef/.dotfiles.git ${CONTEXT}/.dotfiles
 
     wget http://nixos.org/nix/install -O ${CONTEXT}/install.sh
 }
@@ -122,6 +119,9 @@ build_overlay()
 FROM $OG_IMAGE_NAME
 
 USER root
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      ca-certificates curl xz-utils tar git passwd && rm -rf /var/lib/apt/lists/*;
 
 RUN set -eux; \
 if [ "${USERNAME}x" = "x" ]; then \
@@ -138,16 +138,16 @@ fi
 
 RUN mkdir -p /nix && chmod 755 /nix && chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /nix
 
-COPY Busybox-static/busybox_x86 /tmp/busybox
-COPY .dotfiles /tmp/.dotfiles
+#COPY Busybox-static/busybox_x86 /tmp/busybox
+COPY --chown=${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} .dotfiles /tmp/.dotfiles
 COPY install.sh /tmp/install.sh
 RUN mv /tmp/.dotfiles /home/${USERNAME:-$DEV_USER}/
-RUN chmod 755 /tmp/busybox && \
-ln -s /tmp/busybox /tmp/tar && \
-ln -s /tmp/busybox /tmp/wget && \
-ln -s /tmp/busybox /tmp/xz && \
-ln -s /tmp/busybox /tmp/sha256sum && \
-chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /tmp && \
+#RUN chmod 755 /tmp/busybox && \
+#ln -s /tmp/busybox /tmp/tar && \
+#ln -s /tmp/busybox /tmp/wget && \
+#ln -s /tmp/busybox /tmp/xz && \
+#ln -s /tmp/busybox /tmp/sha256sum && \
+RUN chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /tmp && \
 chown -R ${USERNAME:-$DEV_USER}:${USERNAME:-$DEV_USER} /home/${USERNAME:-$DEV_USER}
 
 RUN mv /tmp/install.sh /home/${USERNAME:-$DEV_USER} && \
@@ -167,7 +167,8 @@ ln -s "../.dotfiles/nix/.config/nix" ".config/nix"
 
 RUN ./install.sh
 ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
-RUN nix run home-manager/master -- switch --flake .config/home-manager#${USERNAME:-DEV_USER} --impure
+RUN echo "${USERNAME:-$DEV_USER}"
+RUN nix run home-manager/master -- switch --flake .config/home-manager#${USERNAME:-$DEV_USER}-devcontainer --impure
 EOF
 }
 
