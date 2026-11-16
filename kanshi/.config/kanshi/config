@@ -1,22 +1,8 @@
-output "AU Optronics 0x272D" {
-    mode 1920x1080@60.049000
-    position 0,0
-    scale 1
-    alias $PRIV_LAPTOP_SCRN
+profile laptop_only {
+    output eDP-1 mode 1920x1080 position 0,0
 }
 
-output "Ancor Communications Inc ROG PG279Q F9LMQS054901" {
-    mode 2560x1440@59.951000
-    position 0,0
-    scale 1
-    alias $ASUS_ROG_SCRN
-}
-
-profile priv_laptop_only {
-    output $PRIV_LAPTOP_SCRN enable
-}
-
-profile home_office_priv_laptop {
-    output $ASUS_ROG_SCRN enable mode 2560x1440 pos 0 0
-    output $PRIV_LAPTOP_SCRN disable mode 1920x1080 pos 2560x360
+profile home_office {
+    output eDP-1 mode 1920x1080 position 2560,1000
+    output "Ancor Communications * ROG*" mode 2560x1440 position 0,0
 }
