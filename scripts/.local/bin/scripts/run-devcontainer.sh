@@ -10,6 +10,7 @@ docker run --rm -it \
     --user $(id -u):$(id -g) \
     -v ${SSH_AUTH_SOCK}:/ssh-agent \
     -e SSH_AUTH_SOCK=/ssh-agent \
+    -e DEVCONTAINER_NAME=${IMAGE} \
     --network host \
     -v ${HOME}/.config/nvim:/home/${USER}/.config/nvim \
     -v $(pwd):/workspace \

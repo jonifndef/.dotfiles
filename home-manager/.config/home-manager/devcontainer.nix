@@ -18,7 +18,7 @@
     initContent = ''
       # Prompt
       unset -f prompt_garyblessington_setup 2>/dev/null
-      PROMPT='%F{cyan}devcontainer%f %B%F{green}%~%f%b '
+      PROMPT='%F{cyan}''${DEVCONTAINER_NAME:-devcontainer}%f %B%F{green}%~%f%b '
       RPROMPT=""
     '';
 
