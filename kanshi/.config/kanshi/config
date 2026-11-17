@@ -4,5 +4,5 @@ profile laptop_only {
 
 profile home_office {
     output eDP-1 mode 1920x1080 position 2560,1000
-    output "Ancor Communications * ROG*" mode 2560x1440 position 0,0
+    output "Ancor Communications * ROG* F9LMQS054901" mode 2560x1440 position 0,0
 }
