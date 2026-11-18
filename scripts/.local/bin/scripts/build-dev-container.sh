@@ -18,6 +18,7 @@ cleanup()
 trap 'cleanup' ERR EXIT
 
 DOCKERFILE_PATH=""
+IMAGE_NAME=""
 OG_IMAGE_NAME=""
 NIX_TARBALL_URL="https://releases.nixos.org/nix/nix-2.32.4/nix-2.32.4-x86_64-linux.tar.xz"
 NIX_TARBALL=""
@@ -37,6 +38,11 @@ parse_arguments()
       case $1 in
         -p|--dockerfile-path)
           DOCKERFILE_PATH="$2"
+          shift
+          shift
+          ;;
+        -n|--image-name)
+          IMAGE_NAME="$2"
           shift
           shift
           ;;
@@ -91,6 +97,29 @@ NL='
     DOCKERFILE_PATH="${DOCKERFILES_ARR[(($NUM-1))]}"
 }
 
+set_dockerimage_name()
+{
+    if [ -z "${IMAGE_NAME}" ]; then
+        WORKDIR="$(pwd)"
+        if [ "$(basename ${WORKDIR})" = ".devcontainer" ]; then
+            WORKDIR="$(dirname ${WORKDIR})"
+        fi
+
+        WORKDIR="$(basename ${WORKDIR})"
+
+        echo "Image name is not set, setting to ${WORKDIR}_devcontainer"
+        echo "Proceed? y/N"
+
+        read USER_INPUT
+        if [ "${USER_INPUT}" = "y" ]; then
+            IMAGE_NAME="${WORKDIR}_devcontainer"
+            return
+        else
+            exit 1
+        fi
+    fi
+}
+
 build_og_image()
 {
     OG_IMAGE_NAME="devcontainer_$(uuidgen)"
@@ -115,15 +144,30 @@ download_dependencies()
 
 build_overlay()
 {
-    docker build -t creone_devcontainer_jonas -f - "${CONTEXT}" <<-EOF
+    docker build -t $IMAGE_NAME -f - "${CONTEXT}" <<-EOF
 FROM $OG_IMAGE_NAME
 
 USER root
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-      ca-certificates curl xz-utils tar git passwd && rm -rf /var/lib/apt/lists/*;
-
 RUN set -eux; \
+  if command -v apt-get >/dev/null; then \
+    apt-get update && apt-get install -y --no-install-recommends \
+      ca-certificates curl xz-utils tar git passwd && rm -rf /var/lib/apt/lists/*; \
+  elif command -v apk >/dev/null; then \
+    apk add --no-cache ca-certificates curl xz tar git coreutils shadow; \
+  elif command -v dnf >/dev/null; then \
+    dnf install -y ca-certificates curl xz tar git shadow-utils && dnf clean all; \
+  elif command -v microdnf >/dev/null; then \
+    microdnf install -y ca-certificates curl xz tar git shadow-utils && microdnf clean all; \
+  elif command -v yum >/dev/null; then \
+    yum install -y ca-certificates curl xz tar git shadow-utils && yum clean all; \
+  elif command -v pacman >/dev/null; then \
+    pacman -Sy --noconfirm ca-certificates curl xz tar git shadow; \
+  elif command -v zypper >/dev/null; then \
+    zypper -n install ca-certificates curl xz tar git shadow; \
+  else \
+    echo "Unsupported base image: no known package manager" >&2; exit 1; \
+  fi; \
 if [ "${USERNAME}x" = "x" ]; then \
 if command -v usermod > /dev/null 2>&1; then \
 groupadd -g 1000 $DEV_USER; \
@@ -176,6 +220,7 @@ main()
 {
     parse_arguments "$@"
     set_dockerfile_path
+    set_dockerimage_name
     build_og_image
     set_username
     download_dependencies
