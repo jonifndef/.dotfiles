@@ -36,7 +36,7 @@
     };
 
     initContent = ''
-      export PATH="$HOME/.local/bin:$HOME/.local/bin/scripts:$PATH"
+      export PATH="$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/.devcontainers/bin:$HOME/.cargo/bin:$PATH"
 
       eval $(keychain --quiet --eval id_ed25519)
 
