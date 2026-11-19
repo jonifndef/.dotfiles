@@ -54,6 +54,8 @@
       ENABLE_CORRECTION="false"
       unsetopt correct_all
       unsetopt correct
+
+      GIT_EDITOR=nvim
     '';
 
   };
