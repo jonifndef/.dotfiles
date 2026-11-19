@@ -213,6 +213,11 @@ RUN ./install.sh
 ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
 RUN echo "${USERNAME:-$DEV_USER}"
 RUN nix run home-manager/master -- switch --flake .config/home-manager#${USERNAME:-$DEV_USER}-devcontainer --impure
+
+RUN nvim --headless \
+--cmd 'lua local add = vim.pack.add; vim.pack.add = function(specs, opts) return add(specs, vim.tbl_extend("force", opts or {}, { confirm = false })) end' \
+-c 'qa!'
+
 EOF
 }
 
