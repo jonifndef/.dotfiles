@@ -210,7 +210,7 @@ ln -s "../.dotfiles/home-manager/.config/home-manager" ".config/home-manager" &&
 ln -s "../.dotfiles/nix/.config/nix" ".config/nix"
 
 RUN ./install.sh
-ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:${PATH}"
+ENV PATH="/home/${USERNAME:-$DEV_USER}/.nix-profile/bin:\${PATH}"
 RUN echo "${USERNAME:-$DEV_USER}"
 RUN nix run home-manager/master -- switch --flake .config/home-manager#${USERNAME:-$DEV_USER}-devcontainer --impure
 

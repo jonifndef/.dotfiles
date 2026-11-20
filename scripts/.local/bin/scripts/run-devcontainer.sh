@@ -4,7 +4,11 @@
 # run-devcontainer my-image ubuntu
 
 IMAGE=$1
-USER=$2
+
+CONTAINER_HOME=$(
+  docker run --rm --entrypoint sh "${IMAGE}" \
+    -c 'getent passwd 1000 | cut -d: -f6'
+)
 
 docker run --rm -it \
     --user $(id -u):$(id -g) \
@@ -12,7 +16,8 @@ docker run --rm -it \
     -e SSH_AUTH_SOCK=/ssh-agent \
     -e DEVCONTAINER_NAME=${IMAGE} \
     --network host \
-    -v ${HOME}/.config/nvim:/home/${USER}/.config/nvim \
+    -v ${HOME}/.config/nvim:${CONTAINER_HOME}/.config/nvim:ro \
+    -v "${HOME}/.gitconfig:${CONTAINER_HOME}/.gitconfig:ro" \
     -v $(pwd):/workspace \
     -w /workspace \
     ${IMAGE} \
