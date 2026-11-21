@@ -9,9 +9,13 @@
   home.packages = with pkgs; [
     neovim
     ripgrep
+    ripgrep-all
+    fd
     tmux
     nodejs_22
     fzf
+    eza
+    bat
 
     # dependencies
     git
@@ -40,14 +44,16 @@
 
       eval $(keychain --quiet --eval id_ed25519)
 
-      alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
-      alias ll='LC_COLLATE=C ls -lah --color=auto --group-directories-first'
+      alias ls='eza --icons=always --color=auto --group-directories-first'
+      alias ll='eza --all --long --icons=always --color=auto --group-directories-first'
       alias ..='cd ..'
       alias ...='cd ../../'
       alias nano='nvim'
       alias vi='nvim'
       alias fuck='pkill -9'
       alias ':q'=exit
+      alias rg='rg -i --color=auto'
+      alias cat='bat'
 
       bindkey '^n' autosuggest-accept
 
@@ -69,6 +75,7 @@
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
     ".local/bin/scripts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/scripts/.local/bin/scripts";
+    ".config/bat/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/bat/.config/bat/config";
   };
 
   home.sessionVariables = {
